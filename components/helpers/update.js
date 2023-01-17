@@ -118,6 +118,22 @@ const UPDATE_OFFER = gql`
 	}
 `;
 
+const UPDATE_LANDING_PAGE = gql`
+	mutation UpdateLandingPage(
+		$hero: HeroUpdate!
+		$about: AboutUpdate!
+		$parallel_slide_display: [ParallelSlideUpdate]!
+	) {
+		updateLandingPage(
+			hero: $hero
+			about: $about
+			parallel_slide_display: $parallel_slide_display
+		) {
+			id
+		}
+	}
+`;
+
 const update = (cache, payload) => {
 	const { data } = payload;
 	const key = Object.keys(data)[0];
@@ -125,6 +141,7 @@ const update = (cache, payload) => {
 };
 
 export {
+	UPDATE_LANDING_PAGE,
 	UPDATE_PRODUCT,
 	UPDATE_COLLECTION,
 	UPDATE_TAG,

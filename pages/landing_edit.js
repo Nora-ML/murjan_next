@@ -1,8 +1,10 @@
 import React, { useEffect, useContext } from "react";
 import Router from "next/router";
-//mutations
-import { useMutation } from "@apollo/client";
+//mutations and queries
+import { useMutation, useQuery } from "@apollo/client";
 import { ADD_LANDING_PAGE } from "../components/helpers/Add.js";
+import { GET_LANDING } from "../components/helpers/landing.js";
+import { UPDATE_LANDING_PAGE } from "../components/helpers/update.js";
 // components
 import HeroEdit from "../components/landing/hero/hero_edit.js";
 import PostHeroEdit from "../components/landing/post_hero/post_hero_edit";
@@ -21,48 +23,81 @@ gsap.registerPlugin(ScrollTrigger);
 // if it exists fill it out in the form and run update function not add
 // we will assume for now that it's the first Landing
 const Landing = () => {
-	const [addLandingPage, { data, loading, error }] =
-		useMutation(ADD_LANDING_PAGE);
+	const { data, loading, error } = useQuery(GET_LANDING);
+	const [addLandingPage] = useMutation(ADD_LANDING_PAGE);
+	const [updateLandingPage] = useMutation(UPDATE_LANDING_PAGE);
+
+	let fetchedForm;
+	let cleanedParallelS = [];
+
+	if (loading) return <h1>Loading...</h1>;
+	if (error) return <h1>Error ....</h1>;
+	if (data) {
+		fetchedForm = data.getLanding[0];
+		console.log(
+			"LANDING_EDIT Page, previous landing document ***fetchedForm",
+			fetchedForm
+		);
+
+		fetchedForm.parallel_slide_display.map((slide) => {
+			cleanedParallelS = [
+				...cleanedParallelS,
+				...[
+					{
+						id: slide.id,
+						parallelS_main_media: slide.parallelS_main_media,
+						parallelS_secondary_media: slide.parallelS_secondary_media,
+						parallelS_description: slide.parallelS_description,
+					},
+				],
+			];
+		});
+	}
+
+	console.log("*** cleanedParallelS", cleanedParallelS);
+	console.log(" ***  fetchedForm", fetchedForm);
+
 	const formData = {
 		hero: {
-			hero_media: [],
-			hero_header: "",
-			hero_sub_header: "",
+			hero_media: fetchedForm ? fetchedForm.hero.hero_media : [],
+			hero_header: fetchedForm ? fetchedForm.hero.hero__header : "",
+			hero_sub_header: fetchedForm ? fetchedForm.hero.hero_sub__header : "",
 		},
 		about: {
-			about_image: [],
-			about_header: "",
-			about_sub_header: "",
-			about_second_sub_header: "",
+			about_image: fetchedForm ? fetchedForm.about.about_image : [],
+			about_header: fetchedForm ? fetchedForm.about.about_header : "",
+			about_sub_header: fetchedForm ? fetchedForm.about.about_sub_header : "",
+			about_second_sub_header: fetchedForm
+				? fetchedForm.about.about_second_sub_header
+				: "",
 		},
-		parallel_slide_display: [
-			/* {
-				id: "",
-				parallelS_main_media: "",
-				parallelS_secondary_media: "",
-				parallelS_description: "",
-			}, */
-		],
+		parallel_slide_display: fetchedForm ? cleanedParallelS : [],
 	};
 
-	loading && <h1>Loading...</h1>;
-	error && <h1>Error ....</h1>;
-	data && console.log("DATA ", data);
-
 	const imageData = [];
-
+	console.log("********* LANDING_EDIT Page, formData ", formData);
 	const { inputs, handleChange } = useForm({ formData, imageData });
 	const { hero, about, parallel_slide_display } = inputs.formData;
+
+	console.log("********* LANDING_EDIT Page, Inputs ", inputs);
 
 	const handleSubmit = async (e) => {
 		console.log("SUBMIT FORM");
 		e.preventDefault();
 		console.log("---- FINAL FORM ", inputs.formData);
-		addLandingPage({ variables: inputs.formData })
-			.then((data) => uploadFileToS3())
-			.catch((error) => {
-				console.log("ERROR submiting lanind form", error);
-			});
+		if (data) {
+			updateLandingPage({ variables: inputs.formData })
+				.then((data) => uploadFileToS3())
+				.catch((error) => {
+					console.log("ERROR submiting lanind form", error);
+				});
+		} else {
+			addLandingPage({ variables: inputs.formData })
+				.then((data) => uploadFileToS3())
+				.catch((error) => {
+					console.log("ERROR submiting lanind form", error);
+				});
+		}
 	};
 
 	const uploadFileToS3 = async () => {

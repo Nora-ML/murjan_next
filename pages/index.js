@@ -1,8 +1,8 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import Hero from "../components/landing/hero/hero.js";
 import PostHero from "../components/landing/post_hero/post_hero";
-import client from "../setup/client.js";
+import GemColor from "../components/landing/gem_color/gem_color.js";
 import PreLoader from "../components/landing/pre_loader/pre_loader";
 import { GET_LANDING } from "../components/helpers/landing.js";
 //import { ProductContext } from "../../context/productContext";
@@ -15,8 +15,14 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const Landing = () => {
-	console.log("LANDING DATA PRE rendered");
+	console.log("LANDING PAGE");
 	const { data, loading, error } = useQuery(GET_LANDING);
+	const [done, setDone] = useState(false);
+
+	if (loading) return <h1>LOOOOADING </h1>;
+	if (error) return <h1>ERROR </h1>;
+
+	const { hero, about, parallel_slide_display } = data?.getLanding[0];
 
 	/* useEffect(() => {
 		window.scrollTo(0, 0);
@@ -35,17 +41,19 @@ const Landing = () => {
 		};
 	}, []);
 
+	console.log("///// done ", done);
+
 	return (
 		<>
-			<PreLoader state={loading} />
+			<PreLoader activateHero={(f) => setDone(f)} />
 			<main className="main_container">
-				{data && (
+				{done && (
 					<div className="landing_container">
 						{/* <Nav classN="trans" /> */}
-						<Hero />
-						<PostHero />
-						{/* <GemColor />
-						<CategoryNav />
+						<Hero data={hero} />
+						<PostHero data={about} />
+						<GemColor data={parallel_slide_display} />
+						{/*<CategoryNav />
 						<Collection /> */}
 
 						{/* <div className="content-2">

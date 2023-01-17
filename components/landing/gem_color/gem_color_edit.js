@@ -9,7 +9,7 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const GemColorEdit = ({ form, handleChange }) => {
-	console.log("Parallel Slide Display , form", form);
+	//console.log("Parallel Slide Display , form", form);
 
 	const count = 3;
 
@@ -24,7 +24,7 @@ const GemColorEdit = ({ form, handleChange }) => {
 							id: `parallelS_main_media-${index}`,
 							label: "Video : Section Main Media",
 							name: "parallelS_main_media",
-							required: "true",
+							//required: "true",
 						}}
 						handleChange={handleChange}
 						form={form}
@@ -36,7 +36,7 @@ const GemColorEdit = ({ form, handleChange }) => {
 							id: `parallelS_secondary_media-${index}`,
 							label: "Image: Secondary Media",
 							name: "parallelS_secondary_media",
-							required: "true",
+							//required: "true",
 						}}
 						handleChange={handleChange}
 						form={form}

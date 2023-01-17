@@ -10,6 +10,7 @@ import { CURRENT_USER } from "../components/helpers/users";
 import "./landing.scss";
 import "./pre_loader.scss";
 import "./post_hero.scss";
+import "./hero.scss";
 import "./gem_color.scss";
 
 const MyApp = ({ Component, pageProps, apollo }) => {

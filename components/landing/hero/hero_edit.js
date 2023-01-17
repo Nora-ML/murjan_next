@@ -12,7 +12,7 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const HeroEdit = ({ form, handleChange }) => {
-	console.log("HERO EDIT , form", form);
+	//console.log("HERO EDIT , form", form);
 	const hero = useRef();
 
 	const size = useContext(SizeContext);
@@ -88,7 +88,7 @@ const HeroEdit = ({ form, handleChange }) => {
 						id: "hero_media-0",
 						name: "hero_media",
 						placeholder: "Hero Media",
-						required: "true",
+						/* required: "true", */
 					}}
 					handleChange={handleChange}
 					form={form}

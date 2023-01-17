@@ -10,7 +10,7 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const PostHero = () => {
+const PostHero = ({ data }) => {
 	const app = useRef();
 
 	useLayoutEffect(() => {
@@ -138,31 +138,27 @@ const PostHero = () => {
 				/>
 			</svg>
 			{/* </div> */}
-			<h1 className="main_posthero_header">Creating Diamond History</h1>
+			<h1 className="main_posthero_header">{data.about_header}</h1>
 
-			<h3 className="sub_posthero_header">
-				Exceptional skill, eternal beauty ..
-			</h3>
+			<h3 className="sub_posthero_header">{data.about_sub_header}</h3>
 			<div className="image-main-container">
 				<div className="i-con image-container-first">
 					<img
 						className="post_hero_img main_image"
-						/* src={image1} */ src=""
+						src={data.about_image[0]}
 						alt=""
 					/>
 				</div>
 				<div className="i-con image-container-second">
 					<img
 						className="post_hero_img main_image"
-						/* src={image2} */ src=""
+						src={data.about_image[1]}
 						alt=""
 					/>
 				</div>
 			</div>
 
-			<h4 className="sub2_posthero_header">
-				custodian of many of the world’s most celebrated gemstones
-			</h4>
+			<h4 className="sub2_posthero_header">{data.about_second_sub_header}</h4>
 		</div>
 	);
 };

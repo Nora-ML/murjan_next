@@ -6,44 +6,23 @@ import React, { useLayoutEffect, useRef, useState } from "react";
 //import sapphireVid from "../../../images/videos/saphire_vid.mp4";
 //import yellowVid from "../../../images/videos/yellow_vid.mp4";
 //import dot from "../../../images/icons/white_circle.png";
-//import dot2 from "../../../images/icons/pink_circle.png";
+import dot2 from "../../../public/static/icons/pink_circle.png";
 
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-/* import "./gem_color.scss"; */
+import { gsap } from "gsap/dist/gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* const GemColorEdit = () => {
-	/*const root = useRef();
+const GemColor = ({ data }) => {
+	console.log("GEM COLOR", data);
+	const root = useRef();
 	const [state, setState] = useState(0);
-
-	const gems = [
-		{
-			image: emeraldImg,
-			video: emeraldVid,
-			header: "Be Enchanting",
-			stone: "Emerald",
-		},
-		{
-			image: yellowImg,
-			video: yellowVid,
-			header: "Be Radiant",
-			stone: "Yellow Diamond",
-		},
-		{
-			image: saphire,
-			video: sapphireVid,
-			header: "Be a Queen",
-			stone: "Sapphire",
-		},
-	];
 
 	const activate = (direction) => {
 		console.log("state IN", state);
 		console.log("direction", direction);
 		if (direction === "next") {
-			if (state <= gems.length - 2) {
+			if (state <= data.length - 2) {
 				setState(state + 1);
 			} else {
 				setState(0);
@@ -53,7 +32,7 @@ gsap.registerPlugin(ScrollTrigger);
 			if (state > 0) {
 				setState(state - 1);
 			} else {
-				setState(gems.length - 1);
+				setState(data.length - 1);
 			}
 		}
 	};
@@ -79,29 +58,35 @@ gsap.registerPlugin(ScrollTrigger);
 
 	return (
 		<div ref={root} className="gem_color-container">
-			{gems.map((g, index) => (
+			{data.map((g, index) => (
 				<div
-					key={`${index + g.stone}`}
+					key={`${index + g.parallelS_description}`}
 					className={`gem_container  ${index === state ? "active" : ""}`}>
 					<video
 						className="gem_video main_image "
 						type="video/mp4"
-						src={g.video}
+						src={g.parallelS_main_media[0]}
 						autoPlay
 						loop
 						muted
 					/>
 				</div>
 			))}
-			{gems.map((g, index) => (
-				<div key={`${index + g.header}`} className="gem_image_container ">
+			{data.map((g, index) => (
+				<div
+					key={`${index * 2 + g.parallelS_description}`}
+					className="gem_image_container ">
 					<div
 						className={`gem_image_container2 ${
 							index === state ? "active" : ""
 						}`}>
-						<img className="gem_image" src={g.image} alt="" />
+						<img
+							className="gem_image"
+							src={g.parallelS_secondary_media[0]}
+							alt=""
+						/>
 						<div className="command_container">
-							<h1>SHOP {g.stone}..</h1>
+							<h1>SHOP {g.parallelS_description}..</h1>
 						</div>
 					</div>
 				</div>
@@ -109,7 +94,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 			<div onClick={() => activate("prev")} className="btn prev"></div>
 			<div className="progress">
-				{[...new Array(gems.length)].map((r, index) => (
+				{[...new Array(data.length)].map((r, index) => (
 					<div key={index + ""}>
 						<img
 							className={`progress_dot ${index === state ? "active" : ""}`}
@@ -123,4 +108,5 @@ gsap.registerPlugin(ScrollTrigger);
 		</div>
 	);
 };
-export default GemColor; */
+
+export default GemColor;

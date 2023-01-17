@@ -71,7 +71,7 @@ const ADD_LANDING_PAGE = gql`
 	mutation AddLandingPage(
 		$hero: HeroInput!
 		$about: AboutInput!
-		$parallel_slide_display: [ParallelSlideInput]!
+		$parallel_slide_display: ParallelSlideInput!
 	) {
 		addLandingPage(
 			hero: $hero

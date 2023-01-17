@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useContext } from "react";
+import React, { useEffect, useRef, useState } from "react";
 //import { ProductContext } from "../../context/productContext";
 
 //import "./pre_loader.scss";
@@ -7,8 +7,10 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const PreLoader = ({ state }) => {
-	console.log("PRE Loader State,", state);
+const PreLoader = ({ activateHero }) => {
+	console.log("PRE Loader State,");
+
+	const [state, setState] = useState(false);
 
 	const text = "Murjan";
 	const array = [];
@@ -38,28 +40,23 @@ const PreLoader = ({ state }) => {
 				{ clipPath: "inset(0% 0% 100% 0%)" },
 				{ clipPath: "inset(0% 0% 0% 0%)", duration: 1.5 }
 			);
-			// Container Transition out animation
-
-			/* gsap.fromTo(
-				rootz.current,
-				{
-					yPercent: 0,
-				},
-				{
-					yPercent: -100,
-					duration: 1.5,
-					delay: done === true,
-				},
-				">"
-			); */
 		}, rootz);
 
 		return () => ctx.revert();
 	}, []);
+
+	useEffect(() => {
+		setTimeout(() => {
+			console.log("/////// SET TIME OUT ///////");
+			activateHero(true);
+			setState(true);
+		}, 1500);
+	}, []);
+
 	useEffect(() => {
 		// Container Transition out animation
 		let ctx = gsap.context(() => {
-			if (state === false) {
+			if (state === true) {
 				gsap.fromTo(
 					rootz.current,
 					{
@@ -67,6 +64,7 @@ const PreLoader = ({ state }) => {
 					},
 					{
 						yPercent: -100,
+						//backgroundColor: "purple",
 						duration: 1.5,
 					},
 					">"

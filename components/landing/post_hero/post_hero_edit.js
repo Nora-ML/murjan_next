@@ -9,7 +9,7 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const PostHeroEdit = ({ form, handleChange }) => {
-	console.log("ABOUT  EDIT , form", form);
+	//console.log("ABOUT  EDIT , form", form);
 
 	const app = useRef();
 
@@ -174,7 +174,7 @@ const PostHeroEdit = ({ form, handleChange }) => {
 							id: "about_image-0",
 							label: "noLabel",
 							name: "about_image",
-							required: "true",
+							//required: "true",
 						}}
 						handleChange={handleChange}
 						form={form}
@@ -188,7 +188,7 @@ const PostHeroEdit = ({ form, handleChange }) => {
 							label: "noLabel",
 							id: "about_image-1",
 							name: "about_image",
-							required: "true",
+							//required: "true",
 						}}
 						handleChange={handleChange}
 						form={form}
