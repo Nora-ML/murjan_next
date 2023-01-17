@@ -1,0 +1,68 @@
+.main_container {
+	position: fixed;
+	//top: 100vh;
+	width: 100vw;
+	//border: 5px red solid;
+
+	&.edit {
+		position: relative;
+
+		.save_landing_button-wraper {
+			position: fixed;
+			top: 0;
+			z-index: 15;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+	}
+
+	.landing_container {
+		background-color: #ead4be;
+		overflow-x: hidden;
+
+		position: relative;
+		top: 0;
+		width: 100vw;
+		height: auto;
+
+		display: grid;
+		grid-template-columns: repeat(10, 10vw);
+		grid-template-rows: clamp(330px, 110vh, 1400px) //hero
+			clamp(60vh, 90vw, 1100px) //postHero
+			100vh //gem-color
+			200vh // categories
+			250vh // collection
+			150vh; // footer
+		//row-gap: 5vw;
+		grid-template-areas:
+			"a a a a a a a a a a "
+			"b b b b b b b b b b "
+			"c c c c c c c c c c "
+			"d d d d d d d d d d "
+			"e e e e e e e e e e "
+			"g g g g g g g g g g ";
+
+		.content-2 {
+			grid-area: g;
+			height: 150vh;
+			width: 100vw;
+
+			position: relative;
+
+			background-color: rgba(161, 211, 254, 0.538);
+			.content__text {
+				font-size: 26px;
+				color: rgba(188, 12, 188, 0.608);
+				padding: 10vh 10vw;
+				line-height: 50px;
+			}
+		}
+		.service_container {
+			overflow: hidden;
+			width: 100vw !important;
+		}
+		.categories_container {
+			width: 100vw;
+		}
+	}
+}

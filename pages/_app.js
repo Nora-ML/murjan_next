@@ -1,0 +1,61 @@
+import { ApolloProvider } from "@apollo/client";
+import withData from "../setup/withData.js";
+import client from "../setup/client.js";
+//import Script from "next/script";
+import UserContextProvider from "../components/context/userContext";
+import SizeContextProvider from "../components/context/sizeContext";
+import { getCookie } from "../components/helpers/auth.js";
+import Layout from "../components/Layout";
+import { CURRENT_USER } from "../components/helpers/users";
+import "./landing.scss";
+import "./pre_loader.scss";
+import "./post_hero.scss";
+import "./gem_color.scss";
+
+const MyApp = ({ Component, pageProps, apollo }) => {
+	console.log("_app props", pageProps);
+
+	return (
+		<ApolloProvider client={apollo}>
+			<SizeContextProvider>
+				<UserContextProvider>
+					<Layout currentUser={pageProps.user}>
+						<Component {...pageProps} />
+					</Layout>
+				</UserContextProvider>
+			</SizeContextProvider>
+		</ApolloProvider>
+	);
+};
+
+// tell next.js to fetch all queries in all my components and pages
+MyApp.getInitialProps = async function ({ Component, ctx }) {
+	//console.log("MYAPP ******* _app Component :",Component,"\n_app context",ctx)
+	let pageProps = {};
+
+	const token = getCookie("token", ctx.req);
+	if (token) {
+		try {
+			const { data: currentUser } = await client.query({
+				query: CURRENT_USER,
+				context: {
+					headers: {
+						authorization: token ? `Bearer ${token}` : "",
+					},
+				},
+			});
+
+			pageProps.user = currentUser;
+		} catch (error) {
+			console.log("Accessing /User--- error:", error);
+		}
+	}
+	// if any page has a getinital props in them , fetch them
+	if (Component.getInitialProps) {
+		pageProps.pageLevelProps = await Component.getInitialProps(ctx);
+	}
+	pageProps.query = ctx.query;
+	return { pageProps };
+};
+
+export default withData(MyApp);

@@ -1,0 +1,123 @@
+.post_hero-container {
+    //border: red 2px solid;
+    background-color:  #e6ccb2; // default
+    grid-area: b;
+
+    position: relative;
+
+    width: 100vw;
+    height: auto;
+    //top: -5vw;
+     
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    @media screen and (min-width:1024px) {
+      padding-bottom: 5%;
+    }
+
+      .separator {
+        
+        display: inline-block;
+        border: 0;
+        position: absolute;
+        top:0;
+        transform: translateY(-50%);
+        left: 0;
+        z-index: 1;
+        pointer-events: none;
+        width: clamp(150px,100vw,2000px);
+        height: clamp(100px ,15vw,300px);
+  
+        .path-anim{
+          border: blue solid 2px;
+          fill: #e6ccb2; 
+          width: 100%;
+          height:100%;
+        }
+      }
+      .main_posthero_header{
+        //border: red 1px dashed;
+            background-color:  #e6ccb2;
+    
+            font-size:clamp(10px,6vw,40px);
+            font-weight: 300;
+    
+            font-family: auto;
+            margin-block-start: 3%;
+            margin-block-end: 1%;
+            line-height: 2rem;
+       }
+       .sub_posthero_header{
+        //border: red 1px dashed;
+            background-color:  #e6ccb2;
+    
+            font-size:clamp(10px,4.2vw,30px);
+            font-weight: 300;
+    
+            font-family: auto;
+            margin-block-start: 1%;
+            margin-block-end: 3%;
+            //line-height: 3rem;
+          
+            //font-style: italic;
+            //font-family: 'Cormorant Infant', serif;
+            text-transform:capitalize;
+       }
+    
+        .image-main-container{
+          //border: rgb(26, 255, 0) 2px dashed;
+          background-color:transparent; 
+    
+    
+            width:clamp(250px,70vw,1200px);
+            height:clamp(180px,50vw,750px);
+    
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content:space-between;
+            align-items:center;
+    
+            .i-con{
+               // border: blue 2px dashed;
+                position: relative;
+    
+                overflow:hidden;
+                background-color: transparent;
+    
+                border-radius: 5px;
+                width: 48%;
+                height:100%;
+    
+                  .post_hero_img {
+                    //border: green 2px dashed;
+    
+                    width: 100%;
+                    height:100%;
+                    position: absolute;
+                    object-fit:cover;
+                  }
+              }
+          }
+          .sub2_posthero_header{
+            //border: red 1px dashed;
+            background-color: transparent;
+            font-size:clamp(10px,4.2vw,22px);
+            text-align: center;
+            margin-block-start: 3%;
+            margin-block-end: 0.5vw;
+            font-weight: 200;
+            letter-spacing: 0.1rem;
+            font-style: italic;
+            
+            font-family: 'Cormorant Infant', serif;
+            text-transform:capitalize;
+           }
+    
+
+ 
+
+  }
+
