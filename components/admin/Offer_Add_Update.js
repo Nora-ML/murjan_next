@@ -9,11 +9,7 @@ import { UPDATE_OFFER } from "../helpers/update";
 // components
 import Form_RComp from "../Forms/Form_RComp";
 // styles
-import {
-	AddPageStyle,
-	UpdatePage,
-	FormAndHeaderWrap,
-} from "../styles/AddPageStyle";
+import { AddPageStyle, UpdatePage, FormAndHeaderWrap } from "./Z_Style_AddPage";
 
 const OfferAdd = ({ data, location, classInitial, alterClass }) => {
 	console.log("Offer EDIT/ADD component data", data);

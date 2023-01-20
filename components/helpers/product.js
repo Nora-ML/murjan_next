@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 const ADD_PRODUCT = gql`
 	mutation AddProduct(
-		$image: String!
+		$image: [String]!
 		$name: String!
 		$price: Int!
 		$stock: Int!

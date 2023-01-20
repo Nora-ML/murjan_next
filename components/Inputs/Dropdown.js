@@ -1,7 +1,7 @@
 import { InputLabel, DropDownStyle } from "./Z_Style_Inputs";
 
 const DropDown = ({ width, info, handleChange, form }) => {
-	console.log("DropDown info ::", info);
+	//console.log("DropDown info ::", info);
 	const { label, name, data, multiple, additionalText, required } = info;
 
 	return (
@@ -13,7 +13,7 @@ const DropDown = ({ width, info, handleChange, form }) => {
 				className="dropdown_select"
 				onChange={(e) => handleChange(e)}
 				name={name}
-				required={required}
+				required={required === "true"}
 				multiple={multiple === "true"}
 				placeholder={name}
 				id={name}>

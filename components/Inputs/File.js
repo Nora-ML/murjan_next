@@ -4,6 +4,7 @@ const FileInput = ({ styling, width, info, handleChange, form }) => {
 	//console.log("File INPUT info ::", info);
 	const { parentForm, type, id, label, name, placeholder, required } = info;
 
+	console.log("File INPUT info ::", required);
 	let actualId = id ? id : name;
 
 	const withLabel = () => (
@@ -29,7 +30,7 @@ const FileInput = ({ styling, width, info, handleChange, form }) => {
 			type={type}
 			id={actualId}
 			name={name}
-			required={required}
+			required={required ? required : false}
 			placeholder={placeholder}
 			file={form[name]}
 			onChange={(e) => handleChange(e)}

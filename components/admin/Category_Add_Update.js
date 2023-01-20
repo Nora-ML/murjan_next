@@ -9,14 +9,10 @@ import { UPDATE_CATEGORY } from "../helpers/update";
 // components
 import Form_RComp from "../Forms/Form_RComp";
 // styles
-import {
-	AddPageStyle,
-	UpdatePage,
-	FormAndHeaderWrap,
-} from "../styles/AddPageStyle";
+import { AddPageStyle, UpdatePage, FormAndHeaderWrap } from "./Z_Style_AddPage";
 
 const CategoryAdd = ({ data, location, classInitial, alterClass }) => {
-	console.log("Category EDIT/ADD component data", data);
+	//console.log("Category EDIT/ADD component data", data);
 	const { access } = useContext(UserContext) || {};
 	const [counter, setCounter] = useState(0);
 
@@ -27,7 +23,6 @@ const CategoryAdd = ({ data, location, classInitial, alterClass }) => {
 	const [updateCategory] = useMutation(UPDATE_CATEGORY);
 
 	const activate = () => {
-		console.log("Activating add category page");
 		if (access && (access === "admin_full" || access === "admin_limited")) {
 			if (counter === 0 || counter === 1) {
 				setCounter(2);
@@ -83,7 +78,6 @@ const CategoryAdd = ({ data, location, classInitial, alterClass }) => {
 						type: "file",
 						label: "Image",
 						name: "image",
-						required: "true",
 					},
 				]}
 				btnCount={btnsNumb}

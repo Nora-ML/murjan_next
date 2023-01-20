@@ -2,8 +2,6 @@ import Link from "next/link";
 import { useEffect, useState, useContext } from "react";
 import { useRouter } from "next/router";
 import { SizeContext } from "../context/sizeContext";
-//Styles
-import style from "./nav.module.scss";
 // Helper Functions
 import { isAuth, logout } from "../helpers/auth";
 import { gsap } from "gsap/dist/gsap";
@@ -41,8 +39,8 @@ const Nav = ({ currentUser }) => {
 
 	const homePageNavigation = () => {
 		return (
-			<div className={style.navContainer_multiple_ul}>
-				<ul className={style.navContainer_ul}>
+			<div className="navContainer_multiple_ul">
+				<ul className="navContainer_ul">
 					<li>
 						<Link href="/" className="navContainer-li logo">
 							Murjan
@@ -50,7 +48,7 @@ const Nav = ({ currentUser }) => {
 					</li>
 				</ul>
 				{access === "admin_full" && path === "/" ? (
-					<ul className={style.navContainer_ul}>
+					<ul className="navContainer_ul">
 						<li>
 							<Link href="/landing_edit" className="navContainer-li ">
 								Edit Landing Page
@@ -60,7 +58,7 @@ const Nav = ({ currentUser }) => {
 				) : (
 					""
 				)}
-				<ul className={style.navContainer_ul}>
+				<ul className="navContainer_ul">
 					<li>
 						<Link href="/shop" className="navContainer-li shop-remove">
 							Shop
@@ -72,8 +70,8 @@ const Nav = ({ currentUser }) => {
 	};
 	const shopPageNavigation = () => {
 		return (
-			<div className={style.navContainer_multiple_ul}>
-				<ul className={`${style.navContainer_ul}`}>
+			<div className="navContainer_multiple_ul">
+				<ul className={`$"navContainer_ul"`}>
 					<li>
 						<Link href="/" className="navContainer-li shop-nav">
 							Cart
@@ -86,7 +84,7 @@ const Nav = ({ currentUser }) => {
 					</li>
 				</ul>
 
-				<ul className={style.navContainer_ul}>
+				<ul className="navContainer_ul">
 					<li>
 						<Link href="/" className="navContainer-li logo">
 							Murjan
@@ -94,7 +92,7 @@ const Nav = ({ currentUser }) => {
 					</li>
 				</ul>
 
-				<ul className={style.navContainer_ul}>
+				<ul className="navContainer_ul">
 					{!isAuth() && (
 						<>
 							<li className={path.includes("signin") ? "active" : ""}>
@@ -124,7 +122,7 @@ const Nav = ({ currentUser }) => {
 
 	const navigationList_B = () => {
 		return (
-			<ul className={style.burger_list}>
+			<ul className="burger_list">
 				{!isAuth() && (
 					<>
 						<li className={path.includes("signin") ? "active" : ""}>
@@ -240,18 +238,18 @@ const Nav = ({ currentUser }) => {
 	return (
 		<>
 			{size && (size === "large" || size === "desktop") ? (
-				<div className={style.navContainer}>
+				<div className="navContainer">
 					{path !== "/shop" ? homePageNavigation() : shopPageNavigation()}
 				</div>
 			) : (
-				<div className={style.burgerNavContainer}>
+				<div className="burgerNavContainer">
 					{navigationList_A()}
 					<div
 						onClick={() => setActivateNav(!activateNav)}
-						className={style.burgerNavContainer_burgerIcon}
+						className="burgerNavContainer_burgerIcon"
 					/>
 					{activateNav ? (
-						<div className={style.burgerNavContainer_burgerList_wrapper}>
+						<div className="burgerNavContainer_burgerList_wrapper">
 							{navigationList_B()}
 						</div>
 					) : (

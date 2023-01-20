@@ -4,7 +4,7 @@ import { ACTIVATION_MAIL_USER } from "../helpers/users";
 // sub components
 import Form_RComp from "../Forms/Form_RComp";
 // styles
-import { AddPageStyle } from "../styles/AddPageStyle";
+import { AddPageStyle } from "./Z_Style_AddPage";
 
 const AddUser = () => {
 	const [activationMailToUser, { loading, error, data }] =

@@ -9,8 +9,8 @@ import {
 	ButtonFill_Style,
 } from "../../../components/styles/UserFormStyles";
 import Form_RComp from "../../../components/Forms/Form_RComp";
-import Success_RComp from "../../../components/Reuse_Component/Success_RComp";
-import Error_RComp from "../../../components/Reuse_Component/Error_RComp";
+import Success_RComp from "../../../components/Messages/Success";
+import Error_RComp from "../../../components/Messages/Error";
 
 const ActivateUser = () => {
 	//const [code, setCode] = useState();

@@ -1,7 +1,7 @@
 import { InputField, InputLabel } from "./Z_Style_Inputs";
 
 const TextArea = ({ width, info, handleChange, form }) => {
-	console.log("TEXTAREA info ::", info);
+	//console.log("TEXTAREA info ::", info);
 	const { type, label, name, placeholder, required } = info;
 
 	return (

@@ -34,7 +34,8 @@ const Hero = ({ data }) => {
 					clipPath: "inset(0% 0% 0% 0%)",
 					//backgroundColor: "yellow",
 					duration: 2.5,
-					delay: 0.3,
+					delay: 0.4,
+					ease: "slow(0.7, 0.7, false)",
 				},
 				"<"
 			)
@@ -42,21 +43,31 @@ const Hero = ({ data }) => {
 				// 2- reveal the hero_video
 				// 3- (slide + downward scale) effect as video is revealed
 				// 4- for a parallax effect pin the video after animation is completed
-				.fromTo(
+				/* .fromTo(
 					".hero_video",
 					{
 						clipPath: "inset(100% 0% 0% 0%)",
-						yPercent: -110,
+						yPercent: -40,
 						scale: 4,
 					},
 					{
 						clipPath: "inset(0% 0% 0% 0%)",
 						duration: 3,
+						delay: 0.4,
+						yPercent: 0,
 						scale: 1,
-						yPercent: -10,
+						border: "red solid 1px",
+						ease: "slow(0.7, 0.7, false)",
 					},
 					"<"
-				);
+				); */
+				.fromTo(
+					".hero_video",
+					{ scale: 3, yPercent: 50 },
+					{ scale: 1, duration: 2.5, yPercent: -30, delay: 0.7 },
+					-0.3
+				)
+				.to(".hero_video", { duration: 2, yPercent: 0 }, ">-0.7");
 		}, hero);
 
 		return () => ctx.revert();

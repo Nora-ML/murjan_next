@@ -41,8 +41,6 @@ const Landing = () => {
 		};
 	}, []);
 
-	console.log("///// done ", done);
-
 	return (
 		<>
 			<PreLoader activateHero={(f) => setDone(f)} />

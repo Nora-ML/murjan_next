@@ -9,11 +9,7 @@ import { UPDATE_COLLECTION } from "../helpers/update";
 // components
 import Form_RComp from "../Forms/Form_RComp";
 // styles
-import {
-	AddPageStyle,
-	UpdatePage,
-	FormAndHeaderWrap,
-} from "../styles/AddPageStyle";
+import { AddPageStyle, UpdatePage, FormAndHeaderWrap } from "./Z_Style_AddPage";
 
 const CollectionAdd = ({ data, location, classInitial, alterClass }) => {
 	console.log("Collection EDIT/ADD component data", data);
@@ -23,7 +19,9 @@ const CollectionAdd = ({ data, location, classInitial, alterClass }) => {
 	const [addCollection] = useMutation(ADD_COLLECTION, {
 		refetchQueries: [{ query: LIST_COLLECTION }],
 	});
-	const [updateCollection] = useMutation(UPDATE_COLLECTION);
+	const [updateCollection] = useMutation(UPDATE_COLLECTION, {
+		refetchQueries: [{ query: LIST_COLLECTION }],
+	});
 
 	const activate = () => {
 		console.log("Activating add Collection page access", access);
@@ -40,9 +38,9 @@ const CollectionAdd = ({ data, location, classInitial, alterClass }) => {
 
 	const formData = data
 		? data.getCollection
-		: { name: "", description: "", slug: "", image: "" };
+		: { name: "", description: "", slug: "", image: [] };
 
-	const imageData = { file: "", signedRequest: "" };
+	const imageData = [];
 
 	let width = "60%";
 
@@ -81,8 +79,9 @@ const CollectionAdd = ({ data, location, classInitial, alterClass }) => {
 					{
 						type: "file",
 						label: "Image",
+						id: "image-0",
 						name: "image",
-						required: "true",
+						//required: "true",
 					},
 				]}
 				btnCount={btnsNumb}

@@ -1,7 +1,7 @@
 import { InputField, InputLabel } from "./Z_Style_Inputs";
 
 const OTPInput = ({ width, info, handleChange, form }) => {
-	console.log("OTP INPUT info ::", info);
+	//console.log("OTP INPUT info ::", info);
 	const { type, length, name, placeholder, required } = info;
 
 	return (

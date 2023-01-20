@@ -24,7 +24,7 @@ const GlobalStyles = createGlobalStyle`
         padding:0;
         margin:0;
         width: 100vw;
-        background-color: green;
+        background-color: var(--main_color);
         overflow-x: hidden;
     }
     a{

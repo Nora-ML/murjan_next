@@ -6,6 +6,10 @@ import CollectionAdd from "../../components/admin/Collection_Add_Update";
 //sub components
 import Search_RComp from "../../components/Reuse_Component/Search_RComp.js";
 import Table from "../../components/TableDisplay/Table.js";
+import {
+	Dash_HeaderStyle,
+	Dash_FooterStyle,
+} from "../../components/styles/DashBoard_Style";
 
 const Admin_Collection = () => {
 	const { data: listCollections, error, loading } = useQuery(LIST_COLLECTION);
@@ -19,11 +23,12 @@ const Admin_Collection = () => {
 
 	return (
 		<AdminLayout>
-			<CollectionAdd />
-			<h1 className="admin_display_head_left">Collection</h1>
+			<Dash_HeaderStyle className="admin_display_head_left">
+				Collections
+			</Dash_HeaderStyle>
 
 			<Search_RComp className="admin_display_controls_left" />
-			<h2 className="admin_display_controls_right">Items per page</h2>
+			<p className="admin_display_controls_right">Items per page</p>
 
 			<div className="admin_display_content">
 				{loading ? (
@@ -37,8 +42,11 @@ const Admin_Collection = () => {
 				)}
 			</div>
 
-			<h2 className="admin_display_footer_left">footer 1</h2>
-			<h2 className="admin_display_footer_right">footer2 </h2>
+			<Dash_FooterStyle className="admin_display_footer">
+				PAGES
+			</Dash_FooterStyle>
+
+			<CollectionAdd />
 		</AdminLayout>
 	);
 };

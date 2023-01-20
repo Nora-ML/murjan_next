@@ -5,6 +5,7 @@ const LIST_PRODUCTS = gql`
 		listProducts {
 			name
 			image
+			price
 			item_collection {
 				name
 			}

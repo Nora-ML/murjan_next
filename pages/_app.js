@@ -4,14 +4,21 @@ import client from "../setup/client.js";
 //import Script from "next/script";
 import UserContextProvider from "../components/context/userContext";
 import SizeContextProvider from "../components/context/sizeContext";
+import FilterContextProvider from "../components/context/filterContext";
 import { getCookie } from "../components/helpers/auth.js";
 import Layout from "../components/Layout";
 import { CURRENT_USER } from "../components/helpers/users";
-import "./landing.scss";
-import "./pre_loader.scss";
-import "./post_hero.scss";
-import "./hero.scss";
-import "./gem_color.scss";
+import "../public/static/styles/nav.scss";
+import "../public/static/styles/landing.scss";
+import "../public/static/styles/pre_loader.scss";
+import "../public/static/styles/post_hero.scss";
+import "../public/static/styles/hero.scss";
+import "../public/static/styles/gem_color.scss";
+import "../public/static/styles/shop.scss";
+import "../public/static/styles/shop_hero.scss";
+import "../public/static/styles/shop_items.scss";
+import "../public/static/styles/shop_nav.scss";
+import "../public/static/styles/item.scss";
 
 const MyApp = ({ Component, pageProps, apollo }) => {
 	console.log("_app props", pageProps);
@@ -20,9 +27,11 @@ const MyApp = ({ Component, pageProps, apollo }) => {
 		<ApolloProvider client={apollo}>
 			<SizeContextProvider>
 				<UserContextProvider>
-					<Layout currentUser={pageProps.user}>
-						<Component {...pageProps} />
-					</Layout>
+					<FilterContextProvider>
+						<Layout currentUser={pageProps.user}>
+							<Component {...pageProps} />
+						</Layout>
+					</FilterContextProvider>
 				</UserContextProvider>
 			</SizeContextProvider>
 		</ApolloProvider>

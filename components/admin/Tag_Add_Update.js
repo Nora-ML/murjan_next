@@ -9,11 +9,7 @@ import { UPDATE_TAG } from "../helpers/update";
 // components
 import Form_RComp from "../Forms/Form_RComp";
 // styles
-import {
-	AddPageStyle,
-	UpdatePage,
-	FormAndHeaderWrap,
-} from "../styles/AddPageStyle";
+import { AddPageStyle, UpdatePage, FormAndHeaderWrap } from "./Z_Style_AddPage";
 
 const TagAdd = ({ data, location, classInitial, alterClass }) => {
 	console.log("Tag EDIT/ADD component data", data);

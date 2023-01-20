@@ -6,19 +6,19 @@ const DashBoardStyle = Styled.div`
         overflow:hidden;
        
         margin:0;
-        height:calc(100vh - var(--nav_height));  
+        height:100vh;  
     
         display:flex;
         
 
-    .user_navigationBar{
+       .user_navigationBar{
+        padding-top:var(--nav_height);
 
-        
 
         @media screen and  (max-width:768px){
             position:absolute;
             z-index:2;
-            height:calc(100vh - var(--nav_height));  
+            height:100vh;  
             transform:translateX(0%);
     
         }
@@ -37,17 +37,15 @@ const DashBoardStyle = Styled.div`
         height:100px;
     }
 
-`
+`;
 const Dash_HeaderStyle = Styled.h1`
     margin:0;
     padding:2% 0;
-`
+`;
 
 const Dash_FooterStyle = Styled.div`
     border-top:var(--main_color) 5px double;
 
-`
+`;
 
-
-
-export { DashBoardStyle,Dash_HeaderStyle,Dash_FooterStyle };
+export { DashBoardStyle, Dash_HeaderStyle, Dash_FooterStyle };

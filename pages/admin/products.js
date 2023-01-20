@@ -1,15 +1,11 @@
 import { useQuery } from "@apollo/client";
 import { LIST_PRODUCTS } from "../../components/helpers/list.js";
 import { SEARCH_PRODUCTS } from "../../components/helpers/search.js";
-// Server Side authorization
-import { getCookie } from "../../components/helpers/auth.js";
-import client from "../../setup/client.js";
-import { AUTH_ADMIN } from "../../components/helpers/users";
 //main Components
 import AdminLayout from "../../components/admin/AdminLayout.js";
 import ProductAdd from "../../components/admin/Product_Add_Update";
 //sub components
-//import Search_RComp from "../../components/Reuse_Component/Search_RComp.js";
+import Search_RComp from "../../components/Reuse_Component/Search_RComp.js";
 import Table from "../../components/TableDisplay/Table.js";
 // styles
 import {
@@ -39,7 +35,7 @@ const Admin_Product = ({ query }) => {
 				Product
 			</Dash_HeaderStyle>
 
-			{/* <Search_RComp className="admin_display_controls_left" /> */}
+			<Search_RComp className="admin_display_controls_left" />
 			<p className="admin_display_controls_right">Items per page</p>
 
 			<div className="admin_display_content">

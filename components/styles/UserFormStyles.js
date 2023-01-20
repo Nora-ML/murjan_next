@@ -1,18 +1,20 @@
 import { ST } from "next/dist/shared/lib/utils";
 import Styled from "styled-components";
 
-
-const PageContainer_Style = Styled.div.attrs(props=>({width:props.width,backColor:props.backColor}))`
+const PageContainer_Style = Styled.div.attrs((props) => ({
+	width: props.width,
+	backColor: props.backColor,
+}))`
     background-color: var(--counter_light);
-    background-color:${(props)=> props.backColor} ;
+    background-color:${(props) => props.backColor} ;
 
     position:relative;
     bottom:0;
     left:0;
 
     width:100%;
-    width:${(props)=> props.width};
-    height:calc(100vh - var(--nav_height));
+    width:${(props) => props.width};
+    height:100vh;
     
 
     display:flex;
@@ -20,9 +22,9 @@ const PageContainer_Style = Styled.div.attrs(props=>({width:props.width,backColo
     align-items:center;
     justify-content:center;
 
-`
-const FormHeader_Style = Styled.h1.attrs(props=>({width:props.width}))`
-    width:${props => props.width};
+`;
+const FormHeader_Style = Styled.h1.attrs((props) => ({ width: props.width }))`
+    width:${(props) => props.width};
     background-color:var(--counter_color);
     font-size:80px;
     color:var(--counter_dark);
@@ -33,10 +35,13 @@ const FormHeader_Style = Styled.h1.attrs(props=>({width:props.width}))`
     text-align:center;
     text-transform:capitalize;
 
-`
-const SubContainer_Style = Styled.div.attrs(props=>({width:props.width,backColor:props.backColor}))`
+`;
+const SubContainer_Style = Styled.div.attrs((props) => ({
+	width: props.width,
+	backColor: props.backColor,
+}))`
     background-color: var(--counter_light);
-    background-color:${(props)=> props.backColor} ;
+    background-color:${(props) => props.backColor} ;
 
     width:${(props) => props.width};
     height:auto;
@@ -46,7 +51,7 @@ const SubContainer_Style = Styled.div.attrs(props=>({width:props.width,backColor
     align-items:center;
     justify-content:center;
 
-`
+`;
 const ButtonFill_Style = Styled.input`
     background-color: var(--counter_dark);
     color:var(--counter_light);  
@@ -59,7 +64,7 @@ const ButtonFill_Style = Styled.input`
 
     padding: 2vh 2vw;
     cursor:pointer;
-`
+`;
 const ButtonTransparent_Style = Styled.input`
     background-color: transparent;
     color:var(--counter_dark);
@@ -86,6 +91,12 @@ const ButtonTransparent_Style = Styled.input`
         transform:rotate(360deg);
         transition:transform 3s ease-in;
     }
-`
+`;
 
-export {PageContainer_Style,SubContainer_Style,ButtonFill_Style,FormHeader_Style,ButtonTransparent_Style};
+export {
+	PageContainer_Style,
+	SubContainer_Style,
+	ButtonFill_Style,
+	FormHeader_Style,
+	ButtonTransparent_Style,
+};

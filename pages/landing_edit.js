@@ -12,17 +12,14 @@ import GemColorEdit from "../components/landing/gem_color/gem_color_edit";
 import Button from "../components/Buttons/Button.js";
 // custom hook
 import useForm from "../setup/hooks/useForm.js";
-
 // animation library
 import { gsap } from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/// find if there is a previously saved landing page
-// if it exists fill it out in the form and run update function not add
-// we will assume for now that it's the first Landing
 const Landing = () => {
+	console.log("LANDING _EDIt page");
 	const { data, loading, error } = useQuery(GET_LANDING);
 	const [addLandingPage] = useMutation(ADD_LANDING_PAGE);
 	const [updateLandingPage] = useMutation(UPDATE_LANDING_PAGE);
@@ -34,11 +31,6 @@ const Landing = () => {
 	if (error) return <h1>Error ....</h1>;
 	if (data) {
 		fetchedForm = data.getLanding[0];
-		console.log(
-			"LANDING_EDIT Page, previous landing document ***fetchedForm",
-			fetchedForm
-		);
-
 		fetchedForm.parallel_slide_display.map((slide) => {
 			cleanedParallelS = [
 				...cleanedParallelS,
@@ -53,9 +45,6 @@ const Landing = () => {
 			];
 		});
 	}
-
-	console.log("*** cleanedParallelS", cleanedParallelS);
-	console.log(" ***  fetchedForm", fetchedForm);
 
 	const formData = {
 		hero: {
@@ -75,7 +64,6 @@ const Landing = () => {
 	};
 
 	const imageData = [];
-	console.log("********* LANDING_EDIT Page, formData ", formData);
 	const { inputs, handleChange } = useForm({ formData, imageData });
 	const { hero, about, parallel_slide_display } = inputs.formData;
 
@@ -84,7 +72,6 @@ const Landing = () => {
 	const handleSubmit = async (e) => {
 		console.log("SUBMIT FORM");
 		e.preventDefault();
-		console.log("---- FINAL FORM ", inputs.formData);
 		if (data) {
 			updateLandingPage({ variables: inputs.formData })
 				.then((data) => uploadFileToS3())

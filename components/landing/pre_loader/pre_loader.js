@@ -65,7 +65,7 @@ const PreLoader = ({ activateHero }) => {
 					{
 						yPercent: -100,
 						//backgroundColor: "purple",
-						duration: 1.5,
+						duration: 2,
 					},
 					">"
 				);

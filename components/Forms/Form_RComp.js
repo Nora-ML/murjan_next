@@ -40,47 +40,53 @@ const Form_RComp = ({
 	eitherOrRelation,
 }) => {
 	console.log("FORM components ");
-	console.log("btnCount", btnCount);
 
 	const { inputs, handleChange, resetForm } = useForm(formFields);
 
 	const [state, setState] = useState({
 		loading: false,
 		response: false,
-		error: false,
+		errorMessage: false,
 	});
 	const { loading, error, response } = state;
-	const { formData, subForm, imageData } = inputs;
+	const { formData, subForm, imageData, itemId } = inputs;
 
-	console.log("THEFORM -- inputs ", inputs);
+	//console.log("THEFORM -- inputs ", inputs);
 
 	// Extracting the "key" name in the main form that will be associated with the subform
 	let subFromObjectKey = Object.keys(formData).filter(
 		(k) => formData[k] === "subForm"
 	)[0];
 
+	console.log("THEFORM, INPUTS - \ninputs", inputs);
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		//console.log("HANDLE SUBMIT - \nformData", formData, "\nsubForm", subForm);
+		console.log(
+			"THEFORM, HANDLE SUBMIT - \nformData",
+			formData,
+			"\nitemId",
+			itemId
+		);
 		setState({ ...state, loading: true });
-		mergingSubFormsToMainForm()
-			.then((data) => mutationFunction[0]({ variables: data || formFields }))
+
+		let newForm = itemId ? { ...formData, ...itemId } : formData;
+		console.log("********* NEW FORM ,", newForm);
+		mutationFunction[0]({ variables: newForm || formFields })
 			.then((response) => {
 				console.log("Form fetched response ", response);
 				setState({ ...state, loading: false, response: true });
-				if (inputs.imageData) {
-					const {
-						imageData: { file, signedRequest },
-					} = inputs;
-					uploadFileToS3(file, signedRequest);
+				if (inputs.imageData.length > 0) {
+					console.log("HEEEEEELLO image");
+					uploadFileToS3();
 				} else {
-					resetForm();
+					classN ? classN() : resetForm();
 				}
 			})
-			.catch((error) => setState({ ...state, loading: false, error: error }));
+			.catch((error) => console.log("error"));
 	};
 
-	const mergingSubFormsToMainForm = async () => {
+	/* 	const mergingSubFormsToMainForm = async () => {
 		console.log("subFromObjectKey", subFromObjectKey);
 
 		let newSubForm;
@@ -102,9 +108,36 @@ const Form_RComp = ({
 		console.log("newFormData", newFormData);
 
 		return newFormData;
+	}; */
+	const uploadFileToS3 = async () => {
+		console.log("UPLOAING files to S3 imageData ", inputs.imageData);
+		setState({ ...state, loading: true, errorMessage: false });
+		await inputs.imageData.map((image, index) => {
+			fetch(image.signedRequest, {
+				method: "PUT",
+				body: image.file,
+			})
+				.then((response) => {
+					console.log("SAVED TO S3 .", image);
+					setState({ ...state, loading: false });
+					if (index === inputs.imageData.length - 1) {
+						response.status >= 400
+							? setState({
+									...state,
+									errorMessage: "No Response form Server",
+							  })
+							: classN
+							? classN()
+							: resetForm();
+					}
+				})
+				.catch((error) => {
+					console.log("ERror uploading file to s3 :", error);
+					setState({ ...state, errorMessage: error });
+				});
+		});
 	};
-
-	const uploadFileToS3 = async (file, signedRequest) => {
+	/* const uploadFileToS3 = async (file, signedRequest) => {
 		console.log(
 			"UPLAODING IMAGE TO s3 file",
 			file,
@@ -118,15 +151,16 @@ const Form_RComp = ({
 			.then((response) => {
 				console.log("RESPONSE,", response);
 				response.status >= 400
-					? new Error("Bad response from server")
+					? setState({ ...state, error: "No Response form Server" })
 					: classN
 					? classN()
 					: resetForm();
 			})
 			.catch((error) => {
 				console.log("ERror uploading file to s3 :", error);
+				setState({ ...state, error: error });
 			});
-	};
+	}; */
 
 	// Function: for cases like resendOTP , ForgotPass ..
 	// else it will simply close Form using ClassN animation
@@ -166,7 +200,7 @@ const Form_RComp = ({
 	return (
 		<BasicForm_Style width={formWidth} onSubmit={handleSubmit}>
 			{response && successMsg ? <Success_RComp message={successMsg} /> : ""}
-			{error ? <Error_RComp error={error} /> : ""}
+			{error ? <Error_RComp error={error} message={errorMessage} /> : ""}
 
 			{mainFormInputs && (
 				<MainFormStyle width={formWidth <= "51%" ? "100%" : formWidth}>
@@ -223,7 +257,7 @@ const Form_RComp = ({
 							width={formWidth <= "51%" ? "100%" : "45%"}
 							info={char}
 							handleChange={handleChange}
-							form={subForm}
+							form={formData}
 						/>
 					))}
 				</SubFormStyle>

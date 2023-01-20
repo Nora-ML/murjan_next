@@ -15,11 +15,7 @@ import { ADD_PRODUCT } from "../helpers/product";
 //components
 import Form_RComp from "../Forms/Form_RComp";
 //styles
-import {
-	AddPageStyle,
-	UpdatePage,
-	FormAndHeaderWrap,
-} from "../styles/AddPageStyle";
+import { AddPageStyle, UpdatePage, FormAndHeaderWrap } from "./Z_Style_AddPage";
 
 const ProductAdd = ({ data, location, classInitial, alterClass }) => {
 	console.log("Product EDIT/ADD component data", data);
@@ -51,7 +47,9 @@ const ProductAdd = ({ data, location, classInitial, alterClass }) => {
 		refetchQueries: [{ query: LIST_PRODUCTS }],
 	});
 
-	const [updateProduct] = useMutation(UPDATE_PRODUCT);
+	const [updateProduct] = useMutation(UPDATE_PRODUCT, {
+		refetchQueries: [{ query: LIST_PRODUCTS }],
+	});
 
 	if (categoriesLoading || collectionsLoading || tagsLoading)
 		return <p>Loading Lists cat,coll n' tag..</p>;
@@ -63,44 +61,60 @@ const ProductAdd = ({ data, location, classInitial, alterClass }) => {
 
 	const activate = () => {
 		if (access && (access === "admin_full" || access === "admin_limited")) {
-			if (counter === 0 || counter === 1) {
-				setCounter(2);
+			if (categories.length < 1 || collections.length < 1) {
+				alert("You Need to add Categories and collections first");
 			} else {
-				setCounter(1);
+				if (counter === 0 || counter === 1) {
+					setCounter(2);
+				} else {
+					setCounter(1);
+				}
 			}
 		} else {
 			alert("You are Not authorized To Add A Product");
 		}
 	};
 
-	const formData = data
-		? data.getProduct
-		: {
-				name: "",
-				description: "",
-				image: "",
-				price: "",
-				stock: "",
-				item_tags: [],
-				item_category: "",
-				item_collection: "",
-				item_offer: "",
-				options: "subForm",
-		  };
+	console.log("data.getProduct", data);
+	let fetchedForm = data && data.getProduct;
 
-	const subForm = data
-		? formData.options
-		: { sizes: [], gems: [], metal_colors: [] };
+	console.log("fetchedForm", fetchedForm);
 
-	const imageData = { file: "", signedRequest: "" };
+	const formData = {
+		name: fetchedForm ? fetchedForm.name : "",
+		description: fetchedForm ? fetchedForm.description : "",
+		image: fetchedForm ? fetchedForm.images : [],
+		price: fetchedForm ? fetchedForm.price : "",
+		stock: fetchedForm ? fetchedForm.stock : "",
+		item_tags: fetchedForm ? fetchedForm.item_tags : [],
+		item_category: fetchedForm ? fetchedForm.item_category.id : "",
+		item_collection: fetchedForm ? fetchedForm.item_collection.id : "",
+		item_offer: fetchedForm ? fetchedForm.item_offer : "",
+		options: {
+			sizes: fetchedForm ? fetchedForm.options.sizes[0] : [],
+			gems: fetchedForm ? fetchedForm.options.gems[0] : [],
+			metal_colors: fetchedForm ? fetchedForm.options.metal_colors[0] : [],
+		},
+	};
+
+	console.log("formData", formData);
+
+	const imageData = [];
 
 	let width = "85%";
 
-	const formFrame = (fnc, header, btnsNumb, extraBtn, extraProperty) => {
+	const formFrame = (
+		fnc,
+		header,
+		btnsNumb,
+		extraBtn,
+		extraProperty,
+		itemId
+	) => {
 		return (
 			<Form_RComp
 				formWidth={width}
-				formFields={{ formData, subForm, imageData }}
+				formFields={{ formData, imageData, itemId }}
 				mutationFunction={[fnc]}
 				/* mutationResponse={{ error }} */
 				formHeader={`${header} Product`}
@@ -174,18 +188,21 @@ const ProductAdd = ({ data, location, classInitial, alterClass }) => {
 				]}
 				subFormInputs={[
 					{
+						parentForm: "options",
 						type: "text",
 						label: "Size",
 						name: "sizes",
 						placeholder: "Seperate size by a comma please",
 					},
 					{
+						parentForm: "options",
 						type: "text",
 						label: "Gems",
 						name: "gems",
 						placeholder: "Seperate gems by comma please",
 					},
 					{
+						parentForm: "options",
 						type: "text",
 						label: "Metal Colors",
 						name: "metal_colors",
@@ -224,7 +241,8 @@ const ProductAdd = ({ data, location, classInitial, alterClass }) => {
 							"Update",
 							2,
 							{ type: "cancel", value: "Cancel" },
-							alterClass
+							alterClass,
+							{ id: fetchedForm.id }
 					  )
 					: ""}
 			</FormAndHeaderWrap>

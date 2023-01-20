@@ -2,3 +2,4 @@
 .config
 setup
 node_modules
+.next

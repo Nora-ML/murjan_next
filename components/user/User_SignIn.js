@@ -12,7 +12,7 @@ import {
 	PageContainer_Style,
 	FormHeader_Style,
 } from "../styles/UserFormStyles";
-import { FormAndHeaderWrap } from "../styles/AddPageStyle";
+import { FormAndHeaderWrap } from "../../components/admin/Z_Style_AddPage";
 
 const LogInUser = () => {
 	console.log("-- LOG IN ---");
@@ -59,7 +59,7 @@ const LogInUser = () => {
 			) : (
 				<FormAndHeaderWrap width={width}>
 					<h1 className="form_header">Sign In</h1>
-					{/* {error ? <Error_RComp error={error} /> : ""} */}
+					{error ? <Error_RComp error={error} /> : ""}
 					{loading ? <p>Loading ....</p> : ""}
 					<Form_RComp
 						formWidth={width}

@@ -10,7 +10,7 @@ import {
 import Success_RComp from "../Messages/Success";
 import Error_RComp from "../Messages/Error";
 import { setLocalStorage } from "../helpers/auth";
-import { FormAndHeaderWrap } from "../styles/AddPageStyle";
+import { FormAndHeaderWrap } from "../../components/admin/Z_Style_AddPage";
 
 const UserAdd = () => {
 	const [activationMailToUser, { loading, error, data }] =

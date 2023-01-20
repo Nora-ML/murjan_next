@@ -5,7 +5,7 @@ import {
 } from "./Z_Style_Buttons.js";
 
 const Button = ({ width, info, buttonTriggeredFunction }) => {
-	console.log("Button info ::", info);
+	//console.log("Button info ::", info);
 	const { type, value, fnc, fncData } = info;
 
 	return type !== "submit" ? (

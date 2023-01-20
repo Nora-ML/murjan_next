@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 const UPDATE_PRODUCT = gql`
 	mutation UpdateProduct(
 		$id: ID!
-		$image: String!
+		$image: [String]!
 		$name: String!
 		$price: Int!
 		$stock: Int!
@@ -11,6 +11,7 @@ const UPDATE_PRODUCT = gql`
 		$item_tags: [ID]!
 		$item_category: ID!
 		$item_collection: ID!
+		$options: UpdateProOptions!
 	) {
 		updateProduct(
 			id: $id
@@ -34,12 +35,14 @@ const UPDATE_PRODUCT = gql`
 `;
 const UPDATE_COLLECTION = gql`
 	mutation UpdateCollection(
+		$id: ID!
 		$name: String!
 		$description: String!
 		$slug: String!
-		$image: String!
+		$image: [String]!
 	) {
 		updateCollection(
+			id: $id
 			name: $name
 			description: $description
 			slug: $slug
@@ -52,8 +55,13 @@ const UPDATE_COLLECTION = gql`
 `;
 
 const UPDATE_USER_USER = gql`
-	mutation UpdateUser($name: String!, $email: String!, $password: String!) {
-		updateUser(name: $name, email: $email, password: $password) {
+	mutation UpdateUser(
+		$id: ID!
+		$name: String!
+		$email: String!
+		$password: String!
+	) {
+		updateUser(id: $id, name: $name, email: $email, password: $password) {
 			id
 			name
 			email
@@ -62,8 +70,8 @@ const UPDATE_USER_USER = gql`
 	}
 `;
 const UPDATE_USER_ADMIN = gql`
-	mutation UpdateUserAdmin($role: String!) {
-		updateUserAdmin(role: $role) {
+	mutation UpdateUserAdmin($id: ID!, $role: String!) {
+		updateUserAdmin(id: $id, role: $role) {
 			id
 			name
 			email
@@ -73,12 +81,14 @@ const UPDATE_USER_ADMIN = gql`
 `;
 const UPDATE_CATEGORY = gql`
 	mutation UpdateCategory(
+		$id: ID!
 		$name: String!
 		$description: String!
 		$slug: String!
-		$image: String!
+		$image: [String]!
 	) {
 		updateCategory(
+			id: $id
 			name: $name
 			description: $description
 			slug: $slug
@@ -90,8 +100,13 @@ const UPDATE_CATEGORY = gql`
 	}
 `;
 const UPDATE_TAG = gql`
-	mutation UpdateTag($name: String!, $description: String!, $slug: String!) {
-		updateTag(name: $name, description: $description, slug: $slug) {
+	mutation UpdateTag(
+		$id: ID!
+		$name: String!
+		$description: String!
+		$slug: String!
+	) {
+		updateTag(id: $id, name: $name, description: $description, slug: $slug) {
 			id
 			name
 		}
@@ -99,6 +114,7 @@ const UPDATE_TAG = gql`
 `;
 const UPDATE_OFFER = gql`
 	mutation UpdateOffer(
+		$id: ID!
 		$name: String!
 		$description: String!
 		$percentage: Int!
@@ -106,6 +122,7 @@ const UPDATE_OFFER = gql`
 		$slug: String!
 	) {
 		updateOffer(
+			id: $id
 			name: $name
 			description: $description
 			percentage: $percentage

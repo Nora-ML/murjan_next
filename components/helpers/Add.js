@@ -5,7 +5,7 @@ const ADD_CATEGORY = gql`
 		$name: String!
 		$description: String!
 		$slug: String!
-		$image: String!
+		$image: [String]!
 	) {
 		addCategory(
 			name: $name
@@ -32,7 +32,7 @@ const ADD_COLLECTION = gql`
 		$name: String!
 		$description: String!
 		$slug: String!
-		$image: String!
+		$image: [String]!
 	) {
 		addCollection(
 			name: $name

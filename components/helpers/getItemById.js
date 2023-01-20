@@ -19,7 +19,7 @@ const GET_PRODUCT = gql`
 			stock
 			price
 			options {
-				colors
+				sizes
 				gems
 				metal_colors
 			}

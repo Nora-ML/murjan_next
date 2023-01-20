@@ -1,7 +1,7 @@
 import { InputField, InputLabel } from "./Z_Style_Inputs";
 
 const NumberInput = ({ width, info, handleChange, form }) => {
-	console.log("Number INPUT info ::", info);
+	//console.log("Number INPUT info ::", info);
 	const { type, label, name, placeholder, required } = info;
 
 	return (

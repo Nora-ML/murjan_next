@@ -10,7 +10,7 @@ const AdminStyle = Styled.div`
     
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 9% 7% 78% 5%;
-    padding:0% 1%;
+    padding:var(--nav_height) 1%;
     
     
     .admin_display_head_left{
@@ -52,6 +52,6 @@ const AdminStyle = Styled.div`
     }
     
 
-`
+`;
 
 export { AdminStyle };
