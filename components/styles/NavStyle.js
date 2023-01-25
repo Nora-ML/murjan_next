@@ -1,6 +1,5 @@
 import Styled from "styled-components";
 
-
 const NavStyle = Styled.nav`
     background-color:var(--main_color);
     border-bottom: 1px solid var(--counter_light);
@@ -52,7 +51,7 @@ const NavStyle = Styled.nav`
     a{
         color:var(--counter_light);
     }
-`
+`;
 const BurgerStyle = Styled.nav`
     background-color:var(--main_color);
     border-bottom: 1px solid var(--counter_light);
@@ -133,13 +132,6 @@ const BurgerStyle = Styled.nav`
     a{
         color:var(--counter_light);
     }
-`
+`;
 
-
-const SearchStyle = Styled.div`
-    display:flex;
-    position:relative;
-
-`
-
-export { NavStyle,SearchStyle,BurgerStyle };
+export { NavStyle, BurgerStyle };

@@ -1,15 +1,17 @@
-k{
-    grid-template-rows: 10vh 1fr;
-    overflow-x: hidden;
-    transform: translateX();
+k {
+	grid-template-rows: 10vh 1fr;
+	overflow-x: hidden;
+	transform: translateX();
 }
 
-@media screen and (max-width:480px) {
-    
+@media screen and (max-width: 480px) {
 }
 
 .code::-webkit-outer-spin-button,
-.code::-webkit-inner-spin-button{
-    -webkit-appearance: none;
-    margin:0;
+.code::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
 }

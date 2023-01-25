@@ -4,7 +4,7 @@ import { LIST_COLLECTION } from "../../components/helpers/list.js";
 import AdminLayout from "../../components/admin/AdminLayout.js";
 import CollectionAdd from "../../components/admin/Collection_Add_Update";
 //sub components
-import Search_RComp from "../../components/Reuse_Component/Search_RComp.js";
+import Search from "../../components/Icons/Search.js";
 import Table from "../../components/TableDisplay/Table.js";
 import {
 	Dash_HeaderStyle,
@@ -27,7 +27,7 @@ const Admin_Collection = () => {
 				Collections
 			</Dash_HeaderStyle>
 
-			<Search_RComp className="admin_display_controls_left" />
+			<Search className="admin_display_controls_left" />
 			<p className="admin_display_controls_right">Items per page</p>
 
 			<div className="admin_display_content">

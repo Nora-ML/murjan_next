@@ -15,7 +15,7 @@
 	justify-content: flex-start;
 	align-items: stretch;
 
-	z-index: 10;
+	z-index: 9;
 
 	@media screen and (max-width: 770px) {
 		//background-color: #da8c1e;
@@ -32,6 +32,7 @@
 	.shop_dropdown-container {
 		position: relative;
 
+		padding: 1vh 0.5vw;
 		width: calc(100% / 4);
 		height: 400%;
 		margin-right: 5vw;

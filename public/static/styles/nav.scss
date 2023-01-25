@@ -12,7 +12,7 @@
 	z-index: 10;
 
 	min-height: var(--nav_height);
-	height: auto;
+	height: var(--nav_height);
 
 	&.trans {
 		background-color: transparent;

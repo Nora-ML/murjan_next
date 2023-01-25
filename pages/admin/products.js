@@ -5,7 +5,7 @@ import { SEARCH_PRODUCTS } from "../../components/helpers/search.js";
 import AdminLayout from "../../components/admin/AdminLayout.js";
 import ProductAdd from "../../components/admin/Product_Add_Update";
 //sub components
-import Search_RComp from "../../components/Reuse_Component/Search_RComp.js";
+import Search from "../../components/Icons/Search.js";
 import Table from "../../components/TableDisplay/Table.js";
 // styles
 import {
@@ -35,7 +35,7 @@ const Admin_Product = ({ query }) => {
 				Product
 			</Dash_HeaderStyle>
 
-			<Search_RComp className="admin_display_controls_left" />
+			<Search className="admin_display_controls_left" />
 			<p className="admin_display_controls_right">Items per page</p>
 
 			<div className="admin_display_content">

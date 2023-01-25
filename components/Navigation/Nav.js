@@ -2,6 +2,8 @@ import Link from "next/link";
 import { useEffect, useState, useContext } from "react";
 import { useRouter } from "next/router";
 import { SizeContext } from "../context/sizeContext";
+// Components
+import Search from "../Icons/Search";
 // Helper Functions
 import { isAuth, logout } from "../helpers/auth";
 import { gsap } from "gsap/dist/gsap";
@@ -17,7 +19,7 @@ const Nav = ({ currentUser }) => {
 	//const [screenSize, setScreenSize] = useState(0);
 	const [activateNav, setActivateNav] = useState(false);
 
-	console.log("size ", size, "path", path);
+	//console.log("size ", size, "path", path);
 
 	const { role, name, access } = currentUser
 		? Object.values(currentUser)[0]
@@ -36,6 +38,71 @@ const Nav = ({ currentUser }) => {
 				setScreenSize(window.innerWidth)
 			);
 	}, []); */
+
+	useEffect(() => {
+		const tl = gsap.timeline({});
+		if (location.pathname.includes("shop")) {
+			// flipping shop to cart and favourites
+			/* tl.fromTo(".shop-remove", { yPercent: 0 }, { yPercent: -170 }, 0.5);
+			tl.fromTo(
+				".first-2",
+				{ yPercent: 0 },
+				{ opacity: 1, yPercent: -110 },
+				0.6
+			); */
+
+			// shrinking the whole nav container
+			const navHeight = gsap.getProperty(".navContainer", "height");
+
+			tl.to(".navContainer", {
+				scrollTrigger: {
+					trigger: ".shop_dropdown-container",
+					toggleActions: "play play none reverse",
+					markers: true,
+					start: "top top+=15%",
+				},
+				height: navHeight / 2,
+				border: "1px red solid",
+				ease: "none",
+				duration: 1,
+			});
+		}
+		if (location.pathname === "/") {
+			tl.to(".navContainer", {
+				scrollTrigger: {
+					trigger: ".post_hero-container",
+					start: "top+=20% top",
+					//markers: true,
+					end: "bottom top",
+					toggleActions: "play play none reverse",
+				},
+				backgroundColor: "#e6ccb2",
+			});
+			tl.to(".navContainer", {
+				scrollTrigger: {
+					trigger: ".gem_color-container",
+					start: "top top+=10%",
+					//markers: true,
+					end: "bottom",
+					toggleActions: "play play none reverse",
+				},
+				backgroundColor: "transparent",
+			});
+			tl.to(".navContainer", {
+				scrollTrigger: {
+					trigger: ".category_main_container",
+					start: "top+=5% top+=5%",
+					//markers: true,
+					end: "bottom",
+					//toggleActions: "play play none reverse",
+					scrub: 0.1,
+				},
+				yPercent: -100,
+				duration: 0.5,
+				ease: "none",
+			});
+		}
+	}, []);
 
 	const homePageNavigation = () => {
 		return (
@@ -71,7 +138,7 @@ const Nav = ({ currentUser }) => {
 	const shopPageNavigation = () => {
 		return (
 			<div className="navContainer_multiple_ul">
-				<ul className={`$"navContainer_ul"`}>
+				<ul className="navContainer_ul">
 					<li>
 						<Link href="/" className="navContainer-li shop-nav">
 							Cart
@@ -103,6 +170,7 @@ const Nav = ({ currentUser }) => {
 							</li>
 						</>
 					)}
+
 					{isAuth() && <li onClick={logout}>LogOut</li>}
 					{role === "admin" ? (
 						<li className={path.includes("admin") ? "active" : ""}>
@@ -146,7 +214,6 @@ const Nav = ({ currentUser }) => {
 				) : (
 					""
 				)}
-				{/* {!path.includes("admin")? <li><Search_RComp/></li>:""} */}
 			</ul>
 		);
 	};
@@ -170,79 +237,28 @@ const Nav = ({ currentUser }) => {
 			</ul>
 		);
 	};
-
-	useEffect(() => {
-		const tl = gsap.timeline({});
-		if (location.pathname.includes("shop")) {
-			// flipping shop to cart and favourites
-			tl.fromTo(".shop-remove", { yPercent: 0 }, { yPercent: -170 }, 0.5);
-			tl.fromTo(
-				".first-2",
-				{ yPercent: 0 },
-				{ opacity: 1, yPercent: -110 },
-				0.6
-			);
-
-			// shrinking the whole nav container
-			const navHeight = gsap.getProperty(".navContainer", "height");
-
-			tl.to(".navContainer", {
-				scrollTrigger: {
-					trigger: ".shop_dropdown-container",
-					toggleActions: "play play none reverse",
-					//	markers: true,
-					start: "top top+=5%",
-				},
-				height: navHeight / 2,
-				ease: "none",
-				duration: 1,
-			});
-		}
-		if (location.pathname === "/") {
-			tl.to(".navContainer", {
-				scrollTrigger: {
-					trigger: ".post_hero-container",
-					start: "top+=20% top",
-					//markers: true,
-					end: "bottom top",
-					toggleActions: "play play none reverse",
-				},
-				backgroundColor: "#e6ccb2",
-			});
-			tl.to(".navContainer", {
-				scrollTrigger: {
-					trigger: ".gem_color-container",
-					start: "top top+=10%",
-					//markers: true,
-					end: "bottom",
-					toggleActions: "play play none reverse",
-				},
-				backgroundColor: "transparent",
-			});
-			tl.to(".navContainer", {
-				scrollTrigger: {
-					trigger: ".category_main_container",
-					start: "top+=5% top+=5%",
-					//markers: true,
-					end: "bottom",
-					//toggleActions: "play play none reverse",
-					scrub: 0.1,
-				},
-				yPercent: -100,
-				duration: 0.5,
-				ease: "none",
-			});
-		}
-	}, []);
-
 	return (
 		<>
 			{size && (size === "large" || size === "desktop") ? (
 				<div className="navContainer">
+					{!path.includes("admin") ? (
+						<li>
+							<Search className="search_float" />
+						</li>
+					) : (
+						""
+					)}
 					{path !== "/shop" ? homePageNavigation() : shopPageNavigation()}
 				</div>
 			) : (
 				<div className="burgerNavContainer">
+					{!path.includes("admin") ? (
+						<li>
+							<Search className="search_float" />
+						</li>
+					) : (
+						""
+					)}
 					{navigationList_A()}
 					<div
 						onClick={() => setActivateNav(!activateNav)}

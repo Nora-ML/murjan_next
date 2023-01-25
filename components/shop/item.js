@@ -14,8 +14,8 @@ import { Flip } from "gsap/dist/Flip";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(Flip);
 
-const Item = ({ size, product, loc }) => {
-	console.log("Item Component size", size, "product", product, "loc", loc);
+const Item = ({ size, product, specialClass }) => {
+	console.log("Item Component size", size, "product", product);
 
 	const { name, price, image, id } = product;
 	const [active, setActive] = useState(false);
@@ -94,16 +94,17 @@ const Item = ({ size, product, loc }) => {
 
 	return (
 		<>
-			<div className="target">
+			{/* <div className="target">
 				<div className="target_item-img"></div>
 			</div>
-			{active && <div className="overlay"></div>}
-			<div className={`shop_item ${size} shop_item${loc} id_${id}`}>
-				<div className={`image_wrapper ${size} id_${id}_wrapper`}>
+			{active && <div className="overlay"></div>} */}
+
+			<div className={`shop_item ${specialClass}`}>
+				<div className={`image_wrapper `}>
 					<Link href="/">
 						<img
 							onClick={() => transitionAnim()}
-							className={`shop_item-img ${size} id_${id}_img`}
+							className={`shop_item-img id_${id}_img`}
 							src={image[0]}
 							//src={image3}
 							//src={arrayImages[Math.floor(Math.random() * 6)]}

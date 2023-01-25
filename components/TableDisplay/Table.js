@@ -1,8 +1,7 @@
 import { TableStyle } from "./Z_Style_Table";
-import ItemControl from "../Reuse_Component/Item_RControls";
-import { ThumbnailStyle } from "../Editing_Icons/Z_Style_Icons";
-import Delete from "../Editing_Icons/Delete";
-import Edit from "../Editing_Icons/Edit";
+import { ThumbnailStyle } from "../Icons/Z_Style_Icons";
+import Delete from "../Icons/Delete";
+import Edit from "../Icons/Edit";
 
 const Table = ({ colHeaders, data, type }) => {
 	console.log("TABLE component data", data);

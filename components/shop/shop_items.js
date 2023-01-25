@@ -9,7 +9,7 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const ShopItems = ({ products }) => {
-	console.log("shop Items component");
+	console.log("shop Items component products", products);
 	// this will change on page navigation
 	const size = useContext(SizeContext);
 	const [page, setPage] = useState(1);
@@ -140,62 +140,52 @@ const ShopItems = ({ products }) => {
 			let fourth = [];
 			let fifth = [];
 
-			for (let i = 0; i < 3; i++) {
-				if (products[i]) {
-					first.push(<Item key={i} size={""} loc="" product={products[i]} />);
+			if (products && products.length === 1) {
+				first.push(<Item specialClass="flatten" product={products[0]} />);
+			} else {
+				for (let i = 0; i < 3; i++) {
+					products[i] ? first.push(<Item product={products[i]} />) : "";
 				}
-			}
-			for (let i = 3; i < 6; i++) {
-				if (products[i]) {
-					second.push(
-						i === 5 ? (
-							<Item
-								key={i}
-								size={"large"}
-								loc={`_${i}`}
-								product={products[i]}
-							/>
-						) : (
-							<Item key={i} size={""} loc={`_${i}`} product={products[i]} />
-						)
-					);
+				for (let i = 3; i < 5; i++) {
+					products[i] ? second.push(<Item product={products[i]} />) : "";
 				}
-			}
-			for (let i = 6; i < 9; i++) {
-				if (products[i]) {
-					third.push(<Item key={i} size={""} loc="" product={products[i]} />);
+				for (let i = 5; i < 10; i++) {
+					products[i] ? third.push(<Item product={products[i]} />) : "";
 				}
-			}
-			for (let i = 9; i < 12; i++) {
-				if (products[i]) {
-					fourth.push(
-						i === 9 ? (
-							<Item
-								key={i}
-								size={"large"}
-								loc={`_${i}`}
-								product={products[i]}
-							/>
-						) : (
-							<Item key={i} size={""} loc={`_${i}`} product={products[i]} />
-						)
-					);
+				for (let i = 10; i < 12; i++) {
+					products[i] ? fourth.push(<Item product={products[i]} />) : "";
 				}
-			}
-			for (let i = 12; i < 15; i++) {
-				if (products[i]) {
-					fifth.push(<Item key={i} size={""} loc="" product={products[i]} />);
+				for (let i = 12; i < 15; i++) {
+					products[i] ? fifth.push(<Item product={products[i]} />) : "";
 				}
 			}
 
 			return (
 				<div className="shop_large_container">
 					<div className="shopItems">
-						<div className="shopItems_1">{first}</div>
-						<div className="shopItems_2">{second}</div>
-						<div className="shopItems_3">{third}</div>
-						<div className="shopItems_4">{fourth}</div>
-						<div className="shopItems_5">{fifth}</div>
+						{first}
+						{second.length > 0 ? (
+							<div
+								className={`vertical-wrapper ${
+									third.length < 1 || second.length === 1 ? "flatten" : ""
+								}`}>
+								{second}
+							</div>
+						) : (
+							""
+						)}
+						{third}
+						{fourth.length > 0 ? (
+							<div
+								className={`vertical-wrapper ${
+									fifth.length < 1 ? "flatten" : ""
+								}`}>
+								{fourth}
+							</div>
+						) : (
+							""
+						)}
+						{fifth}
 					</div>
 				</div>
 			);

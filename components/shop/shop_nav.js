@@ -18,10 +18,7 @@ const ShopNav = ({ listCat, listColl }) => {
 		"gem6",
 	]);
 
-	console.log("NAV COMPONENT collections", listColl, "categories", listCat);
-
 	const [selected, setSelected] = useState({ gem: "", coll: "", cat: "" });
-	//const [filter, setFilter] = useState({ gemFilt: [], collFilt: [], catFilt: [] })
 	const [active, setActive] = useState({
 		gemAct: "initial",
 		collAct: "initial",
@@ -34,22 +31,21 @@ const ShopNav = ({ listCat, listColl }) => {
 
 	// activates (display) particular filter option
 	const activate = (e, name) => {
-		console.log("Activate,", e, name, "activeState", active);
+		//console.log("Activate,", e, name, "activeState", active);
 		let change = {};
 		if (active[name] === "triggered") {
-			console.log("CLOSING");
+			//console.log("CLOSING");
 			change[name] = "closed";
 		} else {
-			console.log("Triggering", name);
+			//console.log("Triggering", name);
 			change[name] = "triggered";
 		}
 		Object.keys(active).map((a) => {
 			if (a !== [name] && active[a] === "triggered") {
-				console.log("closing ", a, "active", active);
+				//console.log("closing ", a, "active", active);
 				change[a] = "closed";
 			}
 		});
-		console.log("CHANGE", change);
 		setActive({ ...active, ...change });
 	};
 
@@ -68,7 +64,7 @@ const ShopNav = ({ listCat, listColl }) => {
 					// markers: true,
 					pinSpacing: false,
 					end: "+=3000",
-					start: "top top+=5%",
+					start: "top top+=10%",
 					duration: 5,
 					ease: "slow(0.7, 0.7, false)",
 				},
@@ -137,19 +133,44 @@ const ShopNav = ({ listCat, listColl }) => {
 		}
 	}, []);
 
+	useEffect(() => {
+		console.log("----- MOUSELEVE EFFECT");
+		let filter = document.querySelectorAll(".shop_dropdown-container");
+
+		let deactivate = (e) => {
+			Object.keys(active).map((a) => {
+				if (active[a] === "triggered") {
+					setActive({ ...active, [a]: "closed" });
+				}
+			});
+		};
+
+		console.log("-------filter", filter);
+		filter.forEach((filt) => {
+			filt.addEventListener("mouseleave", deactivate);
+		});
+
+		return () =>
+			filter.forEach((filt) => {
+				filt.removeEventListener("mouseleave", deactivate);
+			});
+	}, [active]);
+
 	return (
 		<div className="filter_container">
-			<div
-				className={`shop_dropdown-container ${catAct}`}
-				onClick={(e) => activate(e, "catAct")}>
-				<p className="shop_dropdown_selected">{cat ? cat : "ALL Categories"}</p>
+			<div className={`shop_dropdown-container ${catAct}`}>
+				<p
+					className="shop_dropdown_selected"
+					onClick={(e) => activate(e, "catAct")}>
+					{cat ? cat : "ALL Categories"}
+				</p>
 				<div className={`shop_dropdown_wrapper ${catAct}`}>
 					{listCat.map((arr, index) => (
 						<div
 							key={index}
-							onClick={() => addToFilter("catFilt", arr.name)}
+							onClick={() => addToFilter("catFilt", arr.id)}
 							className={`shop_dropdown ${catAct} ${
-								catFilt.includes(arr.name) ? "filter" : ""
+								catFilt.includes(arr.id) ? "filter" : ""
 							}`}>
 							<p>{arr.name}</p>
 						</div>
@@ -166,9 +187,9 @@ const ShopNav = ({ listCat, listColl }) => {
 					{listColl.map((arr, index) => (
 						<div
 							key={index}
-							onClick={() => addToFilter("collFilt", arr.name)}
+							onClick={() => addToFilter("collFilt", arr.id)}
 							className={`shop_dropdown ${collAct} ${
-								collFilt && collFilt.includes(arr.name) ? "filter" : ""
+								collFilt && collFilt.includes(arr.id) ? "filter" : ""
 							}`}>
 							<p>{arr.name}</p>
 						</div>
