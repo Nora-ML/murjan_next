@@ -26,6 +26,10 @@ const GlobalStyles = createGlobalStyle`
         width: 100vw;
         background-color: var(--main_color);
         overflow-x: hidden;
+
+        
+    font-size: 16px;
+    font-family: 'Cinzel', serif;
     }
     a{
         text-decoration: none;

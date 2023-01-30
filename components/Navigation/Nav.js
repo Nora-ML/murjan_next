@@ -58,7 +58,7 @@ const Nav = ({ currentUser }) => {
 				scrollTrigger: {
 					trigger: ".shop_dropdown-container",
 					toggleActions: "play play none reverse",
-					markers: true,
+					//markers: true,
 					start: "top top+=15%",
 				},
 				height: navHeight / 2,
@@ -241,24 +241,10 @@ const Nav = ({ currentUser }) => {
 		<>
 			{size && (size === "large" || size === "desktop") ? (
 				<div className="navContainer">
-					{!path.includes("admin") ? (
-						<li>
-							<Search className="search_float" />
-						</li>
-					) : (
-						""
-					)}
 					{path !== "/shop" ? homePageNavigation() : shopPageNavigation()}
 				</div>
 			) : (
 				<div className="burgerNavContainer">
-					{!path.includes("admin") ? (
-						<li>
-							<Search className="search_float" />
-						</li>
-					) : (
-						""
-					)}
 					{navigationList_A()}
 					<div
 						onClick={() => setActivateNav(!activateNav)}

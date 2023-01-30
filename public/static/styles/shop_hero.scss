@@ -10,13 +10,13 @@ $height: (1063px/100);
 
 	padding: 8% 8% 5% 8%;
 	position: relative;
-	top: 10vh;
+	top: 5vh;
 
 	color: var(--counter_light);
+	text-transform: uppercase;
 
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	flex-wrap: wrap;
 
 	@media screen and (max-width: 1201px) {
 		min-height: 35vh;
@@ -40,6 +40,8 @@ $height: (1063px/100);
 	.shop_subheader_container {
 		//background-color: beige;
 		position: relative;
+
+		flex-basis: 90%;
 
 		overflow: hidden;
 		width: auto;
@@ -84,13 +86,19 @@ $height: (1063px/100);
 			@media screen and (max-width: 480px) {
 			}
 		}
+		.shop_post_header {
+			display: inline-block;
+		}
 	}
 
 	.shop_header_container {
-		// background-color: beige;
+		//background-color: beige;
 		overflow: hidden;
 		position: relative;
-		width: auto;
+		display: inline-flex;
+		flex-basis: 60%;
+		flex-grow: 1;
+		//width: auto;
 		// max-height: 50%;
 		height: auto;
 		padding: 0% 1%;
@@ -115,6 +123,10 @@ $height: (1063px/100);
 
 		.shop_header {
 			//font-size: 95px;
+			display: flex;
+			flex-basis: 10%;
+			align-self: center;
+			//border: 1px blue dashed;
 			font-size: clamp(55px, 7vw, 150px);
 
 			font-weight: 300;
@@ -128,6 +140,49 @@ $height: (1063px/100);
 			animation-duration: 1.2s;
 			//animation-delay: 0.2;
 			animation-fill-mode: forwards;
+
+			@media screen and (max-width: 770px) {
+				font-size: clamp(10px, 11vw, 80px);
+				word-spacing: 0.5rem;
+				margin-block-start: 3%;
+				font-weight: 500;
+			}
+			@media screen and (max-width: 480px) {
+				/* font-size:clamp(10px,10vw,50px);
+                letter-spacing:-0.2rem;
+                word-spacing:0.5rem;
+                margin-block-start: 6%;
+                font-weight: 500; */
+			}
+		}
+		.shop_header_dynamic {
+			//font-size: 95px;
+			display: flex;
+			flex-basis: 60%;
+			flex-grow: 1;
+			flex-wrap: wrap;
+			margin-left: 1.5vw;
+			//height: 120px;
+
+			//border: 2px blue solid;
+
+			font-weight: 300;
+			letter-spacing: clamp(-5px, -0.1rem, -10px);
+			word-spacing: clamp(7px, 0.7rem, 20px);
+
+			margin-block-start: 2%;
+			margin-block-end: 1%;
+
+			animation-name: upNscale;
+			animation-duration: 1.2s;
+			//animation-delay: 0.2;
+			animation-fill-mode: forwards;
+
+			.categories_selected {
+				margin-right: 1vw;
+				//border: 1px red solid;
+				align-self: center;
+			}
 
 			@media screen and (max-width: 770px) {
 				font-size: clamp(10px, 11vw, 80px);

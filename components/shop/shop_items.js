@@ -1,23 +1,55 @@
 import React, { useEffect, useContext, useState, useLayoutEffect } from "react";
 import { useQuery } from "@apollo/client";
-import Item from "./item";
+//Contexts
+import { FilterContext } from "../context/filterContext";
 import { SizeContext } from "../context/sizeContext";
-import { Link } from "react-router-dom";
+// Components
+import Item from "./item";
+// GraphQl queries and mutations
+import { FILTER_PRODUCTS } from "../../components/helpers/filter";
+import { LIST_PRODUCTS } from "../../components/helpers/list";
+// Animation Library
 import { gsap } from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-
 gsap.registerPlugin(ScrollTrigger);
 
-const ShopItems = ({ products }) => {
-	console.log("shop Items component products", products);
+const ShopItems = ({ itemsPerPage, currentPage }) => {
+	console.log(
+		"** Shop_Items component itemsPerPage",
+		itemsPerPage,
+		"currentPage",
+		currentPage
+	);
 	// this will change on page navigation
 	const size = useContext(SizeContext);
-	const [page, setPage] = useState(1);
+	const { gemFilt, collFilt, catFilt } = useContext(FilterContext);
+	const { data, loading, error } =
+		catFilt.length > 0 || collFilt.length > 0
+			? useQuery(FILTER_PRODUCTS, {
+					variables: {
+						category: catFilt,
+						collection: collFilt,
+						limit: itemsPerPage * currentPage,
+						skip: itemsPerPage * (currentPage - 1),
+					},
+			  })
+			: useQuery(LIST_PRODUCTS, {
+					variables: {
+						limit: itemsPerPage * currentPage,
+						skip: itemsPerPage * (currentPage - 1),
+					},
+			  });
 
-	const [numberOfPages, setNumberOfPages] = useState(1);
-	const [skip, setSkip] = useState(0);
+	if (loading) <h1>Loading ....</h1>;
+	if (error) <h1>Errror ....</h1>;
 
-	console.log("********* size", size);
+	console.log("***** PRODUCTS DATA", data);
+
+	const products =
+		catFilt.length > 0 || collFilt.length > 0
+			? data?.filterProducts
+			: data?.listProducts;
+
 	// animation
 	useEffect(() => {
 		console.log("animation shop_items");
@@ -35,10 +67,15 @@ const ShopItems = ({ products }) => {
 							{
 								scrollTrigger: {
 									trigger: item,
-									// markers: true,
+									/* markers: {
+										startColor: "magenta",
+										endColor: "black",
+										indent: "5px",
+										fontWeight: "15px",
+									}, */
 									start: "center-=10 bottom",
-									end: "bottom bottom",
-									toggleActions: "play play none reset",
+									end: "top bottom",
+									toggleActions: "play play play reverse",
 								},
 								yPercent: 0,
 								duration: 0.9,
@@ -61,18 +98,18 @@ const ShopItems = ({ products }) => {
 					batch.forEach((item, index) => {
 						gsap.fromTo(
 							item,
-							{ scale: 1.2, yPercent: -10 },
+							{ scale: 1.15, yPercent: -10, opacity: 0 },
 							{
 								scrollTrigger: {
 									trigger: item,
 									//markers: true,
-									start: "center-=10 bottom",
-									end: "bottom bottom",
-									toggleActions: "play play none reset",
+									start: "center-=10 bottom-=40",
+									end: "top bottom",
+									toggleActions: "play play play reverse",
 								},
 								scale: 0.9,
-								duration: 0.5,
-								yPercent: 10,
+								duration: 0.8,
+								yPercent: 0,
 								opacity: 1,
 								ease: "none",
 								delay: `${0.3 * index}`,
@@ -129,9 +166,7 @@ const ShopItems = ({ products }) => {
 	};
 
 	const largeWindow = () => {
-		const newArray = [...new Array(numberOfPages)];
 		console.log("LArge Window ", size);
-		console.log(newArray);
 
 		if (size === "desktop" || size === "large") {
 			let first = [];
@@ -140,23 +175,25 @@ const ShopItems = ({ products }) => {
 			let fourth = [];
 			let fifth = [];
 
-			if (products && products.length === 1) {
-				first.push(<Item specialClass="flatten" product={products[0]} />);
-			} else {
-				for (let i = 0; i < 3; i++) {
-					products[i] ? first.push(<Item product={products[i]} />) : "";
-				}
-				for (let i = 3; i < 5; i++) {
-					products[i] ? second.push(<Item product={products[i]} />) : "";
-				}
-				for (let i = 5; i < 10; i++) {
-					products[i] ? third.push(<Item product={products[i]} />) : "";
-				}
-				for (let i = 10; i < 12; i++) {
-					products[i] ? fourth.push(<Item product={products[i]} />) : "";
-				}
-				for (let i = 12; i < 15; i++) {
-					products[i] ? fifth.push(<Item product={products[i]} />) : "";
+			if (products) {
+				if (products.length === 1) {
+					first.push(<Item specialClass="flatten" product={products[0]} />);
+				} else {
+					for (let i = 0; i < 3; i++) {
+						products[i] ? first.push(<Item product={products[i]} />) : "";
+					}
+					for (let i = 3; i < 5; i++) {
+						products[i] ? second.push(<Item product={products[i]} />) : "";
+					}
+					for (let i = 5; i < 10; i++) {
+						products[i] ? third.push(<Item product={products[i]} />) : "";
+					}
+					for (let i = 10; i < 12; i++) {
+						products[i] ? fourth.push(<Item product={products[i]} />) : "";
+					}
+					for (let i = 12; i < 15; i++) {
+						products[i] ? fifth.push(<Item product={products[i]} />) : "";
+					}
 				}
 			}
 
@@ -197,18 +234,6 @@ const ShopItems = ({ products }) => {
 			{products && size && size !== "desktop" && size !== "large"
 				? smallWindow()
 				: largeWindow()}
-			<div className="pagination">
-				{[...new Array(numberOfPages)].map((e, index) => (
-					<p
-						key={`pageNumber_${index}`}
-						className={`page_number page_number${
-							index + 1 === page ? "-active" : ""
-						}`}
-						onClick={() => fliptoToPage(index + 1)}>
-						{index + 1}
-					</p>
-				))}
-			</div>
 		</>
 	);
 };

@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 const LIST_PRODUCTS = gql`
-	query ListProducts {
-		listProducts {
+	query ListProducts($limit: Int! = 0, $skip: Int! = 0) {
+		listProducts(limit: $limit, skip: $skip) {
 			name
 			image
 			price

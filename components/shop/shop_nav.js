@@ -64,7 +64,7 @@ const ShopNav = ({ listCat, listColl }) => {
 					// markers: true,
 					pinSpacing: false,
 					end: "+=3000",
-					start: "top top+=10%",
+					start: "top top+=5%",
 					duration: 5,
 					ease: "slow(0.7, 0.7, false)",
 				},
@@ -145,7 +145,7 @@ const ShopNav = ({ listCat, listColl }) => {
 			});
 		};
 
-		console.log("-------filter", filter);
+		//console.log("-------filter", filter);
 		filter.forEach((filt) => {
 			filt.addEventListener("mouseleave", deactivate);
 		});

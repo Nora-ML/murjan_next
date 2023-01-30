@@ -46,6 +46,13 @@ const ADD_PRODUCT = gql`
 	}
 `;
 
+const COUNT_PRODUCTS = gql`
+	query CountProducts($category: [ID]! = [], $collection: [ID]! = []) {
+		countProducts(category: $category, collection: $collection) {
+			count
+		}
+	}
+`;
 const UPLOAD_FILE = gql`
 	mutation SignS3($fileName: String!, $fileType: String!) {
 		signS3(fileName: $fileName, fileType: $fileType) {
@@ -55,4 +62,19 @@ const UPLOAD_FILE = gql`
 	}
 `;
 
-export { ADD_PRODUCT, UPLOAD_FILE };
+const FEATURED_PRODUCTS = gql`
+	query FeaturedProducts {
+		featuredProducts {
+			categoryName
+			categoryId
+			featuredProducts {
+				name
+				price
+				image
+				id
+			}
+		}
+	}
+`;
+
+export { ADD_PRODUCT, UPLOAD_FILE, COUNT_PRODUCTS, FEATURED_PRODUCTS };

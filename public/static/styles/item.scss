@@ -52,11 +52,13 @@
 		flex-grow: 0;
 	}
 
-	@media screen and (max-width: 770px) {
-		width: 90%;
-		height: auto;
+	@media screen and (max-width: 769px) {
+		flex-basis: 45%;
+		flex-grow: 0;
 	}
 	@media screen and (max-width: 480px) {
+		flex-basis: 70%;
+		flex-grow: 0.5;
 	}
 
 	.image_wrapper {

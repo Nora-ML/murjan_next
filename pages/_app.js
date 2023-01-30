@@ -19,6 +19,8 @@ import "../public/static/styles/shop_hero.scss";
 import "../public/static/styles/shop_items.scss";
 import "../public/static/styles/shop_nav.scss";
 import "../public/static/styles/item.scss";
+import "../public/static/styles/category_nav.scss";
+import "../public/static/styles/collection.scss";
 
 const MyApp = ({ Component, pageProps, apollo }) => {
 	console.log("_app props", pageProps);

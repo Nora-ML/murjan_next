@@ -4,10 +4,10 @@ import Hero from "../components/landing/hero/hero.js";
 import PostHero from "../components/landing/post_hero/post_hero";
 import GemColor from "../components/landing/gem_color/gem_color.js";
 import PreLoader from "../components/landing/pre_loader/pre_loader";
+import CategoryNav from "../components/landing/category_nav.js";
+import Collection from "../components/landing/collection.js";
 import { GET_LANDING } from "../components/helpers/landing.js";
 //import { ProductContext } from "../../context/productContext";
-
-//import "./landing.scss";
 
 import { gsap } from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -29,17 +29,19 @@ const Landing = () => {
 	}, [done]); */
 
 	useEffect(() => {
-		const script = document.createElement("script");
+		if (done) {
+			const script = document.createElement("script");
 
-		script.src = "/static/loco.js";
-		script.async = true;
+			script.src = "/static/loco.js";
+			script.async = true;
 
-		document.body.appendChild(script);
-		//setFinal(true);
-		return () => {
-			document.body.removeChild(script);
-		};
-	}, []);
+			document.body.appendChild(script);
+			//setFinal(true);
+			return () => {
+				document.body.removeChild(script);
+			};
+		}
+	}, [done]);
 
 	return (
 		<>
@@ -51,10 +53,10 @@ const Landing = () => {
 						<Hero data={hero} />
 						<PostHero data={about} />
 						<GemColor data={parallel_slide_display} />
-						{/*<CategoryNav />
-						<Collection /> */}
+						<CategoryNav />
+						<Collection />
 
-						{/* <div className="content-2">
+						<div className="content-2">
 							<p className="content__text">
 								Lorem ipsum dolor, sit amet consectetur adipisicing elit.
 								Suscipit dicta voluptas ut aperiam harum ratione, doloremque
@@ -65,7 +67,7 @@ const Landing = () => {
 								modi voluptatibus autem assumenda quae animi. Eius labore
 								architecto excepturi expedita ea nulla.
 							</p>
-						</div> */}
+						</div>
 					</div>
 				)}
 			</main>

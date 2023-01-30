@@ -1,0 +1,112 @@
+.collection_container{
+    //background-color:  rgba(43, 210, 43, 0.867); 
+    //border: rgb(22, 102, 173) solid 3px;
+    grid-area: e;
+    position: relative;
+
+    width:100vw;
+    height:250vh;
+    top: 0vh;
+    z-index: -1;
+
+    overflow: hidden;
+
+
+
+        .page4{
+          //background-color:rgb(248, 111, 111);
+        // border: red solid 3px; 
+          width: 100%;
+          height: 100vh;
+          visibility: hidden;
+          top: 0;
+          position: relative;
+      
+          .headers_container{
+            background-color:  #ead4be; 
+            top: 0%;
+            left:2.5%;
+
+            width: 100%;
+            height: 20%;
+            overflow: hidden;
+            position: relative;
+      
+            .header_card{
+              position: absolute;
+      
+              top: 0%;
+              left:0;
+
+              
+              width:90%;
+              height: auto;
+        
+             
+              background-color:  #ead4be; 
+             
+        
+              .header{
+                color:inherit;
+                text-align: left;
+              
+                //padding-top: 3%;
+                text-transform: capitalize;
+                font-size:clamp(40px,7vw,150px);
+
+                font-weight: 300;
+                letter-spacing:clamp(-1px,-0.1rem,-10px);
+                word-spacing:clamp(6px,0.75rem,25px);
+
+                margin-block-end: 0%;
+              
+              }
+            }
+          }
+      
+          .images_container{
+            width: 95%;
+            height: 75%;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+      
+            .image_card{
+              position: absolute;
+      
+              top: 0%;
+              left:0;
+        
+              width:100%;
+              height: 100%;
+
+              &:first-child{
+                .image{
+                width:100%;
+                height: 100%;
+                object-position: center;
+                object-fit: cover;
+
+                  @media screen and (max-width:769px),(max-aspect-ratio:1/1) {
+                      object-position: 50%;
+                    }
+                  }
+              }
+  
+              .image:not(first-child){
+                width:100%;
+                height: 100%;
+                object-position: center;
+                object-fit: cover;
+
+                @media screen and (max-width:769px),(max-aspect-ratio:1/1) {
+                  object-position: 10% ;
+                  object-fit: cover;
+              }
+              }
+            }
+          }
+        }
+}
+
+
