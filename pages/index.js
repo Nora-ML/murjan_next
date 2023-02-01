@@ -54,6 +54,7 @@ const Landing = () => {
 						<PostHero data={about} />
 						<GemColor data={parallel_slide_display} />
 						<CategoryNav />
+						<div className="gap_section"></div>
 						<Collection />
 
 						<div className="content-2">

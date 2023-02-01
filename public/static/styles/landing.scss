@@ -30,8 +30,9 @@
 		grid-template-rows: clamp(330px, 110vh, 1400px) //hero
 			clamp(60vh, 90vw, 1100px) //postHero
 			100vh //gem-color
-			200vh // categories
-			250vh // collection
+			100vh // categories
+			50vh // gap
+			200vh // collection
 			150vh; // footer
 		//row-gap: 5vw;
 		grid-template-areas:
@@ -39,9 +40,18 @@
 			"b b b b b b b b b b "
 			"c c c c c c c c c c "
 			"d d d d d d d d d d "
+			"x x x x x x x x x x "
 			"e e e e e e e e e e "
 			"g g g g g g g g g g ";
 
+		.gap_section {
+			background-color: rgba(243, 168, 168, 0.385);
+			grid-area: x;
+			height: 50vh;
+			width: 100vw;
+			position: relative;
+			z-index: -1;
+		}
 		.content-2 {
 			grid-area: g;
 			height: 150vh;

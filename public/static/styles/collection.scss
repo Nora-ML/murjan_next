@@ -1,112 +1,115 @@
-.collection_container{
-    //background-color:  rgba(43, 210, 43, 0.867); 
-    //border: rgb(22, 102, 173) solid 3px;
-    grid-area: e;
-    position: relative;
+.landing-collection {
+	//background-color:  rgba(43, 210, 43, 0.867);
+	//border: rgb(22, 102, 173) solid 3px;
+	grid-area: e;
+	position: relative;
+	//border: 2px solid red;
+	//background-color: rgba(0, 255, 255, 0.556);
+	background-color: #ead4be;
 
-    width:100vw;
-    height:250vh;
-    top: 0vh;
-    z-index: -1;
+	width: 100vw;
+	height: 100%;
+	top: 0vh;
+	z-index: 1;
+	clip-path: circle(0% at 50% 100%);
+	overflow: hidden;
 
-    overflow: hidden;
+	&__header {
+		background-color: #ead4be;
+		background-color: blue($color: #000000);
+		top: 0%;
+		left: 2.5%;
 
+		width: 100%;
+		height: 20vh;
+		overflow: hidden;
+		position: relative;
 
+		.header-card {
+			position: absolute;
 
-        .page4{
-          //background-color:rgb(248, 111, 111);
-        // border: red solid 3px; 
-          width: 100%;
-          height: 100vh;
-          visibility: hidden;
-          top: 0;
-          position: relative;
-      
-          .headers_container{
-            background-color:  #ead4be; 
-            top: 0%;
-            left:2.5%;
+			top: 0%;
+			left: 0;
 
-            width: 100%;
-            height: 20%;
-            overflow: hidden;
-            position: relative;
-      
-            .header_card{
-              position: absolute;
-      
-              top: 0%;
-              left:0;
+			width: 90%;
+			height: auto;
 
-              
-              width:90%;
-              height: auto;
-        
-             
-              background-color:  #ead4be; 
-             
-        
-              .header{
-                color:inherit;
-                text-align: left;
-              
-                //padding-top: 3%;
-                text-transform: capitalize;
-                font-size:clamp(40px,7vw,150px);
+			background-color: #ead4be;
 
-                font-weight: 300;
-                letter-spacing:clamp(-1px,-0.1rem,-10px);
-                word-spacing:clamp(6px,0.75rem,25px);
+			.header-text {
+				color: inherit;
+				text-align: left;
 
-                margin-block-end: 0%;
-              
-              }
-            }
-          }
-      
-          .images_container{
-            width: 95%;
-            height: 75%;
-            margin: 0 auto;
-            overflow: hidden;
-            position: relative;
-      
-            .image_card{
-              position: absolute;
-      
-              top: 0%;
-              left:0;
-        
-              width:100%;
-              height: 100%;
+				//padding-top: 3%;
+				text-transform: capitalize;
+				font-size: clamp(40px, 7vw, 150px);
 
-              &:first-child{
-                .image{
-                width:100%;
-                height: 100%;
-                object-position: center;
-                object-fit: cover;
+				font-weight: 300;
+				letter-spacing: clamp(-1px, -0.1rem, -10px);
+				word-spacing: clamp(6px, 0.75rem, 25px);
 
-                  @media screen and (max-width:769px),(max-aspect-ratio:1/1) {
-                      object-position: 50%;
-                    }
-                  }
-              }
-  
-              .image:not(first-child){
-                width:100%;
-                height: 100%;
-                object-position: center;
-                object-fit: cover;
+				margin-block-end: 0%;
+			}
+		}
+	}
 
-                @media screen and (max-width:769px),(max-aspect-ratio:1/1) {
-                  object-position: 10% ;
-                  object-fit: cover;
-              }
-              }
-            }
-          }
-        }
+	&__image {
+		width: 95%;
+		height: 75vh;
+		margin: 0 auto;
+		overflow: hidden;
+		position: relative;
+
+		//border: 2px dashed red;
+
+		.image-card {
+			position: absolute;
+
+			//border: 2px solid blue;
+
+			clip-path: inset(100% 0 0 0);
+
+			//top: 100%;
+			left: 0;
+
+			width: 100%;
+			height: 100%;
+
+			.image-img {
+				width: 100%;
+				height: 100%;
+				object-position: center;
+				object-fit: cover;
+
+				@media screen and (max-width: 769px), (max-aspect-ratio: 1/1) {
+					object-position: 50%;
+				}
+			}
+
+			/* &:first-child {
+				.image-img {
+					width: 100%;
+					height: 100%;
+					object-position: center;
+					object-fit: cover;
+
+					@media screen and (max-width: 769px), (max-aspect-ratio: 1/1) {
+						object-position: 50%;
+					}
+				}
+			}
+
+			.image-img:not(first-child) {
+				width: 100%;
+				height: 100%;
+				object-position: center;
+				object-fit: cover;
+
+				@media screen and (max-width: 769px), (max-aspect-ratio: 1/1) {
+					object-position: 10%;
+					object-fit: cover;
+				}
+			} */
+		}
+	}
 }
-
-

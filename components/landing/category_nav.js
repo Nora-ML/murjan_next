@@ -17,17 +17,15 @@ const CategoryNav = () => {
 
 	const featured = data ? data.featuredProducts : "";
 
-	useEffect(() => {
+	/* useEffect(() => {
 		console.log("--- CATEGORY NAV useEffect ");
 
 		let ctx = gsap.context(() => {
-			const section = gsap.utils.toArray(".category_each-container");
-
-			console.log("cateNav", cateNav);
+			const section = gsap.utils.toArray(".each-category");
 
 			let tl = gsap.timeline({
 				scrollTrigger: {
-					trigger: ".second_container",
+					trigger: ".landing-category__category-products",
 					scrub: 0.5,
 					ease: "none",
 					snap: {
@@ -42,7 +40,7 @@ const CategoryNav = () => {
 						fontSize: "16px",
 						fontWeight: "bold",
 						indent: 10,
-					}, */
+					}, 
 					start: `top top+=30%`,
 					end: `top+=400% bottom-=20%`,
 				},
@@ -56,14 +54,14 @@ const CategoryNav = () => {
 		}, cateNav);
 
 		return () => ctx.revert();
-	});
+	}); */
 	/// Headers animation
 
-	useLayoutEffect(() => {
+	/* useLayoutEffect(() => {
 		let ctx = gsap.context(() => {
 			// all your animations go in here...
 
-			const arr = gsap.utils.toArray(".cat_header");
+			const arr = gsap.utils.toArray(".header-dynamic__text");
 			const eachContainer = document.querySelectorAll(
 				".category_each-container"
 			);
@@ -85,7 +83,7 @@ const CategoryNav = () => {
 								fontSize: "16px",
 								fontWeight: "bold",
 								indent: -10,
-							}, */
+							}, 
 							ease: "none",
 							start: `top+=${index * windowInner} top+=30%`,
 							end: `top+=${windowInner + index * windowInner} ${
@@ -134,52 +132,40 @@ const CategoryNav = () => {
 		}, cateNav); // <- scopes all selector text to the root element
 
 		return () => ctx.revert();
-	}, []);
+	}, []); */
 
 	console.log("FEATURED ", featured);
 
 	return (
-		<div ref={cateNav} className="category_main_container">
-			<div className="cat_container">
-				{/* <img
-					className="decoration_image"
-					src={goldEdge}
-					alt="page decoration gold flower"
-				/> */}
-				{/* <div className="fixed_header_part">
-					
-				</div> */}
-				<div className="cat_headers_container">
-					<h1 className="cat_header_fixed">Trending</h1>
-					<div className="cat_wrap">
-						{featured &&
-							featured.map((cat) => (
-								<h1 key={cat.categoryId} className="cat_header">
-									{cat.categoryName}
-								</h1>
-							))}
-					</div>
-				</div>
-				<div className="second_container">
+		<div ref={cateNav} className="landing-category">
+			<div className="landing-category__category-headers">
+				<h1 className="header-fixed">Trending</h1>
+				<div className="header-dynamic">
 					{featured &&
-						featured.map((cat, index) => (
-							<div
-								key={cat.categoryId + "" + index}
-								className="category_each-container">
-								<div className="cat_images">
-									{cat.featuredProducts.map((prod, index) => (
-										<div key={prod.id + "" + index} className="cat_image_each">
-											<img
-												src={prod.image[0]}
-												//src={arrayImages[Math.floor(Math.random() * 6)]}
-												alt=""
-											/>
-										</div>
-									))}
-								</div>
-							</div>
+						featured.map((cat) => (
+							<h1 key={cat.categoryId} className="header-dynamic__text">
+								{cat.categoryName}
+							</h1>
 						))}
 				</div>
+			</div>
+			<div className="landing-category__category-products">
+				{featured &&
+					featured.map((cat, index) => (
+						<div key={cat.categoryId + "" + index} className="each-category">
+							<div className="each-category__product-card">
+								{cat.featuredProducts.map((prod, index) => (
+									<div key={prod.id + "" + index} className="product-image">
+										<img
+											src={prod.image[0]}
+											//src={arrayImages[Math.floor(Math.random() * 6)]}
+											alt=""
+										/>
+									</div>
+								))}
+							</div>
+						</div>
+					))}
 			</div>
 		</div>
 	);
