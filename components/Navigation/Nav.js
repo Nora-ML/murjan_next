@@ -127,7 +127,7 @@ const Nav = ({ currentUser }) => {
 				)}
 				<ul className="navContainer_ul">
 					<li>
-						<Link href="/shop" className="navContainer-li shop-remove">
+						<Link href="/shop/1" className="navContainer-li shop-remove">
 							Shop
 						</Link>
 					</li>
@@ -221,7 +221,7 @@ const Nav = ({ currentUser }) => {
 	const navigationList_A = () => {
 		return (
 			<ul>
-				{path === "/shop" ? (
+				{path.includes("/shop") ? (
 					<li>
 						<Link href="/" className="navContainer-li logo">
 							Murjan

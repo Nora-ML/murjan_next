@@ -19,21 +19,29 @@ const Collection = () => {
 
 	return (
 		<div ref={coll} className="landing-collection">
-			<div className="landing-collection__header">
-				{collection &&
-					collection.map((coll, index) => (
-						<div key={index + coll.id} className="header-card">
-							<h1 className="header-text">{coll.name}</h1>
-						</div>
-					))}
+			<div className="landing-collection__intro">
+				<h1>BE exceptional</h1>
+				<h2>Be Glamourous</h2>
+				<h2>Be Glamourous</h2>
+				<h2>Be Glamourous</h2>
 			</div>
-			<div className="landing-collection__image">
-				{collection &&
-					collection.map((coll, index) => (
-						<div key={index + coll.name} className="image-card">
-							<img className="image-img" src={coll.image[0]} alt="" />
-						</div>
-					))}
+			<div className="landing-collection__sticky">
+				<div className="collection-header">
+					{collection &&
+						collection.map((coll, index) => (
+							<div key={index + coll.id} className="header-card">
+								<h1 className="header-text">{coll.name}</h1>
+							</div>
+						))}
+				</div>
+				<div className="collection-image">
+					{collection &&
+						collection.map((coll, index) => (
+							<div key={index + coll.name} className="image-card">
+								<img className="image-img" src={coll.image[0]} alt="" />
+							</div>
+						))}
+				</div>
 			</div>
 		</div>
 	);

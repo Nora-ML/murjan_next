@@ -8,6 +8,7 @@ const GlobalStyles = createGlobalStyle`
         --main_color:#e6ccb2;
         --darkest:#000000;
         --counter_light:#f3eadd;
+        --another_light:#ead4be;
         --counter_med:#bcbcbc;
         --counter_dark:#524335;
         --alert:red;

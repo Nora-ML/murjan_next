@@ -18,9 +18,9 @@
 
 	.landing_container {
 		background-color: #ead4be;
-		overflow-x: hidden;
+		//overflow-x: hidden;
 
-		position: relative;
+		//position: relative;
 		top: 0;
 		width: 100vw;
 		height: auto;
@@ -30,9 +30,9 @@
 		grid-template-rows: clamp(330px, 110vh, 1400px) //hero
 			clamp(60vh, 90vw, 1100px) //postHero
 			100vh //gem-color
-			100vh // categories
-			50vh // gap
-			200vh // collection
+			200vh // categories
+			//50vh // gap
+			250vh // collection
 			150vh; // footer
 		//row-gap: 5vw;
 		grid-template-areas:
@@ -40,7 +40,7 @@
 			"b b b b b b b b b b "
 			"c c c c c c c c c c "
 			"d d d d d d d d d d "
-			"x x x x x x x x x x "
+			/* "x x x x x x x x x x " */
 			"e e e e e e e e e e "
 			"g g g g g g g g g g ";
 
