@@ -6,7 +6,7 @@ import Router from "next/router";
 // value = is the token
 export const setCookie = (key, value) => {
 	if (typeof window !== "undefined") {
-		cookie.set(key, value, {
+		cookie.set(key, JSON.stringify(value), {
 			expires: 1,
 		});
 	}
@@ -35,7 +35,7 @@ export const getCookieFromBrowser = (key) => {
 };
 
 export const getCookieFromServer = (key, req) => {
-	//console.log("The cookie from the Server, req:",req.headers.cookie)
+	console.log("The cookie from the Server, req:", req.headers);
 	if (!req.headers.cookie) {
 		return undefined;
 	} else {

@@ -11,6 +11,7 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const PostHero = ({ data }) => {
+	console.log("Landing -- Post Hero");
 	const app = useRef();
 
 	useLayoutEffect(() => {

@@ -37,17 +37,23 @@ const Pagination = ({ itemsPerPage, currentPage }) => {
 
 	return (
 		<div className="pagination">
-			{[...new Array(numberOfPages)].map((e, index) => (
-				<Link href={`/shop/${index + 1}`}>
-					<p
-						key={`pageNumber_${index}`}
-						className={`page_number page_number${
-							index + 1 === currentPage ? "-active" : ""
-						}`}>
-						{index + 1}
-					</p>
-				</Link>
-			))}
+			{[...new Array(numberOfPages)].map((e, index) => {
+				console.log(
+					"index + 1 === currentPage",
+					index + 1 === parseInt(currentPage)
+				);
+				return (
+					<Link href={`/shop/${index + 1}`}>
+						<p
+							key={`pageNumber_${index}`}
+							className={`page_number page_number${
+								index + 1 === parseInt(currentPage) ? "-active" : ""
+							}`}>
+							{index + 1}
+						</p>
+					</Link>
+				);
+			})}
 		</div>
 	);
 };

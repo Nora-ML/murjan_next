@@ -1,5 +1,6 @@
 import { createContext, useEffect, useReducer, useState } from "react";
 import filterReducer from "./reducers/filterReducer";
+import { setCookie, setLocalStorage } from "../helpers/auth";
 
 export const FilterContext = createContext();
 
@@ -14,6 +15,10 @@ const FilterContextProvider = ({ children }) => {
 
 	useEffect(() => {
 		// fetch products in selected filter from API
+		console.log("Filter Context useEffect state", state);
+
+		setCookie("filter", state);
+		setLocalStorage("filter", state);
 	});
 
 	const passOn = { ...state, addToFilter };

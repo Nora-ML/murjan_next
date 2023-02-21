@@ -1,14 +1,25 @@
 import React, { useEffect, useRef, useState } from "react";
 //import { ProductContext } from "../../context/productContext";
-
-//import "./pre_loader.scss";
+import { useQuery } from "@apollo/client";
+import { GET_LANDING } from "../../helpers/landing";
+//animation
 import { gsap } from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const PreLoader = ({ activateHero }) => {
-	console.log("PRE Loader State,");
+const PreLoader = ({ activateHero, landing }) => {
+	console.log("PRE Loader ");
+
+	const { data, error, loading } = useQuery(GET_LANDING);
+	if (loading) <h2>LOAding</h2>;
+	if (error) <h2>Error</h2>;
+
+	const landingContent = data ? data.getLanding : "";
+
+	console.log("PRE load landingContent", landingContent);
+
+	if (landingContent) landing(landingContent);
 
 	const [state, setState] = useState(false);
 

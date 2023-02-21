@@ -1,6 +1,9 @@
-import styled, { createGlobalStyle } from "styled-components";
+import { useContext } from "react";
+import { createGlobalStyle } from "styled-components";
 import Nav from "../components/Navigation/Nav.js";
+import NavMobile from "./Navigation/Nav_Mob.js";
 import dynamic from "next/dynamic";
+import { SizeContext } from "./context/sizeContext.js";
 
 const GlobalStyles = createGlobalStyle`
     html{
@@ -39,15 +42,28 @@ const GlobalStyles = createGlobalStyle`
         text-decoration: underline;
     }
 
+    .main-container{
+        max-width:1200px;
+        margin:0 auto;
+
+    }
+
 `;
 
 const DynamicNav = dynamic(() => import("./Navigation/Nav.js"), { ssr: false });
 
-const Layout = ({ children, currentUser }) => {
+const Layout = ({ children /* , currentUser */ }) => {
+	console.log("LAYOUT ..");
+	const size = useContext(SizeContext);
+
 	return (
 		<div>
 			<GlobalStyles />
-			<Nav currentUser={currentUser} />
+			{size && (size === "large" || size === "desktop") ? (
+				<Nav /* currentUser={currentUser} */ />
+			) : (
+				<NavMobile /* currentUser={currentUser} */ />
+			)}
 			<div>{children}</div>
 		</div>
 	);

@@ -30,7 +30,7 @@ const MyApp = ({ Component, pageProps, apollo }) => {
 			<SizeContextProvider>
 				<UserContextProvider>
 					<FilterContextProvider>
-						<Layout currentUser={pageProps.user}>
+						<Layout /* currentUser={pageProps.user }*/>
 							<Component {...pageProps} />
 						</Layout>
 					</FilterContextProvider>
@@ -41,7 +41,7 @@ const MyApp = ({ Component, pageProps, apollo }) => {
 };
 
 // tell next.js to fetch all queries in all my components and pages
-MyApp.getInitialProps = async function ({ Component, ctx }) {
+/* MyApp.getInitialProps = async function ({ Component, ctx }) {
 	//console.log("MYAPP ******* _app Component :",Component,"\n_app context",ctx)
 	let pageProps = {};
 
@@ -68,6 +68,6 @@ MyApp.getInitialProps = async function ({ Component, ctx }) {
 	}
 	pageProps.query = ctx.query;
 	return { pageProps };
-};
+}; */
 
 export default withData(MyApp);

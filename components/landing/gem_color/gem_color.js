@@ -14,7 +14,7 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const GemColor = ({ data }) => {
-	console.log("GEM COLOR", data);
+	console.log("Landing -- GEM COLOR");
 	const root = useRef();
 	const [state, setState] = useState(0);
 
@@ -36,7 +36,7 @@ const GemColor = ({ data }) => {
 			}
 		}
 	};
-	console.log("state OUT", state);
+
 	useLayoutEffect(() => {
 		const ctx = gsap.context(() => {
 			const rC = root.current;
@@ -63,12 +63,12 @@ const GemColor = ({ data }) => {
 					key={`${index + g.parallelS_description}`}
 					className={`gem_container  ${index === state ? "active" : ""}`}>
 					<video
-						className="gem_video main_image "
+						className="gem_video main_image"
 						type="video/mp4"
 						src={g.parallelS_main_media[0]}
-						autoPlay
+						/* autoPlay
 						loop
-						muted
+						muted */
 					/>
 				</div>
 			))}

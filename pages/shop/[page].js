@@ -10,9 +10,10 @@ import {
 	LIST_CATEGORIES,
 	LIST_COLLECTION,
 } from "../../components/helpers/list";
+import { getCookie } from "../../components/helpers/auth";
 
-const ShopPage = ({ query }) => {
-	console.log("Shop page query", query);
+const ShopPage = ({ query, cookie }) => {
+	console.log("Shop page query", query, "cookie", cookie);
 
 	const { data: categories } = useQuery(LIST_CATEGORIES);
 	const { data: collections } = useQuery(LIST_COLLECTION);
@@ -38,4 +39,12 @@ const ShopPage = ({ query }) => {
 		</div>
 	);
 };
+
+export async function getServerSideProps(context) {
+	const cookie = getCookie("filter", context.req);
+	console.log("cookie", decodeURIComponent(cookie));
+
+	return { props: { cookie: cookie, query: context.query } };
+}
+
 export default ShopPage;

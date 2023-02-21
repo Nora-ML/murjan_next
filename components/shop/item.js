@@ -15,7 +15,7 @@ gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(Flip);
 
 const Item = ({ size, product, specialClass }) => {
-	console.log("Item Component size", size, "product", product);
+	//console.log("Item Component size", size, "product", product);
 
 	const { name, price, image, id } = product;
 	const [active, setActive] = useState(false);

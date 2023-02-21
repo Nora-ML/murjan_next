@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from "react";
+import React, { useRef, useLayoutEffect, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { LIST_COLLECTION } from "../helpers/list";
 
@@ -8,13 +8,14 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const Collection = () => {
+	console.log("Landing -- Collection ");
 	const coll = useRef();
+
 	const { data, loading, error } = useQuery(LIST_COLLECTION);
 	if (loading) <h2>LOAding</h2>;
 	if (error) <h2>Error</h2>;
 
 	const collection = data ? data.listCollections : "";
-
 	console.log("collection ", collection);
 
 	return (

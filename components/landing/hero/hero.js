@@ -11,15 +11,14 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = ({ data }) => {
-	console.log("--- HERO SECTION data", data);
+	console.log("Landing -- HERO SECTION ");
 
 	const hero = useRef();
 
 	const size = useContext(SizeContext);
-	console.log("size from context,", size);
 
 	useEffect(() => {
-		console.log("HERO useEffect");
+		//console.log("HERO useEffect");
 		let ctx = gsap.context(() => {
 			const tl = gsap.timeline({});
 
@@ -80,16 +79,11 @@ const Hero = ({ data }) => {
 					src={data.hero_media[0]}
 					type="video/mp4"
 					className="hero_video"
-					autoPlay
+					/* autoPlay
 					loop
-					muted
+					muted */
 				/>
 			</div>
-
-			{/* <div className="hero_subheaders">
-				<h1>This is Header 1</h1>
-				<h3>Subheader 1</h3>
-			</div> */}
 		</div>
 	);
 };

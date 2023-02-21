@@ -1,28 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
+// apollo client
+import client from "../setup/client.js";
+// Components
 import Hero from "../components/landing/hero/hero.js";
 import PostHero from "../components/landing/post_hero/post_hero";
 import GemColor from "../components/landing/gem_color/gem_color.js";
 import PreLoader from "../components/landing/pre_loader/pre_loader";
 import CategoryNav from "../components/landing/category_nav.js";
 import Collection from "../components/landing/collection.js";
+// Graphql query
 import { GET_LANDING } from "../components/helpers/landing.js";
-//import { ProductContext } from "../../context/productContext";
+import { FEATURED_PRODUCTS } from "../components/helpers/product.js";
+import { LIST_COLLECTION } from "../components/helpers/list.js";
 
+// animation
 import { gsap } from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-
 gsap.registerPlugin(ScrollTrigger);
 
 const Landing = () => {
-	console.log("LANDING PAGE");
-	const { data, loading, error } = useQuery(GET_LANDING);
+	console.log("Landing -- Main ");
 	const [done, setDone] = useState(false);
+	const [landingContent, setLanding] = useState();
 
-	if (loading) return <h1>LOOOOADING </h1>;
-	if (error) return <h1>ERROR </h1>;
-
-	const { hero, about, parallel_slide_display } = data?.getLanding[0];
+	const { hero, about, parallel_slide_display } = landingContent
+		? landingContent[0]
+		: "";
 
 	/* useEffect(() => {
 		window.scrollTo(0, 0);
@@ -45,17 +49,18 @@ const Landing = () => {
 
 	return (
 		<>
-			<PreLoader activateHero={(f) => setDone(f)} />
+			<PreLoader
+				activateHero={(f) => setDone(f)}
+				landing={(f) => setLanding(f)}
+			/>
 			<main className="main_container">
 				{done && (
 					<div className="landing_container">
-						{/* <Nav classN="trans" /> */}
 						<Hero data={hero} />
 						<PostHero data={about} />
 						<GemColor data={parallel_slide_display} />
-						<CategoryNav />
-						{/* <div className="gap_section"></div>*/}
-						<Collection />
+						<CategoryNav /* featured={featured}  */ />
+						<Collection /* collection={collection}  */ />
 
 						<div className="content-2">
 							<p className="content__text">
@@ -75,18 +80,31 @@ const Landing = () => {
 		</>
 	);
 };
-//Query
-// 1- landing page
-// 2- Collections
-// 3- top 4/5 products in 4 categories
-/* Landing.getInitialProps = async (context) => {
-	try {
-		const { data, loading, error } = await client.query({ query: GET_LANDING });
-		console.log("DATA FETCHED ", data);
-		return { props: { data } };
-	} catch (error) {
-		console.log("LANDING FETCHIG :", error);
-		return { Error: "Restricted Access" };
+
+/* export async function getServerSideProps(ctx) {
+	console.log("LANDING -- getInitialProps ctx,", ctx);
+
+	const { data } = await client.query({
+		query: GET_LANDING,
+	});
+	/* const { data: products } = await client.query({
+		query: FEATURED_PRODUCTS,
+	});
+	const { data: collections } = await client.query({
+		query: LIST_COLLECTION,
+	}); 
+
+	if (!data) {
+		console.log("NO DATA ");
+	} else {
+		return {
+			props: {
+				landingContent: data.getLanding,
+				/* collection: collections.listCollections,
+				featured: products.featuredProducts, 
+			},
+		};
 	}
-};*/
+} */
+
 export default Landing;

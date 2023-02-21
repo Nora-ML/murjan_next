@@ -5,10 +5,10 @@ export const SizeContext = createContext();
 const SizeContextProvider = ({ children }) => {
 	const [size, setSize] = useState();
 
-	console.log("***** RESZING context  ");
+	//console.log("***** RESZING context  ");
 
 	useEffect(() => {
-		console.log("RESZING context");
+		//console.log("RESZING context");
 		let resizeId;
 
 		const sizeFunc = () => {

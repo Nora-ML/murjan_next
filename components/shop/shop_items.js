@@ -43,7 +43,7 @@ const ShopItems = ({ itemsPerPage, currentPage }) => {
 	if (loading) <h1>Loading ....</h1>;
 	if (error) <h1>Errror ....</h1>;
 
-	console.log("***** PRODUCTS DATA", data);
+	//console.log("***** PRODUCTS DATA", data);
 
 	const products =
 		catFilt.length > 0 || collFilt.length > 0
@@ -231,7 +231,7 @@ const ShopItems = ({ itemsPerPage, currentPage }) => {
 
 	return (
 		<>
-			{products && size && size !== "desktop" && size !== "large"
+			{!loading && products && size && size !== "desktop" && size !== "large"
 				? smallWindow()
 				: largeWindow()}
 		</>

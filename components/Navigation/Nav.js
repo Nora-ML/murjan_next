@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useEffect, useState, useContext } from "react";
 import { useRouter } from "next/router";
-import { SizeContext } from "../context/sizeContext";
 // Components
 import Search from "../Icons/Search";
 // Helper Functions
@@ -14,12 +13,9 @@ gsap.registerPlugin(ScrollTrigger);
 //Website Navigation
 
 const Nav = ({ currentUser }) => {
+	console.log("Regular NAvBAr");
 	const path = useRouter().pathname;
-	const size = useContext(SizeContext);
-	//const [screenSize, setScreenSize] = useState(0);
 	const [activateNav, setActivateNav] = useState(false);
-
-	//console.log("size ", size, "path", path);
 
 	const { role, name, access } = currentUser
 		? Object.values(currentUser)[0]
@@ -28,16 +24,6 @@ const Nav = ({ currentUser }) => {
 	useEffect(() => {
 		activateNav ? setActivateNav(!activateNav) : "";
 	}, [path]);
-
-	/* useEffect(() => {
-		if (screenSize === 0) setScreenSize(window.innerWidth);
-		window.addEventListener("resize", (e) => setScreenSize(window.innerWidth));
-
-		return () =>
-			window.removeEventListener("resize", (e) =>
-				setScreenSize(window.innerWidth)
-			);
-	}, []); */
 
 	useEffect(() => {
 		const tl = gsap.timeline({});
@@ -187,79 +173,10 @@ const Nav = ({ currentUser }) => {
 			</div>
 		);
 	};
-
-	const navigationList_B = () => {
-		return (
-			<ul className="burger_list">
-				{!isAuth() && (
-					<>
-						<li className={path.includes("signin") ? "active" : ""}>
-							<Link href="/signin">SignIn</Link>
-						</li>
-						<li className={path.includes("signup") ? "active" : ""}>
-							<Link href="/signup">SignUp</Link>
-						</li>
-					</>
-				)}
-				{isAuth() && <li onClick={logout}>LogOut</li>}
-
-				{role === "admin" ? (
-					<li className={path.includes("admin") ? "active" : ""}>
-						<Link href="/admin">Admin</Link>
-					</li>
-				) : role === "customer" ? (
-					<li className={path.includes("user") ? "active" : ""}>
-						<Link href="/user">{name}</Link>
-					</li>
-				) : (
-					""
-				)}
-			</ul>
-		);
-	};
-
-	const navigationList_A = () => {
-		return (
-			<ul>
-				{path.includes("/shop") ? (
-					<li>
-						<Link href="/" className="navContainer-li logo">
-							Murjan
-						</Link>
-					</li>
-				) : (
-					<li>
-						<Link href="/shop" className="navContainer-li logo">
-							Shop
-						</Link>
-					</li>
-				)}
-			</ul>
-		);
-	};
 	return (
-		<>
-			{size && (size === "large" || size === "desktop") ? (
-				<div className="navContainer">
-					{path !== "/shop" ? homePageNavigation() : shopPageNavigation()}
-				</div>
-			) : (
-				<div className="burgerNavContainer">
-					{navigationList_A()}
-					<div
-						onClick={() => setActivateNav(!activateNav)}
-						className="burgerNavContainer_burgerIcon"
-					/>
-					{activateNav ? (
-						<div className="burgerNavContainer_burgerList_wrapper">
-							{navigationList_B()}
-						</div>
-					) : (
-						""
-					)}
-				</div>
-			)}
-		</>
+		<div className="navContainer">
+			{!path.includes("/shop") ? homePageNavigation() : shopPageNavigation()}
+		</div>
 	);
 };
 export default Nav;
