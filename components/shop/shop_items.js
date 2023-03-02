@@ -15,7 +15,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ShopItems = ({ itemsPerPage, currentPage }) => {
 	console.log(
-		"** Shop_Items component itemsPerPage",
+		"***** Shop_Items component itemsPerPage",
 		itemsPerPage,
 		"currentPage",
 		currentPage
@@ -23,6 +23,7 @@ const ShopItems = ({ itemsPerPage, currentPage }) => {
 	// this will change on page navigation
 	const size = useContext(SizeContext);
 	const { gemFilt, collFilt, catFilt } = useContext(FilterContext);
+
 	const { data, loading, error } =
 		catFilt.length > 0 || collFilt.length > 0
 			? useQuery(FILTER_PRODUCTS, {
@@ -40,10 +41,10 @@ const ShopItems = ({ itemsPerPage, currentPage }) => {
 					},
 			  });
 
+	console.log("SHOP ITEM COMPO ---- data", data);
+
 	if (loading) <h1>Loading ....</h1>;
 	if (error) <h1>Errror ....</h1>;
-
-	//console.log("***** PRODUCTS DATA", data);
 
 	const products =
 		catFilt.length > 0 || collFilt.length > 0

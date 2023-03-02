@@ -1,11 +1,5 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
-//import emeraldImg from "../../../images/emerald watch.png";
-//import yellowImg from "../../../images/yellow_bracelet_wide.png";
-//import saphire from "../../../images/sapphire.png";
-//import emeraldVid from "../../../images/videos/Emerald_vid.mp4";
-//import sapphireVid from "../../../images/videos/saphire_vid.mp4";
-//import yellowVid from "../../../images/videos/yellow_vid.mp4";
-//import dot from "../../../images/icons/white_circle.png";
+import Image from "next/image";
 import dot2 from "../../../public/static/icons/pink_circle.png";
 
 import { gsap } from "gsap/dist/gsap";
@@ -80,7 +74,8 @@ const GemColor = ({ data }) => {
 						className={`gem_image_container2 ${
 							index === state ? "active" : ""
 						}`}>
-						<img
+						<Image
+							layout="fill"
 							className="gem_image"
 							src={g.parallelS_secondary_media[0]}
 							alt=""
@@ -96,7 +91,8 @@ const GemColor = ({ data }) => {
 			<div className="progress">
 				{[...new Array(data.length)].map((r, index) => (
 					<div key={index + ""}>
-						<img
+						<Image
+							layout="fill"
 							className={`progress_dot ${index === state ? "active" : ""}`}
 							src={dot2}
 							alt="progress dot"

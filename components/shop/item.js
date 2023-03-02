@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { createElement, useEffect, useRef, useState } from "react";
 import Router from "next/router";
+import Cart from "../Icons/Cart";
 import Link from "next/link";
 import { gsap } from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -19,6 +20,7 @@ const Item = ({ size, product, specialClass }) => {
 
 	const { name, price, image, id } = product;
 	const [active, setActive] = useState(false);
+	const [fav, setFav] = useState("");
 	const main = useRef();
 
 	const transitionAnim = () => {
@@ -92,32 +94,81 @@ const Item = ({ size, product, specialClass }) => {
 		}, 2100);
 	};
 
-	return (
-		<>
-			{/* <div className="target">
-				<div className="target_item-img"></div>
-			</div>
-			{active && <div className="overlay"></div>} */}
+	const addToFavs = (e) => {
+		console.log("e", e);
+		let icon =
+			"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/800px-Heart_coraz%C3%B3n.svg.png";
+		let icon_description = "red heart";
+		let className = "favourites-icon";
+		let className_temp = "temporary";
 
-			<div className={`shop_item ${specialClass}`}>
-				<div className={`image_wrapper `}>
-					<Link href="/">
-						<img
-							onClick={() => transitionAnim()}
-							className={`shop_item-img id_${id}_img`}
-							src={image[0]}
-							//src={image3}
-							//src={arrayImages[Math.floor(Math.random() * 6)]}
-							alt=""
-						/>
-					</Link>
-				</div>
-				<div className={`shop_item-details ${size}`}>
-					<p className="shop_item_details-name">{name}</p>
-					<p className="shop_item_details-price">{price}</p>
-				</div>
+		const clickPosition_top = e.y;
+		const clickPosition_left = e.x;
+		const siblingExists =
+			e.nextSibling && e.nextSibling.alt === icon_description;
+
+		console.log("left", clickPosition_left, "top", clickPosition_top);
+
+		if (siblingExists) {
+			console.log("SiblingExists", siblingExists);
+			e.nextSibling.remove();
+		} else {
+			return createHeart(
+				icon,
+				icon_description,
+				className,
+				className_temp,
+				clickPosition_top,
+				clickPosition_left
+			);
+		}
+	};
+
+	const createHeart = (img, iconDesc, class1, class2, top, left) => {
+		console.log("Heart created ");
+
+		/* setTimeout(() => {
+			console.log("rest fav");
+			return (
+				<img
+					src={img}
+					alt={iconDesc}
+					style={{ top: "5px", left: "5px" }}
+					className={class1}
+				/>
+			);
+		}, 1000); */
+		return (
+			<img
+				src={img}
+				alt={iconDesc}
+				style={{ top: `${top}px`, right: `${left}px` }}
+				className={class1 + " " + class2}
+			/>
+		);
+	};
+
+	return (
+		<div className={`shop_item ${specialClass}`}>
+			<div className={`image_wrapper `}>
+				<img
+					onDoubleClick={(e) => setFav(e)}
+					/* onClick={() => transitionAnim()} */
+					className={`shop_item-img id_${id}_img`}
+					src={image[0]}
+					//src={image3}
+					//src={arrayImages[Math.floor(Math.random() * 6)]}
+					alt=""
+				/>
+
+				{fav && addToFavs(fav)}
 			</div>
-		</>
+			<div className={`shop_item-details ${size}`}>
+				<p className="shop_item_details-name">{name}</p>
+				<p className="shop_item_details-price">{price}</p>
+			</div>
+			<Cart product={id} />
+		</div>
 	);
 };
 export default Item;

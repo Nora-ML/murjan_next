@@ -14,5 +14,23 @@
     "files": [
       "static/chunks/node_modules_next_dist_pages__error_js.js"
     ]
+  },
+  "index.js -> ../components/landing/category_nav.js": {
+    "id": "index.js -> ../components/landing/category_nav.js",
+    "files": [
+      "static/chunks/components_landing_category_nav_js.js"
+    ]
+  },
+  "index.js -> ../components/landing/collection.js": {
+    "id": "index.js -> ../components/landing/collection.js",
+    "files": [
+      "static/chunks/components_landing_collection_js.js"
+    ]
+  },
+  "index.js -> ../components/landing/gem_color/gem_color.js": {
+    "id": "index.js -> ../components/landing/gem_color/gem_color.js",
+    "files": [
+      "static/chunks/components_landing_gem_color_gem_color_js.js"
+    ]
   }
 }

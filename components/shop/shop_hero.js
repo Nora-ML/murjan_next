@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const ShopHero = ({ listCat, listColl }) => {
+	console.log("***** SHOP HERO ");
 	const { gemFilt, collFilt, catFilt } = useContext(FilterContext);
 
 	const filterbyCat =

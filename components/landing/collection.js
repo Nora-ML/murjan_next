@@ -1,15 +1,10 @@
 import React, { useRef, useLayoutEffect, useEffect } from "react";
+import Image from "next/image";
 import { useQuery } from "@apollo/client";
 import { LIST_COLLECTION } from "../helpers/list";
 
-import { gsap } from "gsap/dist/gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
-
 const Collection = () => {
 	console.log("Landing -- Collection ");
-	const coll = useRef();
 
 	const { data, loading, error } = useQuery(LIST_COLLECTION);
 	if (loading) <h2>LOAding</h2>;
@@ -19,7 +14,7 @@ const Collection = () => {
 	console.log("collection ", collection);
 
 	return (
-		<div ref={coll} className="landing-collection">
+		<div className="landing-collection">
 			<div className="landing-collection__intro">
 				<h1>BE exceptional</h1>
 				<h2>Be Glamourous</h2>
@@ -39,7 +34,12 @@ const Collection = () => {
 					{collection &&
 						collection.map((coll, index) => (
 							<div key={index + coll.name} className="image-card">
-								<img className="image-img" src={coll.image[0]} alt="" />
+								<Image
+									layout="fill"
+									className="image-img"
+									src={coll.image[0]}
+									alt=""
+								/>
 							</div>
 						))}
 				</div>

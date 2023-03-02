@@ -27,6 +27,15 @@
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: center;
+
+			.cart {
+				padding: 0;
+
+				.cart-icon {
+					height: 45px;
+					width: 45px;
+				}
+			}
 		}
 	}
 	&_ul {

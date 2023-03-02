@@ -5,6 +5,7 @@ import client from "../setup/client.js";
 import UserContextProvider from "../components/context/userContext";
 import SizeContextProvider from "../components/context/sizeContext";
 import FilterContextProvider from "../components/context/filterContext";
+import { CartContextProvider } from "../components/context/cartContext.js";
 import { getCookie } from "../components/helpers/auth.js";
 import Layout from "../components/Layout";
 import { CURRENT_USER } from "../components/helpers/users";
@@ -29,11 +30,13 @@ const MyApp = ({ Component, pageProps, apollo }) => {
 		<ApolloProvider client={apollo}>
 			<SizeContextProvider>
 				<UserContextProvider>
-					<FilterContextProvider>
-						<Layout /* currentUser={pageProps.user }*/>
-							<Component {...pageProps} />
-						</Layout>
-					</FilterContextProvider>
+					<CartContextProvider>
+						<FilterContextProvider>
+							<Layout /* currentUser={pageProps.user }*/>
+								<Component {...pageProps} />
+							</Layout>
+						</FilterContextProvider>
+					</CartContextProvider>
 				</UserContextProvider>
 			</SizeContextProvider>
 		</ApolloProvider>

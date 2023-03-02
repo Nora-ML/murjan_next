@@ -187,13 +187,13 @@
 							height: auto;
 						}
 
-						img {
-							position: relative;
-							width: 95%;
-							height: 70%;
-							top: 50%;
-							transform: translateY(-50%);
-							object-fit: cover;
+						.featured_images {
+							position: relative !important;
+							width: 95% !important;
+							height: 70% !important;
+							top: 50% !important;
+							transform: translateY(-50%) !important;
+							object-fit: contain;
 
 							@media screen and (max-width: 769px) and (orientation: Portrait),
 								(max-aspect-ratio: 1/1) {

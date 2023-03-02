@@ -1,4 +1,6 @@
 import React, { useLayoutEffect, useRef } from "react";
+import dynamic from "next/dynamic";
+import Image from "next/image";
 //assets
 //import image1 from "../../../images/imperial_blue1.jpg";
 //import image2 from "../../../images/Infinity_01.jpg";

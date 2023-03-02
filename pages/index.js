@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useQuery } from "@apollo/client";
-// apollo client
-import client from "../setup/client.js";
+import Script from "next/script.js";
+import dynamic from "next/dynamic.js";
 // Components
 import Hero from "../components/landing/hero/hero.js";
 import PostHero from "../components/landing/post_hero/post_hero";
-import GemColor from "../components/landing/gem_color/gem_color.js";
 import PreLoader from "../components/landing/pre_loader/pre_loader";
-import CategoryNav from "../components/landing/category_nav.js";
-import Collection from "../components/landing/collection.js";
-// Graphql query
-import { GET_LANDING } from "../components/helpers/landing.js";
-import { FEATURED_PRODUCTS } from "../components/helpers/product.js";
-import { LIST_COLLECTION } from "../components/helpers/list.js";
+// dynamically imported components
+const GemColor = dynamic(() =>
+	import("../components/landing/gem_color/gem_color.js")
+);
+const Collection = dynamic(() => import("../components/landing/collection.js"));
+const CategoryNav = dynamic(() =>
+	import("../components/landing/category_nav.js")
+);
 
 // animation
 import { gsap } from "gsap/dist/gsap";
@@ -32,11 +32,11 @@ const Landing = () => {
 		window.scrollTo(0, 0);
 	}, [done]); */
 
-	useEffect(() => {
+	/* useEffect(() => {
 		if (done) {
 			const script = document.createElement("script");
 
-			script.src = "/static/loco.js";
+			script.src = ;
 			script.async = true;
 
 			document.body.appendChild(script);
@@ -45,7 +45,16 @@ const Landing = () => {
 				document.body.removeChild(script);
 			};
 		}
-	}, [done]);
+	}, [done]); */
+
+	/* let populateLanding = () => {
+		const tasks = [Hero, PostHero, GemColor, CategoryNav, Collection];
+
+		while (tasks.length > 0) {
+			const task = tasks.shift();
+			return <task data={hero}/>
+		}
+	} */
 
 	return (
 		<>
@@ -53,8 +62,10 @@ const Landing = () => {
 				activateHero={(f) => setDone(f)}
 				landing={(f) => setLanding(f)}
 			/>
-			<main className="main_container">
-				{done && (
+
+			{done && (
+				<main className="main_container">
+					<Script src="/static/loco.js" />
 					<div className="landing_container">
 						<Hero data={hero} />
 						<PostHero data={about} />
@@ -75,8 +86,8 @@ const Landing = () => {
 							</p>
 						</div>
 					</div>
-				)}
-			</main>
+				</main>
+			)}
 		</>
 	);
 };

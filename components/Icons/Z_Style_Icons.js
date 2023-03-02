@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import Styled from "styled-components";
 
 const IconStyle = Styled.img`
@@ -32,7 +31,7 @@ const SearchStyle = Styled.div`
 
 `;
 
-const SearchIcon = styled.div`
+const SearchIcon = Styled.div`
 	position: fixed;
 	bottom: 2%;
 	right: 2%;

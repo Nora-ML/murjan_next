@@ -1,5 +1,13 @@
 import { gql } from "@apollo/client";
 
+const ADD_CART = gql`
+	mutation AddCart($productID: ID!, $quantity: Int!) {
+		addCart(productId: $productId, quantity: $quantity) {
+			id
+		}
+	}
+`;
+
 const ADD_CATEGORY = gql`
 	mutation AddCategory(
 		$name: String!
@@ -83,4 +91,11 @@ const ADD_LANDING_PAGE = gql`
 	}
 `;
 
-export { ADD_OFFER, ADD_CATEGORY, ADD_COLLECTION, ADD_TAG, ADD_LANDING_PAGE };
+export {
+	ADD_CART,
+	ADD_OFFER,
+	ADD_CATEGORY,
+	ADD_COLLECTION,
+	ADD_TAG,
+	ADD_LANDING_PAGE,
+};

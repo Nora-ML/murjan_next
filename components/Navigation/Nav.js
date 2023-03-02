@@ -25,7 +25,7 @@ const Nav = ({ currentUser }) => {
 		activateNav ? setActivateNav(!activateNav) : "";
 	}, [path]);
 
-	useEffect(() => {
+	/* useEffect(() => {
 		const tl = gsap.timeline({});
 		if (location.pathname.includes("shop")) {
 			// flipping shop to cart and favourites
@@ -35,7 +35,7 @@ const Nav = ({ currentUser }) => {
 				{ yPercent: 0 },
 				{ opacity: 1, yPercent: -110 },
 				0.6
-			); */
+			); 
 
 			// shrinking the whole nav container
 			const navHeight = gsap.getProperty(".navContainer", "height");
@@ -88,14 +88,14 @@ const Nav = ({ currentUser }) => {
 				ease: "none",
 			});
 		}
-	}, []);
+	}, []); */
 
 	const homePageNavigation = () => {
 		return (
 			<div className="navContainer_multiple_ul">
 				<ul className="navContainer_ul">
 					<li>
-						<Link href="/" className="navContainer-li logo">
+						<Link prefetch={false} href="/" className="navContainer-li logo">
 							Murjan
 						</Link>
 					</li>
@@ -103,7 +103,10 @@ const Nav = ({ currentUser }) => {
 				{access === "admin_full" && path === "/" ? (
 					<ul className="navContainer_ul">
 						<li>
-							<Link href="/landing_edit" className="navContainer-li ">
+							<Link
+								prefetch={false}
+								href="/landing_edit"
+								className="navContainer-li ">
 								Edit Landing Page
 							</Link>
 						</li>
@@ -113,7 +116,10 @@ const Nav = ({ currentUser }) => {
 				)}
 				<ul className="navContainer_ul">
 					<li>
-						<Link href="/shop/1" className="navContainer-li shop-remove">
+						<Link
+							prefetch={false}
+							href="/shop/1"
+							className="navContainer-li shop-remove">
 							Shop
 						</Link>
 					</li>
@@ -125,9 +131,13 @@ const Nav = ({ currentUser }) => {
 		return (
 			<div className="navContainer_multiple_ul">
 				<ul className="navContainer_ul">
-					<li>
-						<Link href="/" className="navContainer-li shop-nav">
-							Cart
+					<li className="cart">
+						<Link href="/">
+							<img
+								className="cart-icon"
+								src="https://www.freeiconspng.com/uploads/shopping-basket-icon-18.png"
+								alt="cart"
+							/>
 						</Link>
 					</li>
 					<li>
@@ -175,7 +185,7 @@ const Nav = ({ currentUser }) => {
 	};
 	return (
 		<div className="navContainer">
-			{!path.includes("/shop") ? homePageNavigation() : shopPageNavigation()}
+			{path === "/" ? homePageNavigation() : shopPageNavigation()}
 		</div>
 	);
 };

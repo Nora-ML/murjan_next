@@ -18,6 +18,13 @@ const ShopPage = ({ query, cookie }) => {
 	const { data: categories } = useQuery(LIST_CATEGORIES);
 	const { data: collections } = useQuery(LIST_COLLECTION);
 
+	console.log(
+		"***** SHOP PAGE :  categories",
+		categories,
+		"Collection:",
+		collections
+	);
+
 	let itemsPerpage = 15;
 
 	return (
