@@ -11,7 +11,6 @@ const Collection = () => {
 	if (error) <h2>Error</h2>;
 
 	const collection = data ? data.listCollections : "";
-	console.log("collection ", collection);
 
 	return (
 		<div className="landing-collection">

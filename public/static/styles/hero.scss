@@ -26,6 +26,19 @@
 
 			object-fit: cover;
 		}
+		.hero_edit {
+			background-color: red;
+			position: absolute;
+			top: 10%;
+			right: 5%;
+			width: 30px;
+			height: auto;
+
+			img {
+				padding: 1%;
+				margin: 0;
+			}
+		}
 	}
 }
 

@@ -4,23 +4,23 @@ const main = document.querySelector(".main_container");
 
 // landing page categ section
 const categ_section = document.querySelector(".landing-category__sticky");
-const categ_section_top = categ_section.getBoundingClientRect().top;
-const categ_section_height = categ_section.getBoundingClientRect().height;
-const categ_section_width = categ_section.getBoundingClientRect().width;
+const categ_section_top = categ_section?.getBoundingClientRect().top;
+const categ_section_height = categ_section?.getBoundingClientRect().height;
+const categ_section_width = categ_section?.getBoundingClientRect().width;
 const categ_section_end = categ_section_top + categ_section_height + 100;
 
 // landing page collection section
-const coll_section_wrapper_height = document
-	.querySelector(".landing-collection")
-	.getBoundingClientRect().height;
+const coll_section_main = document.querySelector(".landing-collection");
+const coll_section_wrapper_height =
+	coll_section_main?.getBoundingClientRect().height;
 const coll_section = document.querySelector(".landing-collection__sticky");
-const coll_section_top = coll_section.getBoundingClientRect().top;
-const coll_section_height = coll_section.getBoundingClientRect().height;
+const coll_section_top = coll_section?.getBoundingClientRect().top;
+const coll_section_height = coll_section?.getBoundingClientRect().height;
 const coll_section_end = coll_section_top + coll_section_height * 0.6;
 
 // footer
 const footer = document.querySelector(".content-2");
-const footer_top = footer.getBoundingClientRect().top;
+const footer_top = footer?.getBoundingClientRect().top;
 
 //const figcaptions = document.querySelectorAll("figcaption");
 const mainImage = document.querySelectorAll(".main_image");
@@ -39,21 +39,21 @@ if (motion.matches /* & large.matches */) {
 
 		let path = window.location.pathname;
 
-		if (path === "/") {
+		if (coll_section && (path === "/" || path === "/landing/admin")) {
 			//DATA
 			// Category section data
 			const array_of_categories = document.querySelectorAll(".each-category");
 			const categProduct = document.querySelector(".category-products");
 			const categProduct_width =
-				categProduct.getBoundingClientRect().width - categ_section_width;
+				categProduct?.getBoundingClientRect().width - categ_section_width;
 			const calculated_cat_height =
-				categ_section_height / array_of_categories.length;
+				categ_section_height / array_of_categories?.length;
 
 			//DATA
 			// Collection section data
 			const coll_section_imageCard = document.querySelectorAll(".image-card");
 			const coll_section_image = document.querySelectorAll(".image-img");
-			const count_coll = coll_section_imageCard.length + 1;
+			const count_coll = coll_section_imageCard?.length + 1;
 			const coll_section_header = document.querySelectorAll(".header-card");
 
 			const each_coll_height = coll_section_wrapper_height / count_coll;
@@ -84,7 +84,7 @@ if (motion.matches /* & large.matches */) {
 				coll_section.style.clipPath = " circle(130% at 50% 100%)";
 				coll_section.style.transition = " clip-path 2s linear";
 
-				coll_section_imageCard.forEach((img, index) => {
+				coll_section_imageCard?.forEach((img, index) => {
 					let start = index === 0 ? 0 : index;
 					let end = index === 0 ? 1 : index + 1;
 					if (

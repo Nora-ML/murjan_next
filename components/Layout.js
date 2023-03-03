@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { createGlobalStyle } from "styled-components";
 import Nav from "../components/Navigation/Nav.js";
 import NavMobile from "./Navigation/Nav_Mob.js";
@@ -55,6 +55,10 @@ const DynamicNav = dynamic(() => import("./Navigation/Nav.js"), { ssr: false });
 const Layout = ({ children /* , currentUser */ }) => {
 	console.log("LAYOUT ..");
 	const size = useContext(SizeContext);
+
+	useEffect(() => {
+		console.log("-- Layout , UseEffect");
+	});
 
 	return (
 		<div>

@@ -7,6 +7,7 @@ const CategoryNav = () => {
 	console.log("Landing -- Category");
 
 	const { data, error, loading } = useQuery(FEATURED_PRODUCTS);
+
 	if (loading) <h2>Loading</h2>;
 	if (error) <h2>Error</h2>;
 	const featured = data ? data.featuredProducts : "";
@@ -32,10 +33,10 @@ const CategoryNav = () => {
 								<div className="each-category__product-card">
 									{cat.featuredProducts.map((prod, index) => (
 										<div key={prod.id + "" + index} className="product-image">
-											<Image
+											<img
 												className="featured_images"
 												src={prod.image[0]}
-												layout="fill"
+												//layout="fill"
 												//src={arrayImages[Math.floor(Math.random() * 6)]}
 												alt=""
 											/>

@@ -1,14 +1,13 @@
 import { ApolloProvider } from "@apollo/client";
 import withData from "../setup/withData.js";
-import client from "../setup/client.js";
 //import Script from "next/script";
 import UserContextProvider from "../components/context/userContext";
 import SizeContextProvider from "../components/context/sizeContext";
 import FilterContextProvider from "../components/context/filterContext";
 import { CartContextProvider } from "../components/context/cartContext.js";
-import { getCookie } from "../components/helpers/auth.js";
+import { FormFieldsContextProvider } from "../components/context/formFieldsB4Update.js";
 import Layout from "../components/Layout";
-import { CURRENT_USER } from "../components/helpers/users";
+
 import "../public/static/styles/nav.scss";
 import "../public/static/styles/landing.scss";
 import "../public/static/styles/pre_loader.scss";
@@ -31,11 +30,13 @@ const MyApp = ({ Component, pageProps, apollo }) => {
 			<SizeContextProvider>
 				<UserContextProvider>
 					<CartContextProvider>
-						<FilterContextProvider>
-							<Layout /* currentUser={pageProps.user }*/>
-								<Component {...pageProps} />
-							</Layout>
-						</FilterContextProvider>
+						<FormFieldsContextProvider>
+							<FilterContextProvider>
+								<Layout /* currentUser={pageProps.user }*/>
+									<Component {...pageProps} />
+								</Layout>
+							</FilterContextProvider>
+						</FormFieldsContextProvider>
 					</CartContextProvider>
 				</UserContextProvider>
 			</SizeContextProvider>
@@ -44,7 +45,11 @@ const MyApp = ({ Component, pageProps, apollo }) => {
 };
 
 // tell next.js to fetch all queries in all my components and pages
-/* MyApp.getInitialProps = async function ({ Component, ctx }) {
+/* 
+import client from "../setup/client.js";
+import { getCookie } from "../components/helpers/auth.js";
+import { CURRENT_USER } from "../components/helpers/users";
+MyApp.getInitialProps = async function ({ Component, ctx }) {
 	//console.log("MYAPP ******* _app Component :",Component,"\n_app context",ctx)
 	let pageProps = {};
 

@@ -15,6 +15,7 @@ const initialState = {
 };
 
 const CartContextProvider = ({ children }) => {
+	console.log("--- CART CONTEXT");
 	const [cart, dispatch] = useReducer(cartReducer, initialState);
 	const [cartItem, setCart] = useState([]);
 
@@ -31,6 +32,7 @@ const CartContextProvider = ({ children }) => {
 	};
 
 	useEffect(() => {
+		console.log("--Cart Context useEffect");
 		setCart(cart.items.map((item) => item.productId));
 	}, [cart]);
 
@@ -49,7 +51,6 @@ const CartContextProvider = ({ children }) => {
 
 function useCart() {
 	const all = useContext(CartContext);
-	console.log("ALL ", all);
 	return all;
 }
 

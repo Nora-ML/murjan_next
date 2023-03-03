@@ -157,6 +157,58 @@ const update = (cache, payload) => {
 	cache.evict(cache.identify(payload.data[key]));
 };
 
+const UPDATE_ABOUT = gql`
+	mutation UpdateAbout(
+		$about_image: String!
+		$about_header: String!
+		$about_sub_header: String!
+		$about_second_sub_header: String!
+	) {
+		updateAbout(
+			about_image: $about_image
+			about_header: $about_header
+			about_sub_header: $about_sub_header
+			about_second_sub_header: $about_second_sub_header
+		) {
+			id
+		}
+	}
+`;
+
+const UPDATE_HERO = gql`
+	mutation UpdateHero(
+		$hero_media: [String]
+		$hero_header: String
+		$hero_sub_header: String
+	) {
+		updateHero(
+			hero_media: $hero_media
+			hero_header: $hero_header
+			hero_sub_header: $hero_sub_header
+		) {
+			id
+		}
+	}
+`;
+
+const UPDATE_PARALLEL_SLIDE = gql`
+	mutation updateParallelSlide(
+		$id: ID!
+		$parallelS_main_media: String!
+		$parallelS_secondary_media: String!
+		$parallelS_description: String!
+	) {
+		updateParellelSlide(
+			id: $id
+			parallelS_main_media: $parallelS_main_media
+			parallelS_secondary_media: $parallelS_secondary_media
+			parallelS_description: $parallelS_description
+		) {
+			id
+		}
+	}
+`;
+
 export {
 	UPDATE_LANDING_PAGE,
 	UPDATE_PRODUCT,
@@ -166,5 +218,8 @@ export {
 	UPDATE_USER_ADMIN,
 	UPDATE_USER_USER,
 	UPDATE_OFFER,
+	UPDATE_HERO,
+	UPDATE_PARALLEL_SLIDE,
+	UPDATE_ABOUT,
 	update,
 };

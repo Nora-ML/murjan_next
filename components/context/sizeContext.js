@@ -3,12 +3,11 @@ import { useState, createContext, useEffect } from "react";
 export const SizeContext = createContext();
 
 const SizeContextProvider = ({ children }) => {
+	console.log("--- SIZE CONTEXT");
 	const [size, setSize] = useState();
 
-	//console.log("***** RESZING context  ");
-
 	useEffect(() => {
-		//console.log("RESZING context");
+		console.log("--Size Context useEffect");
 		let resizeId;
 
 		const sizeFunc = () => {

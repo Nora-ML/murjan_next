@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-//import { ProductContext } from "../../context/productContext";
 import { useQuery } from "@apollo/client";
-import { GET_LANDING } from "../../helpers/landing";
+import { GET_HERO } from "../../helpers/landing";
 //animation
 import { gsap } from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -9,17 +8,14 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const PreLoader = ({ activateHero, landing }) => {
-	console.log("PRE Loader ");
+	//console.log("Landing --- PRE Loader ");
 
-	const { data, error, loading } = useQuery(GET_LANDING);
-	if (loading) <h2>LOAding</h2>;
-	if (error) <h2>Error</h2>;
+	const { data, error, loading } = useQuery(GET_HERO);
 
-	const landingContent = data ? data.getLanding : "";
+	let landingContent = data?.getHero?.hero || {};
 
-	console.log("PRE load landingContent", landingContent);
-
-	if (landingContent) landing(landingContent);
+	if (loading) console.log("GET_HERO :: LOADING");
+	if (landingContent) console.log("GET_HERO :: RESPONSE");
 
 	const [state, setState] = useState(false);
 
@@ -58,10 +54,11 @@ const PreLoader = ({ activateHero, landing }) => {
 
 	useEffect(() => {
 		setTimeout(() => {
-			console.log("/////// SET TIME OUT ///////");
+			//console.log("/////// SET TIME OUT ///////");
+			if (landingContent) landing(landingContent);
 			activateHero(true);
 			setState(true);
-		}, 1500);
+		}, 1000);
 	}, []);
 
 	useEffect(() => {

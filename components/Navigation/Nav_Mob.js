@@ -14,7 +14,7 @@ gsap.registerPlugin(ScrollTrigger);
 //Website Navigation
 
 const NavMobile = ({ currentUser }) => {
-	console.log("Mobile NAvBAr");
+	console.log("-- MOBILE NAVBAR");
 	const path = useRouter().pathname;
 	const [activateNav, setActivateNav] = useState(false);
 
@@ -28,7 +28,7 @@ const NavMobile = ({ currentUser }) => {
 		activateNav ? setActivateNav(!activateNav) : "";
 	}, [path]);
 
-	useEffect(() => {
+	/* 	useEffect(() => {
 		const tl = gsap.timeline({});
 		if (location.pathname.includes("shop")) {
 			// flipping shop to cart and favourites
@@ -38,7 +38,7 @@ const NavMobile = ({ currentUser }) => {
 				{ yPercent: 0 },
 				{ opacity: 1, yPercent: -110 },
 				0.6
-			); */
+			);
 
 			// shrinking the whole nav container
 			const navHeight = gsap.getProperty(".navContainer", "height");
@@ -91,9 +91,7 @@ const NavMobile = ({ currentUser }) => {
 				ease: "none",
 			});
 		}
-	}, []);
-
-	console.log("Burger State", burgerState);
+	}, []); */
 
 	const stickyNav = () => {
 		return (

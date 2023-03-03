@@ -10,12 +10,13 @@ const BasicForm_Style = Styled.form.attrs((props) => ({ width: props.width }))`
     height:clamp(400px,calc(${(props) => props.width}/1),1000px);
     
 
-
     display:flex;
     flex-basis:clamp(300px,1500px,${(props) => props.width});
     flex-wrap:wrap;
     align-items:center;
     justify-content:center;
+
+    transition:height 0.4s linear;
 
     @media screen and (max-width:769px){
         //border: green dashed 2px;

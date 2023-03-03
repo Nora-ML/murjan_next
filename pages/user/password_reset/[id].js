@@ -11,6 +11,7 @@ import Router from "next/router";
 import Error_RComp from "../../../components/Messages/Error";
 
 const PasswordReset = ({ query }) => {
+	console.log("QUery", query);
 	const { id: token } = query;
 	console.log("form data token --- ", token);
 	const [newPass, { loading, error, data }] = useMutation(NEW_PASS_USER);
@@ -57,5 +58,9 @@ const PasswordReset = ({ query }) => {
 		</PageContainer_Style>
 	);
 };
+
+export async function getServerSideProps(context) {
+	return { props: { query: context.query } };
+}
 
 export default PasswordReset;

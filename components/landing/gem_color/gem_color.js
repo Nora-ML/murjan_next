@@ -1,4 +1,6 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
+import { useQuery } from "@apollo/client";
+import { GET_PARALLEL_SLIDE } from "../../helpers/landing";
 import Image from "next/image";
 import dot2 from "../../../public/static/icons/pink_circle.png";
 
@@ -7,14 +9,14 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const GemColor = ({ data }) => {
+const GemColor = () => {
 	console.log("Landing -- GEM COLOR");
 	const root = useRef();
 	const [state, setState] = useState(0);
 
+	const { data, error, loading } = useQuery(GET_PARALLEL_SLIDE);
+
 	const activate = (direction) => {
-		console.log("state IN", state);
-		console.log("direction", direction);
 		if (direction === "next") {
 			if (state <= data.length - 2) {
 				setState(state + 1);
@@ -50,9 +52,15 @@ const GemColor = ({ data }) => {
 		return () => ctx.revert();
 	}, []);
 
+	if (loading) return "";
+	if (error) return "";
+
+	let { id, parallel_slide_display } = data?.getParallelSlide;
+	console.log("PARALLEL SLIDE COMPONENT ::", parallel_slide_display);
+
 	return (
 		<div ref={root} className="gem_color-container">
-			{data.map((g, index) => (
+			{parallel_slide_display.map((g, index) => (
 				<div
 					key={`${index + g.parallelS_description}`}
 					className={`gem_container  ${index === state ? "active" : ""}`}>
@@ -66,7 +74,7 @@ const GemColor = ({ data }) => {
 					/>
 				</div>
 			))}
-			{data.map((g, index) => (
+			{parallel_slide_display.map((g, index) => (
 				<div
 					key={`${index * 2 + g.parallelS_description}`}
 					className="gem_image_container ">
@@ -74,8 +82,7 @@ const GemColor = ({ data }) => {
 						className={`gem_image_container2 ${
 							index === state ? "active" : ""
 						}`}>
-						<Image
-							layout="fill"
+						<img
 							className="gem_image"
 							src={g.parallelS_secondary_media[0]}
 							alt=""
@@ -89,10 +96,9 @@ const GemColor = ({ data }) => {
 
 			<div onClick={() => activate("prev")} className="btn prev"></div>
 			<div className="progress">
-				{[...new Array(data.length)].map((r, index) => (
+				{[...new Array(parallel_slide_display.length)].map((r, index) => (
 					<div key={index + ""}>
-						<Image
-							layout="fill"
+						<img
 							className={`progress_dot ${index === state ? "active" : ""}`}
 							src={dot2}
 							alt="progress dot"

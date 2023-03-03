@@ -13,7 +13,8 @@ gsap.registerPlugin(ScrollTrigger);
 //Website Navigation
 
 const Nav = ({ currentUser }) => {
-	console.log("Regular NAvBAr");
+	console.log("-- DESKTOP NAVBAR");
+
 	const path = useRouter().pathname;
 	const [activateNav, setActivateNav] = useState(false);
 
@@ -100,20 +101,42 @@ const Nav = ({ currentUser }) => {
 						</Link>
 					</li>
 				</ul>
-				{access === "admin_full" && path === "/" ? (
-					<ul className="navContainer_ul">
-						<li>
-							<Link
-								prefetch={false}
-								href="/landing_edit"
-								className="navContainer-li ">
-								Edit Landing Page
-							</Link>
-						</li>
-					</ul>
-				) : (
-					""
-				)}
+				<ul className="navContainer_ul">
+					<li>
+						<Link
+							prefetch={false}
+							href="/shop/1"
+							className="navContainer-li shop-remove">
+							Shop
+						</Link>
+					</li>
+				</ul>
+			</div>
+		);
+	};
+	const homePageNavigationAdmin = () => {
+		return (
+			<div className="navContainer_multiple_ul">
+				<ul className="navContainer_ul">
+					<li>
+						<Link
+							prefetch={false}
+							href="/landing/admin"
+							className="navContainer-li logo">
+							Murjan
+						</Link>
+					</li>
+				</ul>
+				<ul className="navContainer_ul">
+					<li>
+						<Link
+							prefetch={false}
+							href="/landing_edit"
+							className="navContainer-li ">
+							Edit Landing Page
+						</Link>
+					</li>
+				</ul>
 				<ul className="navContainer_ul">
 					<li>
 						<Link
@@ -148,11 +171,13 @@ const Nav = ({ currentUser }) => {
 				</ul>
 
 				<ul className="navContainer_ul">
-					<li>
-						<Link href="/" className="navContainer-li logo">
-							Murjan
-						</Link>
-					</li>
+					{
+						<li>
+							<Link href="/landing/admin" className="navContainer-li logo">
+								Murjan
+							</Link>
+						</li>
+					}
 				</ul>
 
 				<ul className="navContainer_ul">
@@ -185,7 +210,11 @@ const Nav = ({ currentUser }) => {
 	};
 	return (
 		<div className="navContainer">
-			{path === "/" ? homePageNavigation() : shopPageNavigation()}
+			{path === "/"
+				? homePageNavigation()
+				: path === "/landing/admin"
+				? homePageNavigationAdmin()
+				: shopPageNavigation()}
 		</div>
 	);
 };

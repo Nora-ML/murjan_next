@@ -39,7 +39,7 @@ const Form_RComp = ({
 	classN,
 	eitherOrRelation,
 }) => {
-	console.log("FORM components ");
+	console.log("** Form Component", mainFormInputs);
 
 	const { inputs, handleChange, resetForm } = useForm(formFields);
 

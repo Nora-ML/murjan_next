@@ -7,6 +7,8 @@ export const FilterContext = createContext();
 const initialState = { gemFilt: [], collFilt: [], catFilt: [] };
 
 const FilterContextProvider = ({ children }) => {
+	console.log("--- FILTER CONTEXT");
+
 	const [state, dispatch] = useReducer(filterReducer, initialState);
 	const [filterProducts, setFilterProducts] = useState();
 
@@ -15,8 +17,7 @@ const FilterContextProvider = ({ children }) => {
 
 	useEffect(() => {
 		// fetch products in selected filter from API
-		console.log("Filter Context useEffect state", state);
-
+		console.log("--Filter Context useEffect");
 		setCookie("filter", state);
 		setLocalStorage("filter", state);
 	});
