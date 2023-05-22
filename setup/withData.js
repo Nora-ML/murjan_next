@@ -30,7 +30,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 const mainLink = new HttpLink({
-	uri: " http://localhost:5000/graphql",
+	uri: " https://murjan-graphql.onrender.com",
 });
 
 function createClient({ headers, initialState }) {

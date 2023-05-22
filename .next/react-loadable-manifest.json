@@ -1,36 +1,52 @@
 {
   "..\\components\\Layout.js -> ./Navigation/Nav.js": {
-    "id": "..\\components\\Layout.js -> ./Navigation/Nav.js",
+    "id": 3738,
     "files": []
   },
   "..\\components\\landing\\category_nav.js -> ./collection.js": {
-    "id": "..\\components\\landing\\category_nav.js -> ./collection.js",
+    "id": 1501,
     "files": [
-      "static/chunks/components_landing_collection_js.js"
+      "static/chunks/639.8f56cb5ab5ba5bd9.js"
     ]
   },
   "..\\components\\landing\\gem_color\\gem_color.js -> ../category_nav.js": {
-    "id": "..\\components\\landing\\gem_color\\gem_color.js -> ../category_nav.js",
+    "id": 7149,
     "files": [
-      "static/chunks/components_landing_category_nav_js.js"
+      "static/chunks/149.84d4cd8927e5dc86.js"
     ]
   },
   "..\\components\\landing\\post_hero\\post_hero.js -> ../gem_color/gem_color.js": {
-    "id": "..\\components\\landing\\post_hero\\post_hero.js -> ../gem_color/gem_color.js",
+    "id": 9747,
     "files": [
-      "static/chunks/components_landing_gem_color_gem_color_js.js"
+      "static/chunks/747.1c11a21386678eb5.js"
     ]
   },
   "..\\node_modules\\next\\dist\\client\\index.js -> ../pages/_app": {
-    "id": "..\\node_modules\\next\\dist\\client\\index.js -> ../pages/_app",
+    "id": 2741,
     "files": [
-      "static/chunks/node_modules_next_dist_pages__app_js.js"
+      "static/chunks/741.8b828148889177c6.js"
     ]
   },
   "..\\node_modules\\next\\dist\\client\\index.js -> ../pages/_error": {
-    "id": "..\\node_modules\\next\\dist\\client\\index.js -> ../pages/_error",
+    "id": 9651,
     "files": [
-      "static/chunks/node_modules_next_dist_pages__error_js.js"
+      "static/chunks/651.ca936378e2c450b9.js"
     ]
+  },
+  "landing\\admin.js -> ../../components/landing/category_nav.js": {
+    "id": 7149,
+    "files": [
+      "static/chunks/970.850f6cbbf81b1ec9.js"
+    ]
+  },
+  "landing\\admin.js -> ../../components/landing/collection.js": {
+    "id": 1501,
+    "files": [
+      "static/chunks/501.176b79502ca5c56e.js"
+    ]
+  },
+  "landing\\admin.js -> ../../components/landing/gem_color/gem_color_edit.js": {
+    "id": 8222,
+    "files": []
   }
 }

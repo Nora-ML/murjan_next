@@ -14,7 +14,6 @@ import "../public/static/styles/nav_mob.scss";
 import "../public/static/styles/landing.scss";
 import "../public/static/styles/pre_loader.scss";
 import "../public/static/styles/hero.scss";
-import { useEffect, useState } from "react";
 
 import "../public/static/styles/post_hero.scss";
 import "../public/static/styles/gem_color.scss";
@@ -28,11 +27,6 @@ import "../public/static/styles/collection.scss";
 
 const MyApp = ({ Component, pageProps, apollo }) => {
 	console.log("_app props", pageProps);
-	const [state, setFire] = useState(false);
-
-	useEffect(() => {
-		setFire(true);
-	}, []);
 
 	return (
 		<ApolloProvider client={apollo}>

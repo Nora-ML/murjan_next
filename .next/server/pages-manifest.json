@@ -1,6 +1,23 @@
 {
   "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js"
+  "/admin": "pages/admin.js",
+  "/admin/categories": "pages/admin/categories.html",
+  "/admin/products": "pages/admin/products.html",
+  "/admin/offers": "pages/admin/offers.html",
+  "/admin/users": "pages/admin/users.html",
+  "/admin/tags": "pages/admin/tags.html",
+  "/signin": "pages/signin.html",
+  "/signup": "pages/signup.html",
+  "/user/activate": "pages/user/activate.html",
+  "/landing/admin": "pages/landing/admin.html",
+  "/admin/collections": "pages/admin/collections.html",
+  "/withAdmin": "pages/withAdmin.html",
+  "/user": "pages/user.js",
+  "/withUser": "pages/withUser.html",
+  "/": "pages/index.html",
+  "/_error": "pages/_error.js",
+  "/shop/[page]": "pages/shop/[page].js",
+  "/user/password_reset/[id]": "pages/user/password_reset/[id].js",
+  "/404": "pages/404.html"
 }
