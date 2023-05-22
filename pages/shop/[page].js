@@ -36,12 +36,15 @@ const ShopPage = ({ query, cookie }) => {
 				/>
 			)}
 			{categories && collections && (
-				<ShopNav
-					listCat={categories.listCategories}
-					listColl={collections.listCollections}
-				/>
+				<div className="shop_page-items-filter_container">
+					<ShopNav
+						listCat={categories.listCategories}
+						listColl={collections.listCollections}
+					/>
+					<ShopItems itemsPerPage={itemsPerpage} currentPage={query.page} />
+				</div>
 			)}
-			<ShopItems itemsPerPage={itemsPerpage} currentPage={query.page} />
+
 			<Pagination itemsPerPage={itemsPerpage} currentPage={query.page} />
 		</div>
 	);

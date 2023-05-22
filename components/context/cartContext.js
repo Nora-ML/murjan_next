@@ -32,8 +32,11 @@ const CartContextProvider = ({ children }) => {
 	};
 
 	useEffect(() => {
-		console.log("--Cart Context useEffect");
-		setCart(cart.items.map((item) => item.productId));
+		// added this condition to prevent useless mapping -> 9 March
+		if (cart.items[0].productId !== "") {
+			console.log("--Cart Context useEffect");
+			setCart(cart.items.map((item) => item.productId));
+		}
 	}, [cart]);
 
 	const passOn = {
@@ -43,8 +46,6 @@ const CartContextProvider = ({ children }) => {
 		deleteItemFromCart,
 		updateItemQty,
 	};
-
-	console.log("PAssOn", passOn);
 
 	return <CartContext.Provider value={passOn}>{children}</CartContext.Provider>;
 };

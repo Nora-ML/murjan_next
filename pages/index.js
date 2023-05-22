@@ -1,41 +1,23 @@
 import React, { useEffect, useState } from "react";
-
-import Script from "next/script.js";
 import dynamic from "next/dynamic.js";
+import Script from "next/script.js";
 // Components
 import Hero from "../components/landing/hero/hero.js";
-import PostHero from "../components/landing/post_hero/post_hero";
-import PreLoader from "../components/landing/pre_loader/pre_loader";
-
-// dynamically imported components
-const GemColor = dynamic(() =>
-	import("../components/landing/gem_color/gem_color.js")
-);
-const Collection = dynamic(() => import("../components/landing/collection.js"));
-const CategoryNav = dynamic(() =>
-	import("../components/landing/category_nav.js")
-);
+import PreLoader from "../components/landing/pre_loader.js";
 
 const Landing = () => {
 	console.log("Landing -- PAGE ");
-	const [done, setDone] = useState(false);
 	const [heroData, setHeroData] = useState(false);
+	const [parallelSData, setParallelSData] = useState(false);
 
 	return (
 		<>
-			<PreLoader
-				activateHero={(f) => setDone(f)}
-				landing={(data) => setHeroData(data)}
-			/>
-			<Script defer src="/static/loco.js" />
+			<Script src="/static/locoAll.js" />
+			<PreLoader triggerHero={(data) => setHeroData(data)} />
 			<main className="main_container">
-				{done && (
+				{heroData && (
 					<div className="landing_container">
-						<Hero data={heroData} />
-						<PostHero />
-						<GemColor />
-						<CategoryNav />
-						<Collection />
+						<Hero />
 						<div className="content-2">
 							<p className="content__text">
 								Lorem ipsum dolor, sit amet consectetur adipisicing elit.

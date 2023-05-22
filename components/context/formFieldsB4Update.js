@@ -7,14 +7,16 @@ const FormFieldsContextProvider = ({ children }) => {
 
 	const getFormChanges = (alteredForm) => {
 		let changes = Object.fromEntries(
-			Object.entries(alteredForm).filter(([k, v]) => originalForm[k] !== v)
+			Object.entries(alteredForm).filter(
+				([k, v]) => originalForm[k] !== v || k.includes("id")
+			)
 		);
 		return changes;
 	};
 
 	const passOn = { originalForm, setOriginalForm, getFormChanges };
 
-	console.log("SAVED FIELDS IN CONTEXT ::", originalForm);
+	//console.log("SAVED FIELDS IN CONTEXT ::", originalForm);
 	return (
 		<FormFieldsContext.Provider value={passOn}>
 			{children}

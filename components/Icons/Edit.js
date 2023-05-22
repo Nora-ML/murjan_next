@@ -6,6 +6,8 @@ import CollectionAdd from "../admin/Collection_Add_Update.js";
 import TagAdd from "../admin/Tag_Add_Update.js";
 import OfferAdd from "../admin/Offer_Add_Update.js";
 import HeroAdd from "../admin/Hero_Add_Update.js";
+import PostHeroAdd from "../admin/PostHero_Add_Update.js";
+import ParallelSlideAdd from "../admin/ParallelSlide_Add_Update.js";
 import { UserContext } from "../context/userContext.js";
 import { useQuery } from "@apollo/client";
 
@@ -16,7 +18,6 @@ import {
 	GET_TAG,
 	GET_OFFER,
 } from "../helpers/getItemById";
-import { GET_HERO } from "../helpers/landing.js";
 
 const Edit = ({ id, type, landingData }) => {
 	console.log("** EDIT ICON");
@@ -114,6 +115,18 @@ const Edit = ({ id, type, landingData }) => {
 			/>
 		) : type === "hero" ? (
 			<HeroAdd
+				classInitial={classN}
+				data={landingData}
+				alterClass={() => transitionOut("closePage")}
+			/>
+		) : type === "posthero" ? (
+			<PostHeroAdd
+				classInitial={classN}
+				data={landingData}
+				alterClass={() => transitionOut("closePage")}
+			/>
+		) : type === "parallelSlide" ? (
+			<ParallelSlideAdd
 				classInitial={classN}
 				data={landingData}
 				alterClass={() => transitionOut("closePage")}

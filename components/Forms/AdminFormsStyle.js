@@ -1,13 +1,15 @@
 import Styled from "styled-components";
 
 const BasicForm_Style = Styled.form.attrs((props) => ({ width: props.width }))`
+
     background-color:var(--main_color);
     overflow:auto;
     
     padding: clamp(18px,3%,30px) ;
     border-radius:  0 0 5px 5px;
 
-    height:clamp(400px,calc(${(props) => props.width}/1),1000px);
+    height:clamp(470px,calc(${(props) =>
+			props.width}/1),1000px); // was 400 pre editing
     
 
     display:flex;
@@ -27,6 +29,7 @@ const BasicForm_Style = Styled.form.attrs((props) => ({ width: props.width }))`
     }
 `;
 const MainFormStyle = Styled.div.attrs((props) => ({ width: props.width }))`
+
         background-color:var(--color_main);
         padding-right: ${(props) =>
 					props.width >= "80%" ? "clamp(18px,3%,30px)" : ""};   

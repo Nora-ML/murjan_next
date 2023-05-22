@@ -1,20 +1,25 @@
-import React, { useLayoutEffect, useEffect, useRef } from "react";
+import React, { useLayoutEffect, useEffect, useRef, memo } from "react";
 import Image from "next/image";
 import { useQuery } from "@apollo/client";
 import { GET_ABOUT } from "../../helpers/landing";
-
+import dynamic from "next/dynamic";
+const GemColor = dynamic(() => import("../gem_color/gem_color.js"));
 import { gsap } from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
-const PostHeroEdit = () => {
-	console.log("Landin/ADMIN -- POST-HERO-EDIT SECTION ");
+const PostHero = ({ child }) => {
+	console.log("Post Hero");
 	const app = useRef();
 	const { data, error, loading } = useQuery(GET_ABOUT);
 
+	if (loading) console.log("GET_ABOUT:: LOADING");
+	if (data) console.log("GET_ABOUT :: RESPONSE ::", data);
+
 	useEffect(() => {
+		console.log("---- Post Hero -- useEffect, wait ...");
 		if (data) {
-			console.log("---- Landing/Admin -- Post Hero -- useEffect");
+			console.log("---- Post Hero -- useEffect, ...done");
 			let ctx = gsap.context(() => {
 				// animating the svg to a wave effect on scroll
 				const pathTo = document.querySelector(".path-anim").dataset.pathTo;
@@ -115,7 +120,6 @@ const PostHeroEdit = () => {
 				ScrollTrigger.normalizeScroll(true);
 				ScrollTrigger.refresh();
 			}, app);
-
 			return () => ctx.revert();
 		}
 	}, [data]);
@@ -132,64 +136,51 @@ const PostHeroEdit = () => {
 		},
 	} = data?.getAbout;
 
-	console.log(
-		"POST-HERO-EDIT COMPONENT ::",
-		"about_header:",
-		about_header,
-		"about_image",
-		about_image,
-		"about_sub_header",
-		about_sub_header,
-		"about_second_sub_header",
-		about_second_sub_header
-	);
-
 	return (
-		<div ref={app} className="post_hero-container">
-			{/* 	<div class="svg-container"> */}
-			<svg
-				className="separator"
-				preserveAspectRatio="xMinYMin meet"
-				viewBox="0 0 100 200">
-				<path
-					className="path-anim"
-					d="M-4-1c362 0 1360-1 1653 0v121H-3V83Z"
-					data-path-to="M-4-1c-87 208 1360-1 1653 0v121H-3V83Z"
-					vectorEffect="non-scaling-stroke"
-				/>
-			</svg>
-			{/* </div> */}
-			<h1 className="main_posthero_header">{about_header}</h1>
+		<>
+			<div ref={app} className="post_hero-container">
+				{child && child(data)}
+				{/* 	<div class="svg-container"> */}
+				<svg
+					className="separator"
+					preserveAspectRatio="xMinYMin meet"
+					viewBox="0 0 100 200">
+					<path
+						className="path-anim"
+						d="M-4-1c362 0 1360-1 1653 0v121H-3V83Z"
+						data-path-to="M-4-1c-87 208 1360-1 1653 0v121H-3V83Z"
+						vectorEffect="non-scaling-stroke"
+					/>
+				</svg>
+				{/* </div> */}
+				<h1 className="main_posthero_header">{about_header}</h1>
 
-			<h3 className="sub_posthero_header">{about_sub_header}</h3>
-			<div className="image-main-container">
-				<div className="i-con image-container-first">
-					<Image
-						width="100%"
-						height="100%"
-						layout="responsive"
-						objectFit="cover"
-						className="post_hero_img main_image"
-						src={about_image[0]}
-						alt=""
-					/>
+				<h3 className="sub_posthero_header">{about_sub_header}</h3>
+				<div className="image-main-container">
+					{about_image &&
+						about_image.map((img, index) => (
+							<div
+								key={(index * 0.153).toString()}
+								className={`i-con image-container-${
+									index === 0 ? "first" : "second"
+								}`}>
+								{/* <img className="post_hero_img main_image" src={img} alt="" /> */}
+								<Image
+									layout="fill"
+									objectFit="cover"
+									className="post_hero_img main_image"
+									src={img}
+									alt=""
+								/>
+							</div>
+						))}
 				</div>
-				<div className="i-con image-container-second">
-					<Image
-						width="100%"
-						height="100%"
-						layout="responsive"
-						objectFit="cover"
-						className="post_hero_img main_image"
-						src={about_image[1]}
-						alt=""
-					/>
-				</div>
+
+				<h4 className="sub2_posthero_header">{about_second_sub_header}</h4>
 			</div>
-
-			<h4 className="sub2_posthero_header">{about_second_sub_header}</h4>
-		</div>
+			<GemColor />
+		</>
 	);
 };
 
-export default PostHeroEdit;
+export default memo(PostHero);

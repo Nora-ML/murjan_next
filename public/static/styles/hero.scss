@@ -41,38 +41,3 @@
 		}
 	}
 }
-
-/* .fromTo(
-					".hero_video",
-					{ scale: 1.5, yPercent: 50 },
-					{ scale: 1, duration: 2, yPercent: -50, delay: 0.7 },
-					-0.3
-				) */
-
-/* .to(".hero_container", {
-					//objectPosition: `50% ${-innerHeight / 2}px`,
-					ease: "none",
-					scrollTrigger: {
-						markers: true,
-						start: "top top",
-						trigger: ".hero_container",
-						scrub: true,
-					},
-					//delay: 0.5,
-					clipPath: "inset(0% 0% 0% 0%)",
-					duration: 10,
-				}) */
-/* .to(".hero_video", {
-					scrollTrigger: {
-						markers: true,
-						pin: ".hero_video",
-						pinSpacing: false,
-						//start: "top+=20% top",
-						start: "top top",
-						trigger: ".hero_container",
-						scrub: true,
-					},
-					clipPath: "inset(0% 0% 100% 0%)",
-					duration: 10,
-					ease: "sine.inOut",
-				}); */

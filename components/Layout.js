@@ -52,24 +52,25 @@ const GlobalStyles = createGlobalStyle`
 
 const DynamicNav = dynamic(() => import("./Navigation/Nav.js"), { ssr: false });
 
-const Layout = ({ children /* , currentUser */ }) => {
-	console.log("LAYOUT ..");
+const Layout = ({ children }) => {
 	const size = useContext(SizeContext);
-
-	useEffect(() => {
-		console.log("-- Layout , UseEffect");
-	});
+	console.log("LAYOUT ..size", size);
 
 	return (
-		<div>
-			<GlobalStyles />
-			{size && (size === "large" || size === "desktop") ? (
-				<Nav /* currentUser={currentUser} */ />
-			) : (
-				<NavMobile /* currentUser={currentUser} */ />
-			)}
-			<div>{children}</div>
-		</div>
+		size && (
+			<div>
+				<GlobalStyles />
+				{size === "large" || size === "desktop" ? (
+					<Nav /* currentUser={currentUser} */ />
+				) : size === "tablet" || size === "phone" ? (
+					<NavMobile /* currentUser={currentUser} */ />
+				) : (
+					""
+				)}
+
+				<div>{children}</div>
+			</div>
+		)
 	);
 };
 export default Layout;

@@ -1,3 +1,5 @@
+import { setCookie, setLocalStorage } from "../../helpers/auth";
+
 const filterReducer = (state, action) => {
 	let selectionItem = action.payload[1];
 	let selectionCat = action.payload[0];
@@ -35,6 +37,10 @@ const filterReducer = (state, action) => {
 					console.log("FAAAAAAAAAAAAAIled");
 					break;
 			}
+
+			// placed this here insted of Useeffect -> 9 March
+			/* setCookie("filter", state);
+			setLocalStorage("filter", state); */
 			break;
 		default:
 			console.log("FAAAAAAAAAAAAAIled CONTEXT");

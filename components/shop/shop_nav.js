@@ -19,121 +19,11 @@ const ShopNav = ({ listCat, listColl }) => {
 	]);
 
 	const [selected, setSelected] = useState({ gem: "", coll: "", cat: "" });
-	const [active, setActive] = useState({
-		gemAct: "initial",
-		collAct: "initial",
-		catAct: "initial",
-	});
+	const [active, setActive] = useState();
 
 	const { gem, coll, cat } = selected;
 
-	const { gemAct, collAct, catAct } = active;
-
-	// activates (display) particular filter option
-	const activate = (e, name) => {
-		//console.log("Activate,", e, name, "activeState", active);
-		let change = {};
-		if (active[name] === "triggered") {
-			//console.log("CLOSING");
-			change[name] = "closed";
-		} else {
-			//console.log("Triggering", name);
-			change[name] = "triggered";
-		}
-		Object.keys(active).map((a) => {
-			if (a !== [name] && active[a] === "triggered") {
-				//console.log("closing ", a, "active", active);
-				change[a] = "closed";
-			}
-		});
-		setActive({ ...active, ...change });
-	};
-
-	// pinning the filter and sliding contents
-	useEffect(() => {
-		console.log("useEffect Pinning filter");
-		let ww = window.innerWidth;
-
-		if (ww > 770) {
-			console.log("window greater than 770", ww);
-			gsap.to(".shop_dropdown-container", {
-				scrollTrigger: {
-					trigger: ".shop_dropdown-container",
-					toggleActions: "play play none reverse",
-					pin: ".filter_container",
-					// markers: true,
-					pinSpacing: false,
-					end: "+=3000",
-					start: "top top+=5%",
-					duration: 5,
-					ease: "slow(0.7, 0.7, false)",
-				},
-				xPercent: 20,
-			});
-		} else {
-			console.log("****** OR ELSE");
-			gsap.to(
-				".filter_container",
-				{
-					scrollTrigger: {
-						trigger: ".filter_container",
-						pin: ".filter_container",
-						toggleActions: "play play none reverse",
-						//markers: true,
-						pinSpacing: false,
-						start: "top+=10% top+=5%",
-						end: "+=6000",
-					},
-				},
-				0
-			);
-
-			ScrollTrigger.batch(
-				".shop_dropdown-container",
-				{
-					interval: 1,
-					onEnter: (batch) => {
-						batch.forEach((filter, index) => {
-							gsap.to(filter, {
-								keyframes: [
-									{ xPercent: `${100 * index - 30}` },
-									{ yPercent: `${index > 0 ? -100 * index : 0}`, delay: -0.5 },
-								],
-								scrollTrigger: {
-									trigger: filter,
-									toggleActions: "play play none reverse",
-									//markers: true,
-									start: `top-=${index * 8}% top+=5%`,
-									end: `top-=${index * 8}% top+=5%`,
-									duration: 5,
-									ease: "slow(0.7, 0.7, false)",
-								},
-								width: `${100 / 3}vw`,
-								stagger: 0.1,
-							});
-						});
-					},
-					onLeave: () => {
-						gsap.to(".filter_container", {
-							duration: 0.5,
-							delay: -0.2,
-							clipPath: "inset(0% 0% 70% 0%)",
-						});
-					},
-					onEnterBack: () => {
-						gsap.to(".filter_container", {
-							duration: 0.5,
-							delay: -1,
-							clipPath: "inset(0% 0% 0% 0%)",
-						});
-					},
-				},
-				0
-			);
-		}
-	}, []);
-
-	useEffect(() => {
+	/* useEffect(() => {
 		console.log("----- MOUSELEVE EFFECT");
 		let filter = document.querySelectorAll(".shop_dropdown-container");
 
@@ -154,22 +44,94 @@ const ShopNav = ({ listCat, listColl }) => {
 			filter.forEach((filt) => {
 				filt.removeEventListener("mouseleave", deactivate);
 			});
-	}, [active]);
+	}, [active]); */
+
+	useEffect(() => {
+		const fixAndSlideFilter = () => {
+			console.log("SHOP NAVIGATION SCROLL LISTENER");
+			let container = document.querySelector(".filter_container ");
+			let allSubContainers = document.querySelectorAll(
+				".shop_dropdown-container"
+			);
+			let allTitles = document.querySelectorAll(".shop_dropdown_selected");
+			let { top: containerTop } = container.getBoundingClientRect();
+			let navBar = document.querySelector(".navContainer")
+				? document.querySelector(".navContainer")
+				: document.querySelector(".navbar-mobile");
+
+			let { height: navBarHeight } = navBar.getBoundingClientRect();
+
+			console.log("CONTAINER TOP", containerTop, "NAVBAR HEIGHT", navBarHeight);
+			if (containerTop <= navBarHeight) {
+				container.style.top = `${navBarHeight - 5}px`;
+				allSubContainers.forEach((option, index) => {
+					option.style.flexBasis = "33.333%";
+					option.style.padding = "1vh 0";
+					if (index === allSubContainers.length - 1) {
+						setTimeout(() => {
+							allTitles.forEach((option) => {
+								option.style.border = "none";
+								option.style.fontSize = "larger";
+								option.style.textAlign = "center";
+							});
+						}, 500);
+					}
+				});
+
+				container.style.borderBottom = "3px double var(--counter_light)";
+				container.style.padding = "0";
+
+				/* navBar.style.borderBottom = "none"; */
+			}
+			if (window.scrollY === 0 || containerTop > navBarHeight) {
+				allSubContainers.forEach((option, index) => {
+					option.style.flexBasis = "90%";
+					option.style.padding = "0.5vh 0.5vw";
+					if (index === allSubContainers.length - 1) {
+						setTimeout(() => {
+							allTitles.forEach((option) => {
+								option.style.borderBottom = "1px solid var(--counter_light)";
+								option.style.fontSize = "clamp(16px, 1.5vw, 29px)";
+								option.style.textAlign = "left";
+							});
+						}, 500);
+					}
+				});
+
+				container.style.borderBottom = "none";
+				container.style.paddingLeft = "10%";
+				navBar.style.borderBottom = "1px solid var(--counter_light)";
+			}
+
+			// when container is at the top , fix it
+		};
+
+		window.addEventListener("scroll", fixAndSlideFilter);
+		return () => window.removeEventListener("scroll", fixAndSlideFilter);
+	}, []);
 
 	return (
 		<div className="filter_container">
-			<div className={`shop_dropdown-container ${catAct}`}>
+			<div
+				className={`shop_dropdown-container ${
+					active === "category" ? "--active" : ""
+				}`}>
 				<p
-					className="shop_dropdown_selected"
-					onClick={(e) => activate(e, "catAct")}>
-					{cat ? cat : "ALL Categories"}
+					className={`shop_dropdown_selected ${
+						active === "category" ? "--active" : ""
+					}`}
+					onClick={() => setActive(active === "category" ? "" : "category")}>
+					{cat ? cat : "Categories"}
 				</p>
-				<div className={`shop_dropdown_wrapper ${catAct}`}>
+				<div
+					className={`shop_dropdown_wrapper category-wrapper${
+						active === "category" ? "--active" : ""
+					}`}>
 					{listCat.map((arr, index) => (
 						<div
 							key={index}
 							onClick={() => addToFilter("catFilt", arr.id)}
-							className={`shop_dropdown ${catAct} ${
+							className={`shop_dropdown ${
 								catFilt.includes(arr.id) ? "filter" : ""
 							}`}>
 							<p>{arr.name}</p>
@@ -177,18 +139,28 @@ const ShopNav = ({ listCat, listColl }) => {
 					))}
 				</div>
 			</div>
-			<div className={`shop_dropdown-container ${collAct}`}>
+			<div
+				className={`shop_dropdown-container ${
+					active === "collection" ? "--active" : ""
+				}`}>
 				<p
-					className="shop_dropdown_selected"
-					onClick={(e) => activate(e, "collAct")}>
-					{coll ? coll : "ALL Collections"}
+					className={`shop_dropdown_selected ${
+						active === "collection" ? "--active" : ""
+					}`}
+					onClick={() =>
+						setActive(active === "collection" ? "" : "collection")
+					}>
+					{coll ? coll : "Collections"}
 				</p>
-				<div className={`shop_dropdown_wrapper ${collAct}`}>
+				<div
+					className={`shop_dropdown_wrapper collection-wrapper${
+						active === "collection" ? "--active" : ""
+					}`}>
 					{listColl.map((arr, index) => (
 						<div
 							key={index}
 							onClick={() => addToFilter("collFilt", arr.id)}
-							className={`shop_dropdown ${collAct} ${
+							className={`shop_dropdown ${
 								collFilt && collFilt.includes(arr.id) ? "filter" : ""
 							}`}>
 							<p>{arr.name}</p>
@@ -196,24 +168,32 @@ const ShopNav = ({ listCat, listColl }) => {
 					))}
 				</div>
 			</div>
-			<div className={`shop_dropdown-container ${gemAct}`}>
+			<div
+				className={`shop_dropdown-container ${
+					active === "gem" ? "--active" : ""
+				}`}>
 				<p
-					className="shop_dropdown_selected"
-					onClick={(e) => activate(e, "gemAct")}>
-					{gem ? gem : "ALL Gems"}
+					className={`shop_dropdown_selected ${
+						active === "gem" ? "--active" : ""
+					}`}
+					onClick={() => setActive(active === "gem" ? "" : "gem")}>
+					{gem ? gem : "Gems"}
 				</p>
-				{/* <div className={`shop_dropdown_wrapper ${gemAct}`}>
+				<div
+					className={`shop_dropdown_wrapper gem-wrapper${
+						active === "gem" ? "--active" : ""
+					}`}>
 					{gems.map((arr, index) => (
 						<div
 							key={index}
 							onClick={() => addToFilter("gemFilt", arr)}
-							className={`shop_dropdown ${gemAct} ${
+							className={`shop_dropdown ${
 								gemFilt && gemFilt.includes(arr) ? "filter" : ""
 							}`}>
 							<p>{arr}</p>
 						</div>
 					))}
-				</div> */}
+				</div>
 			</div>
 		</div>
 	);

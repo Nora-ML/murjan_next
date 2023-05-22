@@ -2,7 +2,7 @@ import { InputField, InputLabel } from "./Z_Style_Inputs";
 
 const NumberInput = ({ width, info, handleChange, form }) => {
 	//console.log("Number INPUT info ::", info);
-	const { type, label, name, placeholder, required } = info;
+	const { type, label, name, placeholder, required, disabled, value } = info;
 
 	return (
 		<InputLabel width={width} htmlFor={name} className="number_label">
@@ -13,9 +13,10 @@ const NumberInput = ({ width, info, handleChange, form }) => {
 				id={name}
 				name={name}
 				required={required}
+				disabled={disabled ? true : false}
 				placeholder={placeholder}
-				value={form[name]}
-				onChange={(e) => handleChange(e)}
+				value={value ? value : form[name]}
+				onChange={value ? "" : (e) => handleChange(e)}
 			/>
 		</InputLabel>
 	);

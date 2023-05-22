@@ -1,13 +1,13 @@
 .landing-collection {
 	grid-area: e;
-	border-bottom: 3px solid red;
-	background-color: var(--counter_light);
+	//border: 3px solid red;
+	//background-color: var(--counter_light);
+	background-color: transparent;
 	height: 200vh;
 	width: 100vw;
 
 	.landing-collection__intro {
 		position: absolute;
-		//border: 2px dashed rgb(255, 242, 0);
 
 		display: flex;
 		left: 50%;
@@ -16,8 +16,7 @@
 		flex-direction: column;
 	}
 	.landing-collection__sticky {
-		//background-color:  rgba(43, 210, 43, 0.867);
-		border-bottom: rgb(20, 245, 12) solid 3px;
+		//border: rgb(20, 245, 12) solid 3px;
 
 		position: sticky;
 		top: 0;
@@ -25,14 +24,17 @@
 
 		width: 100vw;
 		height: 100vh;
-		z-index: 1;
-		//clip-path: circle(0% at 50% 100%);
+
+		clip-path: circle(0% at 50% 100%);
 		overflow: hidden;
+
+		transition: clip-path 0.5s linear;
 
 		& .collection-header {
 			//background-color: #ead4be;
 			//background-color: transparent;
 			background-color: var(--another_light);
+
 			top: 0%;
 			left: 2.5%;
 
@@ -52,6 +54,10 @@
 				height: auto;
 
 				background-color: transparent;
+
+				&:first-child {
+					opacity: 1;
+				}
 
 				.header-text {
 					color: inherit;
@@ -85,16 +91,23 @@
 				position: absolute;
 
 				clip-path: inset(100% 0 0 0);
+				transition: clip-path 0.5s linear;
 
 				width: 100%;
 				height: 100%;
+
+				&:first-child {
+					opacity: 1;
+					clip-path: inset(0% 0 0 0);
+				}
 
 				.image-img {
 					width: 100%;
 					height: 100%;
 					object-position: center;
 					object-fit: cover;
-					transform: scale(1.5);
+					scale: 1.5;
+					transition: scale 0.5s linear;
 
 					@media screen and (max-width: 769px), (max-aspect-ratio: 1/1) {
 						object-position: 50%;

@@ -159,10 +159,10 @@ const update = (cache, payload) => {
 
 const UPDATE_ABOUT = gql`
 	mutation UpdateAbout(
-		$about_image: String!
-		$about_header: String!
-		$about_sub_header: String!
-		$about_second_sub_header: String!
+		$about_image: [String]
+		$about_header: String
+		$about_sub_header: String
+		$about_second_sub_header: String
 	) {
 		updateAbout(
 			about_image: $about_image
@@ -193,18 +193,18 @@ const UPDATE_HERO = gql`
 
 const UPDATE_PARALLEL_SLIDE = gql`
 	mutation updateParallelSlide(
-		$id: ID!
-		$parallelS_main_media: String!
-		$parallelS_secondary_media: String!
-		$parallelS_description: String!
+		$slide_id: Int!
+		$parallelS_main_media: imageInput
+		$parallelS_secondary_media: imageInput
+		$parallelS_description: String
 	) {
-		updateParellelSlide(
-			id: $id
+		updateParallelSlide(
+			slide_id: $slide_id
 			parallelS_main_media: $parallelS_main_media
 			parallelS_secondary_media: $parallelS_secondary_media
 			parallelS_description: $parallelS_description
 		) {
-			id
+			slide_id
 		}
 	}
 `;

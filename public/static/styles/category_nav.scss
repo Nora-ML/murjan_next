@@ -1,8 +1,9 @@
 .landing-category {
 	grid-area: d;
 
+	position: relative;
 	background-color: #e8d0b8;
-	//border: #3b4ccfd8 2px solid;
+	border: #3b4ccfd8 2px solid;
 
 	width: 100vw;
 	height: 200vh;
@@ -10,6 +11,7 @@
 	//overscroll-behavior: none;
 	&__sticky {
 		background-color: var(--main_color);
+		/* border: magenta 2px dashed; */
 
 		position: sticky;
 		top: 0;
@@ -43,12 +45,13 @@
 			@media screen and (min-width: 1024px) {
 				//top: 35%;
 				width: 70%;
-				height: 45%;
+				height: 35%;
 			}
 
 			& .header-fixed {
-				background-color: #e8d0b8;
+				//background-color: #e8d0b8;
 				//border: rgb(0, 110, 255) dashed 1px;
+				background-color: #877c71ca;
 
 				width: auto;
 				height: auto;
@@ -72,34 +75,51 @@
 			}
 
 			& .header-dynamic {
-				border: rgb(36, 28, 28) solid 1px;
-				background-color: transparent;
 				overflow: hidden;
-
-				width: 60%;
-				height: clamp(10px, 5vw, 90px);
+				background-color: #e6ccb2;
 
 				position: relative;
-				top: 0%;
+				left: 50%;
+				width: 40vw;
+				display: flex;
+				flex-wrap: nowrap;
+				overflow: hidden;
 
-				align-self: flex-end;
+				height: clamp(10px, 5vw, 90px);
 
-				&__text {
-					//border: rgb(38, 0, 255) dashed 2px;
-					background-color: #e8d0b8;
+				.header-content {
+					//border: rgb(83, 246, 61) dashed 2px;
+					/* background-color: #e8d0b8; */
+					display: flex;
+					flex-wrap: nowrap;
+					transition: transform 0.6s linear;
+					//overflow: hidden;
 
-					position: absolute;
-					width: 100%;
+					&.active {
+						transform: translateX(-50vw);
+					}
 
-					font-size: clamp(10px, 5vw, 90px);
-					font-weight: 300;
-					font-family: auto;
+					&__text {
+						//border: rgb(38, 0, 255) dashed 2px;
+						/* background-color: #e8d0b8; */
+						//border: red 1px solid;
 
-					text-transform: uppercase;
-					letter-spacing: -0.1rem;
+						width: 45vw;
+						font-variant: small-caps;
+						padding-left: 2vw;
 
-					margin-block-start: 0%;
-					margin-block-end: 0%;
+						font-size: clamp(12px, 7vw, 35px);
+						font-weight: 300;
+						font-family: auto;
+
+						text-transform: uppercase;
+						text-align: left;
+						letter-spacing: -0.1rem;
+						font-style: oblique;
+
+						margin-block-start: 0%;
+						margin-block-end: 0%;
+					}
 				}
 			}
 		}
@@ -108,7 +128,8 @@
 			position: relative;
 			background-color: #eeeeed;
 			background-color: #e8d0b87b;
-			width: 400%;
+
+			//width: 400vw;
 			height: 50%;
 
 			display: flex;
@@ -116,6 +137,8 @@
 			flex-wrap: nowrap;
 			justify-content: center;
 			align-items: flex-start;
+
+			transition: transform 0.3s ease;
 
 			@media screen and (max-width: 769px), (max-aspect-ratio: 1/1) {
 				height: 70%;
@@ -127,7 +150,7 @@
 			.each-category {
 				border-top: double #f3eadd 2px;
 				background-color: #ead4be;
-				//background-color: yellow;
+				/* border: yellow 1px solid; */
 				position: relative;
 
 				display: flex;
@@ -138,34 +161,18 @@
 				width: 100vw;
 				height: 100%;
 
-				/* @media screen and (min-width:769px) and (max-width:1024px) {
-					height: 80%;
-				} */
-
-				&.slide-first {
-					transform: translateX(-100%);
-					transition: transform 1s ease;
-				}
-				&.slide-second {
-					transform: translateX(-200%);
-					transition: transform 1s ease;
-				}
-				&.slide-third {
-					transform: translateX(-300%);
-					transition: transform 1s ease;
-				}
-
 				&__product-card {
 					position: absolute;
-					//    top: 40%;
+					//border: black 1px solid;
+					top: 5%;
+					//left: 10%;
 					width: 100%;
-					height: 80%;
+					height: 85%;
 
 					cursor: pointer;
 					display: flex;
-					flex-direction: row;
 					flex-wrap: nowrap;
-					justify-content: space-around;
+					justify-content: space-evenly;
 					align-items: center;
 
 					@media screen and (max-width: 769px) and (orientation: Portrait),
@@ -176,8 +183,9 @@
 					& .product-image {
 						background-color: #f3eadd;
 						border-radius: 10px;
-						width: 22%;
+						width: 20%;
 						height: 100%;
+
 						position: relative;
 
 						@media screen and (max-width: 769px) and (orientation: Portrait),
@@ -207,96 +215,3 @@
 		}
 	}
 }
-/* 	useLayoutEffect(() => {
-		let ctx = gsap.context(() => {
-			const arr = gsap.utils.toArray(".category_each-container");
-
-			let scrollTween = gsap.to(arr, {
-				xPercent: -100 * (arr.length - 1),
-				ease: "none",
-				scrollTrigger: {
-					trigger: ".cat_container",
-					pin: true,
-					delay:1,
-					scrub: true,
-					snap: {
-						snapTo: 1 / (arr.length - 1),
-						directional: false,
-					},
-					markers: {
-						startColor: "green",
-						endColor: "green",
-						fontSize: "18px",
-						fontWeight: "bold",
-						indent: 20,
-					},
-					start: "top+=50 top",
-					end: `+=100%`,
-				},
-			});
-
-			const arr1 = gsap.utils.toArray(".cat_image_each");
-			gsap.set(arr1, { y: 100 });
-
-			arr1.forEach((e, index) => {
-				gsap.fromTo(
-					e,
-					{
-						xPercent: 50,
-					},
-					{
-						xPercent: 0,
-						duration: 1,
-						ease: "elastic",
-						//delay: `${index * 0.3}`,
-						scrollTrigger: {
-							trigger: e,
-							//stagger: 0.1,
-							containerAnimation: scrollTween,
-							markers: {
-								startColor: "black",
-								endColor: "black",
-								fontSize: "20px",
-								fontWeight: "bold",
-								indent: 20,
-							},
-							start: "start-=20% bottom",
-							toggleActions: "play play none reset",
-						},
-					}
-				);
-				/* gsap.fromTo(
-					e,
-					{
-						xPercent: 50,
-						//yPercent: -10,
-					},
-					{
-						xPercent: -10,
-
-						duration: 2,
-						ease: "none",
-						//delay: `${index * 0.3}`,
-						scrollTrigger: {
-							trigger: e,
-							stagger: 0.1,
-							containerAnimation: scrollTween,
-							markers: {
-								startColor: "black",
-								endColor: "black",
-								fontSize: "20px",
-								fontWeight: "bold",
-								indent: 20,
-							},
-							start: "start-=20% bottom",
-							toggleActions: "play none none reset",
-						},
-					}
-				); 
-			});
-
-			ScrollTrigger.refresh();
-		}, app);
-
-		return () => ctx.revert();
-	}); */

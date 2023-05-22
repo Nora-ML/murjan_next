@@ -15,12 +15,13 @@ const FilterContextProvider = ({ children }) => {
 	const addToFilter = (category, item) =>
 		dispatch({ type: "ADD_FILTER", payload: [category, item] });
 
+	// placed this in the reducer insted of here -> 9 March
 	useEffect(() => {
 		// fetch products in selected filter from API
 		console.log("--Filter Context useEffect");
 		setCookie("filter", state);
 		setLocalStorage("filter", state);
-	});
+	}, [state]);
 
 	const passOn = { ...state, addToFilter };
 

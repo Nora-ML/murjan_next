@@ -26,16 +26,26 @@ const GET_ABOUT = gql`
 const GET_PARALLEL_SLIDE = gql`
 	query GetParallelSlide {
 		getParallelSlide {
-			id
 			parallel_slide_display {
-				parallelS_main_media
+				slide_id
 				parallelS_description
-				parallelS_secondary_media
+				parallelS_main_media {
+					mobile
+					tablet
+					desktop
+					alt
+				}
+				parallelS_secondary_media {
+					mobile
+					tablet
+					desktop
+					alt
+				}
 			}
 		}
 	}
 `;
-/* const GET_LANDING = gql`
+const GET_LANDING = gql`
 	query GetLanding {
 		getLanding {
 			id
@@ -51,12 +61,22 @@ const GET_PARALLEL_SLIDE = gql`
 				about_second_sub_header
 			}
 			parallel_slide_display {
-				parallelS_main_media
 				parallelS_description
-				parallelS_secondary_media
+				parallelS_main_media {
+					mobile
+					desktop
+					tablet
+					alt
+				}
+				parallelS_secondary_media {
+					mobile
+					tablet
+					desktop
+					alt
+				}
 			}
 		}
 	}
-`; */
+`;
 
-export { GET_ABOUT, GET_HERO, GET_PARALLEL_SLIDE };
+export { GET_ABOUT, GET_HERO, GET_PARALLEL_SLIDE, GET_LANDING };

@@ -1,21 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useQuery } from "@apollo/client";
-import { GET_HERO } from "../../helpers/landing";
+import { GET_HERO } from "../helpers/landing";
 //animation
 import { gsap } from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const PreLoader = ({ activateHero, landing }) => {
-	//console.log("Landing --- PRE Loader ");
+const PreLoader = ({ landing }) => {
+	console.log("Landing --- PRE Loader ");
 
 	const { data, error, loading } = useQuery(GET_HERO);
 
 	let landingContent = data?.getHero?.hero || {};
+	let heroContentFetched = Object.keys(landingContent).length !== 0;
 
 	if (loading) console.log("GET_HERO :: LOADING");
-	if (landingContent) console.log("GET_HERO :: RESPONSE");
+	if (landingContent) console.log("GET_HERO :: RESPONSE", landingContent);
 
 	const [state, setState] = useState(false);
 
@@ -32,6 +33,7 @@ const PreLoader = ({ activateHero, landing }) => {
 	}
 
 	useEffect(() => {
+		console.log("PRE-LOADER :: Useffect .. LOGO ANIMATION");
 		let ctx = gsap.context(() => {
 			// Logo animation
 			array.forEach((item, i) => {
@@ -53,18 +55,31 @@ const PreLoader = ({ activateHero, landing }) => {
 	}, []);
 
 	useEffect(() => {
-		setTimeout(() => {
-			//console.log("/////// SET TIME OUT ///////");
-			if (landingContent) landing(landingContent);
-			activateHero(true);
+		console.log(
+			"PRE-LOADER :: Useffect 2-1, if hero data fetched will set state to true=> to trigger slide out animation , then wait 800ms to pass up the data to the landing page"
+		);
+		if (heroContentFetched) {
 			setState(true);
-		}, 1000);
-	}, []);
+
+			setTimeout(() => {
+				console.log(
+					"PRE-LOADER :: Useffect 2-3, 800ms passed, will pass herodata up "
+				);
+				landing(landingContent);
+			}, 800);
+		}
+	}, [heroContentFetched]);
 
 	useEffect(() => {
+		console.log(
+			"PRE-LOADER :: Useffect 3-1 , to trigger slide out animation if state is true"
+		);
 		// Container Transition out animation
 		let ctx = gsap.context(() => {
 			if (state === true) {
+				console.log(
+					"PRE-LOADER :: Useffect 3-2 ,.state is true. We are sliding .."
+				);
 				gsap.fromTo(
 					rootz.current,
 					{
@@ -82,6 +97,8 @@ const PreLoader = ({ activateHero, landing }) => {
 
 		return () => ctx.revert();
 	}, [state]);
+
+	console.log("PRE-LOADER :: STATE", state);
 
 	return (
 		<>
