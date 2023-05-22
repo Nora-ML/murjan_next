@@ -36,7 +36,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 const uploadImageLink = createUploadLink({
-	uri: "https://murjan-graphql.onrender.com",
+	uri: "https://murjan-graphql.onrender.com/graphql",
 	//credentials: "include",
 	// pass the headers along from this request. This enables SSR with logged in state
 	//headers,
