@@ -36,7 +36,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 const uploadImageLink = createUploadLink({
-	uri: process.env.NODE_ENV === "development" ? endpoint : prodEndpoint,
+	uri: "http://localhost:5000/graphql",
 	//credentials: "include",
 	// pass the headers along from this request. This enables SSR with logged in state
 	//headers,

@@ -30,7 +30,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 const mainLink = new HttpLink({
-	uri: process.env.NODE_ENV === "development" ? endpoint : prodEndpoint,
+	uri: " http://localhost:5000/graphql",
 });
 
 function createClient({ headers, initialState }) {
